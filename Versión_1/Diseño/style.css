@@ -1,0 +1,716 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700;800&display=swap');
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'open sans';
+}
+html{
+    scroll-behavior: smooth;
+}
+/* sección INICIO */
+.inicio{
+    background: linear-gradient(rgba(0,0,0,.5), rgba(0,0,0,.5)), url(img/fondo.jpg);
+    height: 100vh;
+    background-size: cover;
+    background-position: center center;
+    position: relative;
+    background-attachment: fixed;
+}
+.contenido{
+    max-width: 1300px;
+    margin: auto;
+}
+/* ENCABEZADO */
+header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 0;
+}
+header h1 a{
+    color: #fff;
+    text-decoration: none;
+    letter-spacing: 3px;
+}
+header h1 a:hover{
+    color: #e74452;
+}
+nav ul{
+    list-style: none;
+    display: flex;
+}
+nav ul li{
+    margin: 0 15px;
+} 
+  
+nav ul li a{
+    color: #fff;
+    text-decoration: none;
+    text-transform: uppercase;
+    padding: 5px 7px;
+    transition: .3s;
+}
+  
+
+
+
+
+
+/* Estilos para la barra de navegación */
+.navbar {
+    background-color: #000;
+    border-bottom: 5px solid gold; /* Agregar una línea dorada en la parte inferior */
+    color: #fff;
+    padding: 10px 0;
+    width: 100%; /* Ancho del 100% */
+    position: fixed; /* Fijar la barra de navegación en la parte superior */
+    top: 0; /* Alinear la barra de navegación en la parte superior */
+    left: 0; /* Alinear la barra de navegación en el extremo izquierdo */
+    z-index: 1000; /* Asegurar que la barra de navegación esté por encima de otros elementos */
+}
+
+.navbar-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1400px; /* Ancho máximo del contenedor de la barra de navegación */
+    margin: 0 auto;
+    padding: 0 20px;
+    width: 100%; /* Ancho del 100% */
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    margin-right: auto; /* Mover los elementos de la izquierda hacia la derecha */
+}
+
+.nav-links li {
+    margin-right: 20px;
+}
+
+.nav-links li a {
+    color: #fff;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.nav-links li a:hover {
+    color: gold;
+}
+
+.social-icons {
+    list-style: none;
+    display: flex;
+    margin-left: auto; /* Mover los elementos de la derecha hacia la izquierda */
+}
+
+.social-icons li {
+    margin-right: 10px;
+}
+
+.social-icons .social-icon {
+    color: #fff;
+    text-decoration: none;
+    font-size: 20px;
+    transition: color 0.3s;
+}
+
+.social-icons .social-icon:hover {
+    color: gold;
+}
+
+#logo {
+    width: 150px; /* Ajustar el ancho del logo */
+    height: auto; /* Mantener la proporción */
+    margin-left: 20px; /* Ajustar el margen izquierdo */
+}
+
+
+
+
+
+
+
+
+
+
+
+.inicio .frase{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-weight: normal;
+    color: #fff;
+    font-size: 3rem;
+    width: 100%;
+    text-align: center;
+}
+.inicio .frase .resaltar{
+    font-weight: bold;
+}
+.subir{
+    width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    border: 2px solid #212121;
+    border-radius: 50%;
+    color: #212121;
+    cursor: pointer;
+    background: rgba(255, 255, 255, .5);
+    z-index: 100;
+}
+/* SECCION SOBRE MI */
+.sobre-mi{
+    padding: 70px 0;
+}
+.sobre-mi .fila{
+    display: flex;
+    justify-content: space-between;
+}
+.sobre-mi .fila .contenedor-img{
+    width: 40%;
+}
+  
+.sobre-mi .fila .contenedor-img img{
+    width: 100%;
+}
+.sobre-mi .fila .info{
+    width: 55%;
+    padding: 0px 30px;
+    color: #5f5f5f;
+}
+.sobre-mi .fila .info .opciones{
+    display: flex;
+    justify-content: space-around;
+}
+.sobre-mi .fila .info .opciones button{
+    background-color: transparent;
+    border: none;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 20px;
+    border-bottom: 3px solid #5f5f5f;
+    padding-bottom: 7px;
+    width: 130px;
+    cursor: pointer;
+}
+.sobre-mi .fila .info .opciones button.selected{
+    border-bottom: 3px solid #d04e60;
+    color: #d04e60;
+}
+.sobre-mi .fila .info .info-opcion{
+    margin-top: 40px;
+}
+
+.sobre-mi .fila .info .info-opcion h2{
+    color: #000;
+    font-size: 30px;
+    margin-bottom: 20px;
+}
+.color{
+    color: #d04e60;
+}
+.sobre-mi .fila .info .info-opcion p{
+    line-height: 30px;
+    margin-bottom: 20px;
+}
+#info-sobre-mi{
+    display: block;
+}
+#info-skills{
+    display: none;
+}
+.sobre-mi .fila .info .info-opcion .skill{
+    margin-bottom: 20px;
+}
+.sobre-mi .fila .info .info-opcion .skill .texto{
+    display: flex;
+    justify-content: space-between;
+}
+.sobre-mi .fila .info .info-opcion .skill .contenedor-barra{
+    background-color: #c7c6c6;
+    height: 10px;
+    width: 100%;
+    border-radius: 10px;
+    overflow: hidden;
+    position: relative;
+}
+.sobre-mi .fila .info .info-opcion .skill .contenedor-barra .relleno{
+    height: 10px;
+    position: absolute;
+    width: 0;
+    background-color: #d04e60;
+
+}
+@keyframes animHtml {
+    0%{width: 0%;}
+    100%{width: 95%;}
+}
+@keyframes animCss {
+    0%{width: 0%;}
+    100%{width: 90%;}
+}
+@keyframes animJs {
+    0%{width: 0%;}
+    100%{width: 85%;}
+}
+@keyframes animReact {
+    0%{width: 0%;}
+    100%{width: 75%;}
+}
+@keyframes animBoostrap {
+    0%{width: 0%;}
+    100%{width: 93%;}
+}
+
+/* SECCION SERVICIOS */
+.servicios{
+    background-color: #ededed;
+    padding: 70px 0;
+}
+.titulo-seccion{
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 40px;
+}
+.servicios .items-servicios{
+    display: grid;
+    grid-template-columns: 30% 30% 30%;
+    justify-content: space-between;
+    gap: 30px;
+}
+.servicios .items-servicios .item{
+    padding: 30px;
+    text-align: center;
+    color: #5f5f5f;
+    transition: .3s;
+}
+.servicios .items-servicios .item:hover{
+    background-color: #c7c6c6;
+    border-radius: 20px;
+
+}
+.servicios .items-servicios .item i{
+    font-size: 50px;
+}
+.servicios .items-servicios .item h3{
+    margin: 15px 0;
+}
+/* TRABAJOS */
+.trabajos{
+    padding: 70px 0;
+}
+.trabajos .portfolio{
+    display: grid;
+    grid-template-columns: max(350px) max(350px) max(350px);
+    justify-content: space-around;
+    grid-gap: 40px;
+}
+.trabajos .portfolio .item{
+    height: 400px;
+    overflow: hidden;
+    position: relative;
+}
+.trabajos .portfolio .item img{
+    width: 100%;
+    display: block;
+    object-fit: cover;
+}
+.trabajos .portfolio .item .info-trabajo{
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: linear-gradient(rgba(208, 78, 96,.9),rgba(240, 192, 199, 0.8));
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    scale: 0;
+    transition: .5s;
+    color: #fff;
+}
+.trabajos .portfolio .item .info-trabajo h2{
+    margin-bottom: 10px;
+}
+.trabajos .portfolio .item .info-trabajo p{
+    margin-bottom: 10px;
+}
+.trabajos .portfolio .item .info-trabajo button{
+   background-color: #000;
+   color: #fff;
+   padding: 10px 15px;
+   border-radius: 30px;
+   border: none;
+   font-weight: bold;
+   cursor: pointer;
+}
+.trabajos .portfolio .item:hover .info-trabajo{
+    opacity: 1;
+    scale:1;
+}
+/* SECCION CURRICULUM */
+.curriculum .contenido{
+    padding: 70px 0;
+}
+.curriculum .numeros{
+    background: linear-gradient(rgba(0,0,0, 0.7), rgba(0,0,0,.7)), url(img/fondo-curriculum.png);
+    height: 400px;
+    width: 100%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.curriculum .numeros .item{
+    text-align: center;
+}    
+.curriculum .numeros .item .num{
+    display: block;
+    font-size: 4rem;
+    font-weight: bold;
+    color: #d04e60;
+    line-height: 4rem;
+}
+.curriculum .numeros .item .txt{
+    color: #fff;
+    font-size: 14px;
+    font-weight: bold;
+}
+.curriculum .contenido .recorrido-anios{
+    max-width: 800px;
+    margin: 30px auto;   
+}
+.curriculum .contenido .derecha{
+    display: flex;
+    justify-content: end;
+    position: relative;
+    right: 40px;
+}
+.curriculum .contenido .izquierda{
+    display: flex;
+    justify-content: start;
+    position: relative;
+    left: 40px;
+}
+.curriculum .contenido .recorrido-anios .dato{
+    max-width: 400px;
+    display: grid;
+    align-items: center;
+}
+.curriculum .contenido .recorrido-anios .dato-der{
+    grid-template-columns: 80px 50px auto;
+}
+.curriculum .contenido .recorrido-anios .dato-izq{
+    grid-template-columns: auto 50px 80px;
+}
+.curriculum .contenido .recorrido-anios .dato .anio{
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    background-color: #fff;
+}
+.curriculum .contenido .recorrido-anios .dato .linea{
+    height: 10px;
+}
+.curriculum .contenido .recorrido-anios .dato .info{
+    font-size: 16px;
+    padding: 10px;
+    color: #fff;   
+}
+.curriculum .contenido .recorrido-anios .dato .info h3{
+ font-size: 16px;   
+}
+.curriculum .contenido .recorrido-anios .dato .info p{
+    font-size: 12px;
+    line-height: 20px;   
+}
+.c1{
+    background-color: #e74452;
+}
+.c2{
+    background-color: #df792b;
+}
+.c3{
+    background-color: #16a8a5;
+}
+.c4{
+    background-color: #0e526f;
+}
+.b1{
+    border:10px solid #e74452;
+    color: #e74452;
+}
+.b2{
+    border:10px solid #df792b;
+    color: #df792b;
+}
+.b3{
+    border:10px solid #16a8a5;
+    color: #16a8a5;
+}
+.b4{
+    border:10px solid #0e526f;
+    color: #0e526f;
+}
+/* SECCION CONTACTO */
+.contacto .contenido{
+    padding: 70px 0;
+}
+.contacto .banner{
+    background: linear-gradient(rgba(0,0,0, 0.8), rgba(0,0,0,.8)), url(img/fondo-contacto.png);
+    height: 400px;
+    width: 100%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.contacto .banner p{
+    font-size: 22px;
+}
+.contacto .banner h2{
+    font-size: 3rem;
+    margin: 10px 0;
+}
+.contacto .banner button{
+    border: none;
+    background-color:#e74452;
+    color: #fff;
+    padding: 10px 15px;
+    font-weight: bold;
+    border-radius: 30px;
+    cursor: pointer;
+}
+.contacto .contenido .fila{
+    display: flex;
+    justify-content: space-around;
+}
+.contacto .contenido .fila .item{
+    padding: 10px 15px;
+    text-align: center;
+}
+.contacto .contenido .fila .item span{
+    background-color: #d04e60;
+    width: 50px;
+    height: 50px;
+    margin: auto;
+    display: block;
+    color: #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    margin-bottom: 20px;
+}
+.contacto .contenido .fila .item p{
+    color: #5f5f5f;
+}
+.contacto .formulario{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 50px;
+}
+.contacto .formulario .col{
+    width: 49%;
+}
+.contacto .formulario .col img{
+    width: 100%;
+    filter: grayscale();
+}
+.contacto .formulario .fila-input{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 30px;
+}
+.contacto .formulario .fila-input .input{
+    width: 47%;
+    border-bottom: 2px solid #000;
+    padding: 7px 0;
+    display: flex;
+}
+.contacto .formulario .fila-input .input input,
+.contacto .formulario .col > .input input
+{
+    border: none;
+    margin-left: 10px;
+    outline: none;
+    width: 100%;
+}
+.contacto .formulario i{
+    color: #e74452;
+}
+.contacto .formulario .col > .input{
+    width: 100%;
+    border-bottom: 2px solid #000;
+    padding: 7px 0;
+    display: flex;
+    margin-bottom: 30px;
+}
+
+.contacto .formulario .col textarea{
+    width: 100%;
+    border: none;
+    outline: none;
+    margin-left: 8px;
+}
+.contacto .formulario button{
+    border: none;
+    background-color:#e74452;
+    color: #fff;
+    padding: 10px 15px;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 20px;
+}
+/* FOOTER */
+footer{
+    width: 100%;
+    padding: 60px 0;
+    text-align: center;
+    background: #212121;
+    color: #fff;
+}
+footer h2{
+    margin-bottom: 30px;
+}
+footer .red{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: inline-block;
+    line-height: 40px;
+    margin: 0 10px;
+}
+.r1{
+    background: #3e5294;
+}
+.r2{
+    background: #64a8e4;
+}
+.r3{
+    background:#16a8a5;
+}
+.r4{
+    background:#e74452; 
+}
+footer p{
+    margin-top: 30px;
+}
+footer p a{
+    color: #d04e60;
+    text-decoration: none;
+}
+footer p a:hover{
+    text-decoration: underline;
+}
+
+/* MENU RESPONSIVO */
+.nav-responsive{
+    display: none;
+    justify-content: center;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 20px;
+}
+.nav-responsive a{
+    text-decoration: none;
+    color: #e74452;
+    font-size: 30px;
+}
+
+/*  SECCION RESPONSIVE */
+@media screen and (max-width:1130px){
+    .trabajos .portfolio{
+        grid-template-columns: max(400px) max(400px);   
+    }
+}
+@media screen and (max-width:850px){
+    header{
+        display: block;
+        text-align: center;
+        background: rgba(0,0,0, 0.8);
+    }
+    nav{
+        display: none;
+    }
+    .nav-responsive{
+        display: flex;
+    }
+    .trabajos .portfolio{
+        grid-template-columns: auto  
+    }
+    .servicios .items-servicios{
+        grid-template-columns:auto auto;
+    }
+    .sobre-mi .fila{
+        display: block;
+    }
+    .sobre-mi .fila .contenedor-img{
+        width: 100%;
+    }
+      
+    .sobre-mi .fila .contenedor-img img{
+        width: 200px;
+        display: block;
+        margin: auto;
+    }
+    .sobre-mi .fila .info{
+        width: 100%;
+        margin-top: 30px;
+    }
+    .curriculum .numeros{
+        display: block;
+    }
+    .curriculum .contenido .derecha{
+        right: 0px;
+        justify-content: center;
+    }
+    .curriculum .contenido .izquierda{
+        left: 0px;
+        justify-content: center;
+    }
+    .curriculum .numeros{
+        height: auto;
+        padding: 30px 0;
+    }
+    .curriculum .numeros .item{
+        margin-bottom: 20px;
+    }
+    .curriculum .numeros .item .num{
+        font-size: 3rem;
+    }
+    .contacto .contenido .fila{
+        display: block;
+    }
+    .contacto .contenido .formulario{
+        display: block;
+    }
+    .contacto .contenido .formulario .col{
+        width: 100%;
+        padding: 0 20px;
+        margin-bottom: 20px;
+    }
+
+}
