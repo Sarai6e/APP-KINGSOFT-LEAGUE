@@ -1,31 +1,31 @@
 <?php
-require_once 'ParticipanteModel.php';
+require_once 'CompetenciaModel.php';
 
-class ParticipanteController {
+class CompetenciaController {
     private $model;
 
     public function __construct($db) {
-        $this->model = new ParticipanteModel($db);
+        $this->model = new CompetenciaModel($db);
     }
 
     public function index() {
-        $participantes = $this->model->getAllParticipantes();
-        include 'ParticipanteView.php';
+        $competencias = $this->model->getAllCompetencias();
+        include 'CompetenciaView.php';
     }
 
     public function eliminar($id) {
-        $this->model->deleteParticipante($id);
+        $this->model->deleteCompetencia($id);
         header("Location: index.php");
     }
 
     public function editar($id) {
-        // Implementa la lógica para editar un participante
+        // Implementa la lógica para editar una competencia
     }
 }
 
 // Uso de ejemplo
 $db = new PDO('mysql:host=localhost;dbname=nombre_de_tu_base_de_datos', 'usuario', 'contraseña');
-$controller = new ParticipanteController($db);
+$controller = new CompetenciaController($db);
 
 // Manejo de las solicitudes
 if (isset($_GET['accion'])) {

@@ -1,31 +1,31 @@
 <?php
-require_once 'ParticipanteModel.php';
+require_once 'NombreInstitucionModel.php';
 
-class ParticipanteController {
+class NombreInstitucionController {
     private $model;
 
     public function __construct($db) {
-        $this->model = new ParticipanteModel($db);
+        $this->model = new NombreInstitucionModel($db);
     }
 
     public function index() {
-        $participantes = $this->model->getAllParticipantes();
-        include 'ParticipanteView.php';
+        $instituciones = $this->model->getAllInstituciones();
+        include 'NombreInstitucionView.php';
     }
 
     public function eliminar($id) {
-        $this->model->deleteParticipante($id);
+        $this->model->deleteInstitucion($id);
         header("Location: index.php");
     }
 
     public function editar($id) {
-        // Implementa la lógica para editar un participante
+        // Implementa la lógica para editar una institución
     }
 }
 
 // Uso de ejemplo
 $db = new PDO('mysql:host=localhost;dbname=nombre_de_tu_base_de_datos', 'usuario', 'contraseña');
-$controller = new ParticipanteController($db);
+$controller = new NombreInstitucionController($db);
 
 // Manejo de las solicitudes
 if (isset($_GET['accion'])) {

@@ -1,31 +1,31 @@
 <?php
-require_once 'ParticipanteModel.php';
+require_once 'ClubRoboticaModel.php';
 
-class ParticipanteController {
+class ClubRoboticaController {
     private $model;
 
     public function __construct($db) {
-        $this->model = new ParticipanteModel($db);
+        $this->model = new ClubRoboticaModel($db);
     }
 
     public function index() {
-        $participantes = $this->model->getAllParticipantes();
-        include 'ParticipanteView.php';
+        $clubs = $this->model->getAllClubs();
+        include 'ClubRoboticaView.php';
     }
 
     public function eliminar($id) {
-        $this->model->deleteParticipante($id);
+        $this->model->deleteClub($id);
         header("Location: index.php");
     }
 
     public function editar($id) {
-        // Implementa la lógica para editar un participante
+        // Aquí puedes implementar la lógica para cargar los datos del club y mostrar el formulario de edición
     }
 }
 
 // Uso de ejemplo
-$db = new PDO('mysql:host=localhost;dbname=nombre_de_tu_base_de_datos', 'usuario', 'contraseña');
-$controller = new ParticipanteController($db);
+$db = new PDO('mysql:host=localhost;dbname=basedatos', 'root', '');
+$controller = new ClubRoboticaController($db);
 
 // Manejo de las solicitudes
 if (isset($_GET['accion'])) {
@@ -47,3 +47,4 @@ if (isset($_GET['accion'])) {
     $controller->index();
 }
 ?>
+

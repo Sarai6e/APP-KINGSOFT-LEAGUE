@@ -1,31 +1,31 @@
 <?php
-require_once 'ParticipanteModel.php';
+require_once 'GradoEstudioModel.php';
 
-class ParticipanteController {
+class GradoEstudioController {
     private $model;
 
     public function __construct($db) {
-        $this->model = new ParticipanteModel($db);
+        $this->model = new GradoEstudioModel($db);
     }
 
     public function index() {
-        $participantes = $this->model->getAllParticipantes();
-        include 'ParticipanteView.php';
+        $gradosEstudio = $this->model->getAllGradosEstudio();
+        include 'GradoEstudioView.php';
     }
 
     public function eliminar($id) {
-        $this->model->deleteParticipante($id);
+        $this->model->deleteGradoEstudio($id);
         header("Location: index.php");
     }
 
     public function editar($id) {
-        // Implementa la lógica para editar un participante
+        // Implementa la lógica para editar un grado de estudio
     }
 }
 
 // Uso de ejemplo
 $db = new PDO('mysql:host=localhost;dbname=nombre_de_tu_base_de_datos', 'usuario', 'contraseña');
-$controller = new ParticipanteController($db);
+$controller = new GradoEstudioController($db);
 
 // Manejo de las solicitudes
 if (isset($_GET['accion'])) {
