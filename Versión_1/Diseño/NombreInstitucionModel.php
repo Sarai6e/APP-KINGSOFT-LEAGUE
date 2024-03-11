@@ -1,38 +1,39 @@
 <?php
 class NombreInstitucionModel {
-    private $db;
+    private $conn;
 
     public function __construct($db) {
-        $this->db = $db;
+        $this->conn = $db;
     }
 
-    // Obtener todas las instituciones
-    public function getAllInstituciones() {
+    public function getAllNombresInstitucion() {
         $query = "SELECT * FROM nombre_institucion";
-        $result = $this->db->query($query);
-        return $result->fetchAll(PDO::FETCH_ASSOC);
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute();
+        return $stmt;
     }
 
-    // Eliminar una institución por ID
-    public function deleteInstitucion($id) {
-        $query = "DELETE FROM nombre_institucion WHERE id = :id";
-        $stmt = $this->db->prepare($query);
-        return $stmt->execute(['id' => $id]);
-    }
-
-    // Obtener una institución por ID
-    public function getInstitucionById($id) {
-        $query = "SELECT * FROM nombre_institucion WHERE id = :id";
-        $stmt = $this->db->prepare($query);
-        $stmt->execute(['id' => $id]);
+    public function getNombreInstitucionById($id) {
+        $query = "SELECT * FROM nombre_institucion WHERE id = ?";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(1, $id);
+        $stmt->execute();
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
-    // Actualizar una institución
-    public function updateInstitucion($id, $nombre) {
-        $query = "UPDATE nombre_institucion SET nombre = :nombre WHERE id = :id";
-        $stmt = $this->db->prepare($query);
-        return $stmt->execute(['id' => $id, 'nombre' => $nombre]);
+    public function updateNombreInstitucion($id, $nombre) {
+        $query = "UPDATE nombre_institucion SET nombre = ? WHERE id = ?";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(1, $nombre);
+        $stmt->bindParam(2, $id);
+        return $stmt->execute();
+    }
+
+    public function deleteNombreInstitucion($id) {
+        $query = "DELETE FROM nombre_institucion WHERE id = ?";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(1, $id);
+        return $stmt->execute();
     }
 }
 ?>

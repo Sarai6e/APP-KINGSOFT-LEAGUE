@@ -8,42 +8,20 @@ class NombreInstitucionController {
         $this->model = new NombreInstitucionModel($db);
     }
 
-    public function index() {
-        $instituciones = $this->model->getAllInstituciones();
-        include 'NombreInstitucionView.php';
+    public function getAllNombresInstitucion() {
+        return $this->model->getAllNombresInstitucion();
     }
 
-    public function eliminar($id) {
-        $this->model->deleteInstitucion($id);
-        header("Location: index.php");
+    public function getNombreInstitucionById($id) {
+        return $this->model->getNombreInstitucionById($id);
     }
 
-    public function editar($id) {
-        // Implementa la lógica para editar una institución
+    public function updateNombreInstitucion($id, $nombre) {
+        return $this->model->updateNombreInstitucion($id, $nombre);
     }
-}
 
-// Uso de ejemplo
-$db = new PDO('mysql:host=localhost;dbname=nombre_de_tu_base_de_datos', 'usuario', 'contraseña');
-$controller = new NombreInstitucionController($db);
-
-// Manejo de las solicitudes
-if (isset($_GET['accion'])) {
-    $accion = $_GET['accion'];
-    switch ($accion) {
-        case 'eliminar':
-            $id = $_GET['id'];
-            $controller->eliminar($id);
-            break;
-        case 'editar':
-            $id = $_GET['id'];
-            $controller->editar($id);
-            break;
-        default:
-            $controller->index();
-            break;
+    public function deleteNombreInstitucion($id) {
+        return $this->model->deleteNombreInstitucion($id);
     }
-} else {
-    $controller->index();
 }
 ?>

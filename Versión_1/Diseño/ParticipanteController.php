@@ -8,42 +8,20 @@ class ParticipanteController {
         $this->model = new ParticipanteModel($db);
     }
 
-    public function index() {
-        $participantes = $this->model->getAllParticipantes();
-        include 'ParticipanteView.php';
+    public function getAllParticipantes() {
+        return $this->model->getAllParticipantes();
     }
 
-    public function eliminar($id) {
-        $this->model->deleteParticipante($id);
-        header("Location: index.php");
+    public function getParticipanteById($id) {
+        return $this->model->getParticipanteById($id);
     }
 
-    public function editar($id) {
-        // Implementa la lógica para editar un participante
+    public function updateParticipante($id, $nombre, $apellidos, $dni, $genero, $fecha_nacimiento, $correo, $anio_estudio, $especialidad, $clave, $grado_estudio, $id_club_robotica, $nombre_institucion_id) {
+        return $this->model->updateParticipante($id, $nombre, $apellidos, $dni, $genero, $fecha_nacimiento, $correo, $anio_estudio, $especialidad, $clave, $grado_estudio, $id_club_robotica, $nombre_institucion_id);
     }
-}
 
-// Uso de ejemplo
-$db = new PDO('mysql:host=localhost;dbname=nombre_de_tu_base_de_datos', 'usuario', 'contraseña');
-$controller = new ParticipanteController($db);
-
-// Manejo de las solicitudes
-if (isset($_GET['accion'])) {
-    $accion = $_GET['accion'];
-    switch ($accion) {
-        case 'eliminar':
-            $id = $_GET['id'];
-            $controller->eliminar($id);
-            break;
-        case 'editar':
-            $id = $_GET['id'];
-            $controller->editar($id);
-            break;
-        default:
-            $controller->index();
-            break;
+    public function deleteParticipante($id) {
+        return $this->model->deleteParticipante($id);
     }
-} else {
-    $controller->index();
 }
 ?>

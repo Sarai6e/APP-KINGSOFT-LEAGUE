@@ -18,7 +18,7 @@ class ClubRoboticaModel {
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(1, $id);
         $stmt->execute();
-        return $stmt;
+        return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
     public function updateClub($id, $nombre, $ciudad, $pais) {

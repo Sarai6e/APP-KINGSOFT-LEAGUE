@@ -1,41 +1,39 @@
 <?php
 class GradoEstudioModel {
-    private $db;
+    private $conn;
 
     public function __construct($db) {
-        $this->db = $db;
+        $this->conn = $db;
     }
 
-    // Obtener todos los grados de estudio
     public function getAllGradosEstudio() {
         $query = "SELECT * FROM grado_estudio";
-        $result = $this->db->query($query);
-        return $result->fetchAll(PDO::FETCH_ASSOC);
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute();
+        return $stmt;
     }
 
-    // Eliminar un grado de estudio por ID
-    public function deleteGradoEstudio($id) {
-        $query = "DELETE FROM grado_estudio WHERE id = :id";
-        $stmt = $this->db->prepare($query);
-        return $stmt->execute(['id' => $id]);
-    }
-
-    // Obtener un grado de estudio por ID
     public function getGradoEstudioById($id) {
-        $query = "SELECT * FROM grado_estudio WHERE id = :id";
-        $stmt = $this->db->prepare($query);
-        $stmt->execute(['id' => $id]);
+        $query = "SELECT * FROM grado_estudio WHERE id = ?";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(1, $id);
+        $stmt->execute();
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
-    // Actualizar un grado de estudio
     public function updateGradoEstudio($id, $grado) {
-        $query = "UPDATE grado_estudio SET grado = :grado WHERE id = :id";
-        $stmt = $this->db->prepare($query);
-        return $stmt->execute([
-            'id' => $id,
-            'grado' => $grado
-        ]);
+        $query = "UPDATE grado_estudio SET grado = ? WHERE id = ?";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(1, $grado);
+        $stmt->bindParam(2, $id);
+        return $stmt->execute();
+    }
+
+    public function deleteGradoEstudio($id) {
+        $query = "DELETE FROM grado_estudio WHERE id = ?";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(1, $id);
+        return $stmt->execute();
     }
 }
 ?>

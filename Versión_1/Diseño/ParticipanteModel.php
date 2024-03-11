@@ -1,53 +1,50 @@
 <?php
 class ParticipanteModel {
-    private $db;
+    private $conn;
 
     public function __construct($db) {
-        $this->db = $db;
+        $this->conn = $db;
     }
 
-    // Obtener todos los participantes
     public function getAllParticipantes() {
         $query = "SELECT * FROM participantes";
-        $result = $this->db->query($query);
-        return $result->fetchAll(PDO::FETCH_ASSOC);
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute();
+        return $stmt;
     }
 
-    // Eliminar un participante por ID
-    public function deleteParticipante($id) {
-        $query = "DELETE FROM participantes WHERE id = :id";
-        $stmt = $this->db->prepare($query);
-        return $stmt->execute(['id' => $id]);
-    }
-
-    // Obtener un participante por ID
     public function getParticipanteById($id) {
-        $query = "SELECT * FROM participantes WHERE id = :id";
-        $stmt = $this->db->prepare($query);
-        $stmt->execute(['id' => $id]);
+        $query = "SELECT * FROM participantes WHERE id = ?";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(1, $id);
+        $stmt->execute();
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
-    // Actualizar un participante
-    public function updateParticipante($id, $nombre, $apellidos, $dni, $genero, $fecha_nacimiento, $correo, $anio_estudio, $especialidad, $clave, $fecha_actualizacion, $grado_estudio, $id_club_robotica, $nombre_institucion_id) {
-        $query = "UPDATE participantes SET nombre = :nombre, apellidos = :apellidos, dni = :dni, genero = :genero, fecha_nacimiento = :fecha_nacimiento, correo = :correo, anio_estudio = :anio_estudio, especialidad = :especialidad, clave = :clave, fecha_actualizacion = :fecha_actualizacion, grado_estudio = :grado_estudio, id_club_robotica = :id_club_robotica, nombre_institucion_id = :nombre_institucion_id WHERE id = :id";
-        $stmt = $this->db->prepare($query);
-        return $stmt->execute([
-            'id' => $id,
-            'nombre' => $nombre,
-            'apellidos' => $apellidos,
-            'dni' => $dni,
-            'genero' => $genero,
-            'fecha_nacimiento' => $fecha_nacimiento,
-            'correo' => $correo,
-            'anio_estudio' => $anio_estudio,
-            'especialidad' => $especialidad,
-            'clave' => $clave,
-            'fecha_actualizacion' => $fecha_actualizacion,
-            'grado_estudio' => $grado_estudio,
-            'id_club_robotica' => $id_club_robotica,
-            'nombre_institucion_id' => $nombre_institucion_id
-        ]);
+    public function updateParticipante($id, $nombre, $apellidos, $dni, $genero, $fecha_nacimiento, $correo, $anio_estudio, $especialidad, $clave, $grado_estudio, $id_club_robotica, $nombre_institucion_id) {
+        $query = "UPDATE participantes SET nombre = ?, apellidos = ?, dni = ?, genero = ?, fecha_nacimiento = ?, correo = ?, anio_estudio = ?, especialidad = ?, clave = ?, grado_estudio = ?, id_club_robotica = ?, nombre_institucion_id = ? WHERE id = ?";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(1, $nombre);
+        $stmt->bindParam(2, $apellidos);
+        $stmt->bindParam(3, $dni);
+        $stmt->bindParam(4, $genero);
+        $stmt->bindParam(5, $fecha_nacimiento);
+        $stmt->bindParam(6, $correo);
+        $stmt->bindParam(7, $anio_estudio);
+        $stmt->bindParam(8, $especialidad);
+        $stmt->bindParam(9, $clave);
+        $stmt->bindParam(10, $grado_estudio);
+        $stmt->bindParam(11, $id_club_robotica);
+        $stmt->bindParam(12, $nombre_institucion_id);
+        $stmt->bindParam(13, $id);
+        return $stmt->execute();
+    }
+
+    public function deleteParticipante($id) {
+        $query = "DELETE FROM participantes WHERE id = ?";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(1, $id);
+        return $stmt->execute();
     }
 }
 ?>

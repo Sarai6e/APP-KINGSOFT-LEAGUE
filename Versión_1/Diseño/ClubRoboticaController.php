@@ -9,22 +9,19 @@ class ClubRoboticaController {
     }
 
     public function index() {
-        $clubs = $this->model->getClubs();
-        return $clubs;
+        return $this->model->getClubs();
     }
 
-    public function edit($id, $nombre, $ciudad, $pais) {
-        if ($this->model->updateClub($id, $nombre, $ciudad, $pais)) {
-            return true;
-        }
-        return false;
+    public function ver($id) {
+        return $this->model->getClubById($id);
     }
 
-    public function delete($id) {
-        if ($this->model->deleteClub($id)) {
-            return true;
-        }
-        return false;
+    public function editar($id, $nombre, $ciudad, $pais) {
+        return $this->model->updateClub($id, $nombre, $ciudad, $pais);
+    }
+
+    public function eliminar($id) {
+        return $this->model->deleteClub($id);
     }
 }
 ?>
