@@ -1,51 +1,58 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Club de Robótica</title>
-    <!-- Enlace a Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <title>Clubes de Robótica</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
     <div class="container">
-        <h1 class="mt-5 mb-4">Club de Robótica</h1>
-        <table class="table table-bordered">
+        <h1 class="mt-4 mb-4">Clubes de Robótica</h1>
+        <table class="table">
             <thead class="thead-dark">
                 <tr>
                     <th>ID</th>
                     <th>Nombre</th>
                     <th>Ciudad</th>
                     <th>País</th>
+                    <th>Logo</th>
                     <th>Acciones</th>
                 </tr>
             </thead>
             <tbody>
-                <?php 
-                if(isset($clubs)) {
-                    foreach ($clubs as $club): ?>
-                        <tr>
-                            <td><?php echo $club['id']; ?></td>
-                            <td><?php echo $club['nombre']; ?></td>
-                            <td><?php echo $club['ciudad']; ?></td>
-                            <td><?php echo $club['pais']; ?></td>
-                            <td>
-                                <a href="editar.php?id=<?php echo $club['id']; ?>" class="btn btn-primary btn-sm mr-2">Editar</a>
-                                <a href="eliminar.php?id=<?php echo $club['id']; ?>" class="btn btn-danger btn-sm">Eliminar</a>
-                            </td>
-                        </tr>
-                    <?php endforeach;
-                } else {
-                    echo "<tr><td colspan='5'>No hay clubes de robótica registrados.</td></tr>";
-                }
+                <?php
+                require_once 'ClubRoboticaController.php';
+
+                $db = new PDO('mysql:host=localhost;dbname=datosks', 'root', '');
+                $controller = new ClubRoboticaController($db);
+
+                // Ver todos los clubes
+                $clubs = $controller->index();
+
+                while ($club = $clubs->fetch(PDO::FETCH_ASSOC)) :
                 ?>
+                    <tr>
+                        <td><?php echo $club['id']; ?></td>
+                        <td><?php echo $club['nombre']; ?></td>
+                        <td><?php echo $club['ciudad']; ?></td>
+                        <td><?php echo $club['pais']; ?></td>
+                        <td><img src="data:image/jpeg;base64,<?php echo base64_encode($club['logo']); ?>" alt="Logo del club" width="100"></td>
+                        <td>
+                            <a href="ver.php?id=<?php echo $club['id']; ?>" class="btn btn-info btn-sm">Ver</a>
+                            <a href="editar.php?id=<?php echo $club['id']; ?>" class="btn btn-primary btn-sm">Editar</a>
+                            <a href="eliminar.php?id=<?php echo $club['id']; ?>" class="btn btn-danger btn-sm">Eliminar</a>
+                        </td>
+                    </tr>
+                <?php endwhile; ?>
             </tbody>
         </table>
     </div>
 
-    <!-- Enlace a Bootstrap JS y jQuery (opcional, si necesitas componentes interactivos) -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>

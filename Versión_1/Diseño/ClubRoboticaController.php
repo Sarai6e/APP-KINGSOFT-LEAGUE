@@ -9,42 +9,22 @@ class ClubRoboticaController {
     }
 
     public function index() {
-        $clubs = $this->model->getAllClubs();
-        include 'ClubRoboticaView.php';
+        $clubs = $this->model->getClubs();
+        return $clubs;
     }
 
-    public function eliminar($id) {
-        $this->model->deleteClub($id);
-        header("Location: index.php");
+    public function edit($id, $nombre, $ciudad, $pais) {
+        if ($this->model->updateClub($id, $nombre, $ciudad, $pais)) {
+            return true;
+        }
+        return false;
     }
 
-    public function editar($id) {
-        // Aquí puedes implementar la lógica para cargar los datos del club y mostrar el formulario de edición
+    public function delete($id) {
+        if ($this->model->deleteClub($id)) {
+            return true;
+        }
+        return false;
     }
-}
-
-// Uso de ejemplo
-$db = new PDO('mysql:host=localhost;dbname=basedatos', 'root', '');
-$controller = new ClubRoboticaController($db);
-
-// Manejo de las solicitudes
-if (isset($_GET['accion'])) {
-    $accion = $_GET['accion'];
-    switch ($accion) {
-        case 'eliminar':
-            $id = $_GET['id'];
-            $controller->eliminar($id);
-            break;
-        case 'editar':
-            $id = $_GET['id'];
-            $controller->editar($id);
-            break;
-        default:
-            $controller->index();
-            break;
-    }
-} else {
-    $controller->index();
 }
 ?>
-

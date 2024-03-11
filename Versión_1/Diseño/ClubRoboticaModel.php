@@ -1,45 +1,47 @@
 <?php
 class ClubRoboticaModel {
-    private $db;
+    private $conn;
 
     public function __construct($db) {
-        $this->db = $db;
+        $this->conn = $db;
     }
 
-    // Obtener todos los clubes de robótica
-    public function getAllClubs() {
+    public function getClubs() {
         $query = "SELECT * FROM club_robotica";
-        $result = $this->db->query($query);
-        return $result->fetchAll(PDO::FETCH_ASSOC);
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute();
+        return $stmt;
     }
 
-    // Eliminar un club de robótica por ID
-    public function deleteClub($id) {
-        $query = "DELETE FROM club_robotica WHERE id = :id";
-        $stmt = $this->db->prepare($query);
-        return $stmt->execute(['id' => $id]);
-    }
-
-    // Obtener un club de robótica por ID
     public function getClubById($id) {
-        $query = "SELECT * FROM club_robotica WHERE id = :id";
-        $stmt = $this->db->prepare($query);
-        $stmt->execute(['id' => $id]);
-        return $stmt->fetch(PDO::FETCH_ASSOC);
+        $query = "SELECT * FROM club_robotica WHERE id = ?";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(1, $id);
+        $stmt->execute();
+        return $stmt;
     }
 
-    // Actualizar un club de robótica
-    public function updateClub($id, $nombre, $ciudad, $pais, $logo, $nombre_institucion_id) {
-        $query = "UPDATE club_robotica SET nombre = :nombre, ciudad = :ciudad, pais = :pais, logo = :logo, nombre_institucion_id = :nombre_institucion_id WHERE id = :id";
-        $stmt = $this->db->prepare($query);
-        return $stmt->execute([
-            'id' => $id,
-            'nombre' => $nombre,
-            'ciudad' => $ciudad,
-            'pais' => $pais,
-            'logo' => $logo,
-            'nombre_institucion_id' => $nombre_institucion_id
-        ]);
+    public function updateClub($id, $nombre, $ciudad, $pais) {
+        $query = "UPDATE club_robotica SET nombre = ?, ciudad = ?, pais = ? WHERE id = ?";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(1, $nombre);
+        $stmt->bindParam(2, $ciudad);
+        $stmt->bindParam(3, $pais);
+        $stmt->bindParam(4, $id);
+        if($stmt->execute()) {
+            return true;
+        }
+        return false;
+    }
+
+    public function deleteClub($id) {
+        $query = "DELETE FROM club_robotica WHERE id = ?";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(1, $id);
+        if($stmt->execute()) {
+            return true;
+        }
+        return false;
     }
 }
 ?>
