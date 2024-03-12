@@ -16,8 +16,8 @@ class ParticipanteController {
         return $this->model->getParticipanteById($id);
     }
 
-    public function updateParticipante($id, $nombre, $apellidos, $dni, $genero, $fecha_nacimiento, $correo, $anio_estudio, $especialidad, $clave, $grado_estudio, $id_club_robotica, $nombre_institucion_id) {
-        return $this->model->updateParticipante($id, $nombre, $apellidos, $dni, $genero, $fecha_nacimiento, $correo, $anio_estudio, $especialidad, $clave, $grado_estudio, $id_club_robotica, $nombre_institucion_id);
+    public function updateParticipante($id, $nombre, $apellido, $dni, $genero_id, $grado_estudio_id, $año_estudio, $especialidad, $correo, $clave, $robot_id, $club_robotica_id, $fecha_nacimiento) {
+        return $this->model->updateParticipante($id, $nombre, $apellido, $dni, $genero_id, $grado_estudio_id, $año_estudio, $especialidad, $correo, $clave, $robot_id, $club_robotica_id, $fecha_nacimiento);
     }
 
     public function deleteParticipante($id) {

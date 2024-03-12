@@ -1,15 +1,21 @@
 <?php
 require_once 'ParticipanteController.php';
 
-$db = new PDO('mysql:host=localhost;dbname=datosks', 'root', '');
-$controller = new ParticipanteController($db);
+// Verificar si se proporcionó un ID válido
+if (isset($_GET["id"]) && !empty(trim($_GET["id"]))) {
+    $db = new PDO('mysql:host=localhost;dbname=datosks', 'root', '');
+    $controller = new ParticipanteController($db);
 
-if(isset($_GET['id'])) {
-    $id = $_GET['id'];
-    if($controller->deleteParticipante($id)) {
-        header('Location: ParticipanteView.php');
+    $id = trim($_GET["id"]);
+
+    // Eliminar el participante
+    if ($controller->deleteParticipante($id)) {
+        header("location: ParticipanteView.php");
+        exit();
     } else {
-        echo 'Error al eliminar el participante.';
+        echo "Hubo un problema al eliminar el participante.";
     }
+} else {
+    echo "ID de participante no especificado.";
 }
 ?>

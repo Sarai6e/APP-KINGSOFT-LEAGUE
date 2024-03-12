@@ -1,49 +1,44 @@
 <?php
-require_once 'RobotModel.php';
-
 class RobotController {
-    private $model;
+    private $db;
 
-    public function __construct($db) {
-        $this->model = new RobotModel($db);
+    public function __construct(PDO $db) {
+        $this->db = $db;
     }
 
+    // Método para obtener todos los robots
     public function index() {
-        $robots = $this->model->getAllRobots();
-        include 'RobotView.php';
+        $query = "SELECT * FROM robot";
+        $stmt = $this->db->query($query);
+        return $stmt;
     }
 
-    public function eliminar($id) {
-        $this->model->deleteRobot($id);
-        header("Location: index.php");
+    // Método para obtener un robot por su ID
+    public function getRobotById($id) {
+        $query = "SELECT * FROM robot WHERE id = :id";
+        $stmt = $this->db->prepare($query);
+        $stmt->execute(array(":id" => $id));
+        return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
-    public function editar($id) {
-        // Implementa la lógica para editar un robot
+    // Método para actualizar un robot
+    public function updateRobot($id, $nombre, $peso, $ancho, $alto) {
+        $query = "UPDATE robot SET nombre = :nombre, peso = :peso, ancho = :ancho, alto = :alto WHERE id = :id";
+        $stmt = $this->db->prepare($query);
+        return $stmt->execute(array(
+            ":id" => $id,
+            ":nombre" => $nombre,
+            ":peso" => $peso,
+            ":ancho" => $ancho,
+            ":alto" => $alto
+        ));
     }
-}
 
-// Uso de ejemplo
-$db = new PDO('mysql:host=localhost;dbname=nombre_de_tu_base_de_datos', 'usuario', 'contraseña');
-$controller = new RobotController($db);
-
-// Manejo de las solicitudes
-if (isset($_GET['accion'])) {
-    $accion = $_GET['accion'];
-    switch ($accion) {
-        case 'eliminar':
-            $id = $_GET['id'];
-            $controller->eliminar($id);
-            break;
-        case 'editar':
-            $id = $_GET['id'];
-            $controller->editar($id);
-            break;
-        default:
-            $controller->index();
-            break;
+    // Método para eliminar un robot
+    public function deleteRobot($id) {
+        $query = "DELETE FROM robot WHERE id = :id";
+        $stmt = $this->db->prepare($query);
+        return $stmt->execute(array(":id" => $id));
     }
-} else {
-    $controller->index();
 }
 ?>

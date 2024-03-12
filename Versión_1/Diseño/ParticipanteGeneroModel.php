@@ -1,38 +1,39 @@
 <?php
 class ParticipanteGeneroModel {
-    private $db;
+    private $conn;
 
     public function __construct($db) {
-        $this->db = $db;
+        $this->conn = $db;
     }
 
-    // Obtener todos los géneros de participantes
-    public function getAllGeneros() {
+    public function getAllParticipanteGenero() {
         $query = "SELECT * FROM participante_genero";
-        $result = $this->db->query($query);
-        return $result->fetchAll(PDO::FETCH_ASSOC);
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute();
+        return $stmt;
     }
 
-    // Eliminar un género de participante por ID
-    public function deleteGenero($id) {
-        $query = "DELETE FROM participante_genero WHERE id = :id";
-        $stmt = $this->db->prepare($query);
-        return $stmt->execute(['id' => $id]);
-    }
-
-    // Obtener un género de participante por ID
-    public function getGeneroById($id) {
-        $query = "SELECT * FROM participante_genero WHERE id = :id";
-        $stmt = $this->db->prepare($query);
-        $stmt->execute(['id' => $id]);
+    public function getParticipanteGeneroById($id) {
+        $query = "SELECT * FROM participante_genero WHERE id = ?";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(1, $id);
+        $stmt->execute();
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
-    // Actualizar un género de participante
-    public function updateGenero($id, $genero) {
-        $query = "UPDATE participante_genero SET genero = :genero WHERE id = :id";
-        $stmt = $this->db->prepare($query);
-        return $stmt->execute(['id' => $id, 'genero' => $genero]);
+    public function updateParticipanteGenero($id, $genero) {
+        $query = "UPDATE participante_genero SET genero = ? WHERE id = ?";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(1, $genero);
+        $stmt->bindParam(2, $id);
+        return $stmt->execute();
+    }
+
+    public function deleteParticipanteGenero($id) {
+        $query = "DELETE FROM participante_genero WHERE id = ?";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(1, $id);
+        return $stmt->execute();
     }
 }
 ?>

@@ -22,32 +22,34 @@ $participantes = $controller->getAllParticipantes();
         <tr>
             <th>ID</th>
             <th>Nombre</th>
-            <th>Apellidos</th>
+            <th>Apellido</th>
             <th>DNI</th>
-            <th>Género</th>
-            <th>Fecha de Nacimiento</th>
-            <th>Correo</th>
-            <th>Año de Estudio</th>
+            <th>Género ID</th>
+            <th>Grado Estudio ID</th>
+            <th>Año Estudio</th>
             <th>Especialidad</th>
-            <th>Grado de Estudio</th>
-            <th>ID Club de Robótica</th>
-            <th>ID Nombre de Institución</th>
+            <th>Correo</th>
+            <th>Clave</th>
+            <th>Robot ID</th>
+            <th>Club Robótica ID</th>
+            <th>Fecha Nacimiento</th>
             <th>Acciones</th>
         </tr>
         <?php while ($participante = $participantes->fetch(PDO::FETCH_ASSOC)) : ?>
             <tr>
                 <td><?php echo $participante['id']; ?></td>
                 <td><?php echo $participante['nombre']; ?></td>
-                <td><?php echo $participante['apellidos']; ?></td>
+                <td><?php echo $participante['apellido']; ?></td>
                 <td><?php echo $participante['dni']; ?></td>
-                <td><?php echo $participante['genero']; ?></td>
-                <td><?php echo $participante['fecha_nacimiento']; ?></td>
-                <td><?php echo $participante['correo']; ?></td>
-                <td><?php echo $participante['anio_estudio']; ?></td>
+                <td><?php echo $participante['participante_genero_id']; ?></td>
+                <td><?php echo $participante['grado_estudio_id']; ?></td>
+                <td><?php echo $participante['año_estudio']; ?></td>
                 <td><?php echo $participante['especialidad']; ?></td>
-                <td><?php echo $participante['grado_estudio']; ?></td>
-                <td><?php echo $participante['id_club_robotica']; ?></td>
-                <td><?php echo $participante['nombre_institucion_id']; ?></td>
+                <td><?php echo $participante['correo']; ?></td>
+                <td><?php echo $participante['clave']; ?></td>
+                <td><?php echo $participante['robot_id']; ?></td>
+                <td><?php echo $participante['club_robotica_id']; ?></td>
+                <td><?php echo $participante['fecha_nacimiento']; ?></td>
                 <td>
                     <a href="verparticipante.php?id=<?php echo $participante['id']; ?>">Ver</a>
                     <a href="editarparticipante.php?id=<?php echo $participante['id']; ?>">Editar</a>
