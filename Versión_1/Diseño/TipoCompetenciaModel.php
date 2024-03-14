@@ -2,15 +2,19 @@
 class TipoCompetenciaModel {
     private $db;
 
-    public function __construct($db) {
-        $this->db = $db;
+    public function __construct($database) {
+        $this->db = $database;
     }
 
-    // Obtener todos los tipos de competencia
-    public function getAllTiposCompetencia() {
-        $query = "SELECT * FROM tipo_competencia";
-        $stmt = $this->db->query($query);
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    // Método para obtener un tipo de competencia por su ID
+    public function getTipoCompetenciaById($id) {
+        $query = "SELECT * FROM tipo_competencia WHERE id = :id";
+        $statement = $this->db->prepare($query);
+        $statement->bindParam(':id', $id);
+        $statement->execute();
+        return $statement->fetch(PDO::FETCH_ASSOC);
     }
+
+    // Otros métodos del modelo...
 }
 ?>
