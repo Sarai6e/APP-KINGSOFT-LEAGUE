@@ -1,17 +1,27 @@
 <?php
-class TipoCompetenciaModel {
-    private $db;
+require_once 'TipoCompetenciaModel.php';
 
-    public function __construct($database) {
-        $this->db = $database;
+class TipoCompetenciaController {
+    private $model;
+
+    public function __construct(TipoCompetenciaModel $model) {
+        $this->model = $model;
     }
 
-    // Método para obtener todos los tipos de competencia
-    public function getAllTiposCompetencia() {
-        $query = "SELECT * FROM tipo_competencia";
-        $statement = $this->db->prepare($query);
-        $statement->execute();
-        return $statement->fetchAll(PDO::FETCH_ASSOC);
+    public function index() {
+        return $this->model->getAllTiposCompetencia();
+    }
+
+    public function getTipoCompetencia($id) {
+        return $this->model->getTipoCompetenciaById($id);
+    }
+
+    public function updateTipoCompetencia($id, $nombre, $descripcion) {
+        return $this->model->updateTipoCompetencia($id, $nombre, $descripcion);
+    }
+
+    public function deleteTipoCompetencia($id) {
+        return $this->model->deleteTipoCompetencia($id);
     }
 }
 ?>

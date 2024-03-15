@@ -1,22 +1,17 @@
 <?php
 require_once 'TipoCompetenciaController.php';
 
-// Verificar si se ha proporcionado un ID
-if (isset($_GET['id'])) {
-    $id = $_GET['id'];
-
+if(isset($_GET['id']) && !empty($_GET['id'])) {
     $db = new PDO('mysql:host=localhost;dbname=datosks', 'root', '');
-    $controller = new TipoCompetenciaController($db);
+    $controller = new TipoCompetenciaController(new TipoCompetenciaModel($db));
 
-    // Obtener la información del tipo de competencia
-    $tipoCompetencia = $controller->getTipoCompetenciaById($id);
+    $id = $_GET['id'];
+    $tipoCompetencia = $controller->getTipoCompetencia($id);
 
-    if ($tipoCompetencia) {
-        // Mostrar los detalles del tipo de competencia
-        echo "<h2>Detalles del Tipo de Competencia</h2>";
-        echo "<p><strong>ID:</strong> {$tipoCompetencia['id']}</p>";
-        echo "<p><strong>Nombre:</strong> {$tipoCompetencia['nombre']}</p>";
-        echo "<p><strong>Descripción:</strong> {$tipoCompetencia['descripcion']}</p>";
+    if($tipoCompetencia) {
+        echo "ID: " . $tipoCompetencia['id'] . "<br>";
+        echo "Nombre: " . $tipoCompetencia['nombre'] . "<br>";
+        echo "Descripción: " . $tipoCompetencia['descripcion'] . "<br>";
     } else {
         echo "Tipo de competencia no encontrado.";
     }
