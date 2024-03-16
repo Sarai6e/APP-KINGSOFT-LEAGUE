@@ -9,81 +9,99 @@ html{
     scroll-behavior: smooth;
 }
 /* sección INICIO */
-.inicio{
-    background: linear-gradient(rgba(245, 240, 240, 0.5), rgba(26, 25, 25, 0.5)), url(img/fondo.gif);
+.inicio {
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(img/fondo.gif);
     height: 100vh;
     background-size: cover;
     background-position: center center;
     position: relative;
     background-attachment: fixed;
 }
-.contenido{
+
+.contenido {
     max-width: 1300px;
     margin: auto;
 }
-/* ENCABEZADO */
-header{
+
+
+.background-slider img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+    z-index: -2; /* Asegura que esté detrás del fondo negro transparente */
+}
+
+.background-slider img.active {
+    opacity: 1;
+    z-index: -1; /* Asegura que esté delante del fondo negro transparente */
+}
+
+
+/* Estilos para el encabezado */
+header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 20px 0;
 }
-header h1 a{
+
+header h1 a {
     color: #fff;
     text-decoration: none;
     letter-spacing: 3px;
 }
-header h1 a:hover{
-    color: #e74452;
+
+header h1 a:hover {
+    color: #d9ff00;
 }
-nav ul{
+
+nav ul {
     list-style: none;
     display: flex;
 }
-nav ul li{
+
+nav ul li {
     margin: 0 15px;
-} 
-  
-nav ul li a{
+}
+
+nav ul li a {
     color: #fff;
     text-decoration: none;
     text-transform: uppercase;
     padding: 5px 7px;
     transition: .3s;
 }
-  
 
-
-
-
-
-/* Estilos para la barra de navegación */
 .navbar {
     background-color: #000;
-    border-bottom: 5px solid gold; /* Agregar una línea dorada en la parte inferior */
+    border-bottom: 5px solid gold;
     color: #fff;
     padding: 10px 0;
-    width: 100%; /* Ancho del 100% */
-    position: fixed; /* Fijar la barra de navegación en la parte superior */
-    top: 0; /* Alinear la barra de navegación en la parte superior */
-    left: 0; /* Alinear la barra de navegación en el extremo izquierdo */
-    z-index: 1000; /* Asegurar que la barra de navegación esté por encima de otros elementos */
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
 }
 
 .navbar-container {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    max-width: 1400px; /* Ancho máximo del contenedor de la barra de navegación */
+    max-width: 1400px;
     margin: 0 auto;
     padding: 0 20px;
-    width: 100%; /* Ancho del 100% */
+    width: 100%;
 }
 
 .nav-links {
     list-style: none;
     display: flex;
-    margin-right: auto; /* Mover los elementos de la izquierda hacia la derecha */
+    margin-right: auto;
 }
 
 .nav-links li {
@@ -103,7 +121,7 @@ nav ul li a{
 .social-icons {
     list-style: none;
     display: flex;
-    margin-left: auto; /* Mover los elementos de la derecha hacia la izquierda */
+    margin-left: auto;
 }
 
 .social-icons li {
@@ -122,11 +140,10 @@ nav ul li a{
 }
 
 #logo {
-    width: 150px; /* Ajustar el ancho del logo */
-    height: auto; /* Mantener la proporción */
-    margin-left: 20px; /* Ajustar el margen izquierdo */
+    width: 150px;
+    height: auto;
+    margin-left: 20px;
 }
-
 
 
 

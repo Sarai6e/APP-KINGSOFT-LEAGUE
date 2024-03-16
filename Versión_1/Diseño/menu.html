@@ -14,9 +14,35 @@
           width: 100px;
           height: 100px;
       }
+
+
+      .resaltar {
+            position: relative;
+            display: inline-block;
+        }
+        .resaltar::before {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            color: rgb(255, 215, 00); /* Color del texto amarillo */
+            overflow: hidden;
+            clip: rect(0, auto, auto, 0);
+            z-index: 2;
+        }
+        .resaltar::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 2px; /* Ajusta la posición del texto para el efecto de sombra */
+            left: 2px; /* Ajusta la posición del texto para el efecto de sombra */
+            color: black; /* Color del texto negro */
+            z-index: 1;
+        }
+
   </style>
 </head>
 <body>
+
     <!-- SECCION INICIO -->
     <section class="inicio" id="inicio">
         <div class="contenido">
@@ -27,7 +53,7 @@
                     <ul class="nav-links">
                         <li><a href="#inicio">Inicio</a></li>
                         <li><a href="#sobre-mi">Sobre Mí</a></li>
-                        <li><a href="#servicios">Servicios</a></li>
+                        <li><a href="#servicios">Capacitaciones</a></li>
                         <li><a href="#trabajos">Competencia</a></li>
                         <li><a href="#curriculum">Socios</a></li>
                         <li><a href="#contacto">Contacto</a></li>
@@ -36,6 +62,8 @@
                         <li><a href="#" class="social-icon"><i class="fab fa-facebook"></i></a></li>
                         <li><a href="#" class="social-icon"><i class="fab fa-twitter"></i></a></li>
                         <li><a href="#" class="social-icon"><i class="fab fa-instagram"></i></a></li>
+                        <li><a href="https://wa.me/978384404" class="social-icon"><i class="fab fa-whatsapp"></i></a></li>
+                        <li><a href="menulogin.html" class="social-icon"><i class="fas fa-user"></i></a></li>
                     </ul>
                 </div>
             </nav>
@@ -61,8 +89,11 @@
                     </a>
                 </div>
             </header>
-            <h2 class="frase">Hola, somos <span class="resaltar">kingsoft.</span></h2>
-        </div>
+            <header>
+                <div class="frase">
+                    <h2>Hola, somos <span class="resaltar" data-text="kingsoft">kingsoft</span>.</h2>
+                </div>
+            </header>
 
         <a href="#inicio">
             <div class="subir">
@@ -76,7 +107,7 @@
     <section class="sobre-mi" id="sobre-mi">
         <div class="contenido fila">
             <div class="contenedor-img">
-                <img src="img/nina.png" alt="">
+                <img src="img/robot.webp.jpeg" alt="">
             </div>
             
             <div class="info">
@@ -85,7 +116,7 @@
                     <button id="btn-skills">Skills</button>
                 </div>
                 <div class="info-opcion" id="info-sobre-mi">
-                    <h2>Hola a todos! Soy <span class="color">Nina</span></h2>
+                    <h2>Hola a todos! Soy <span class="color">Kingsoft</span></h2>
                     <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Tenetur porro, ipsam repellendus magnam veritatis quaerat labore quos. Necessitatibus enim deserunt corporis reprehenderit cupiditate tempore adipisci, quaerat possimus. Magni, non ad!</p>
                     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae nulla laboriosam odio, nihil facilis velit aut assumenda aperiam quibusdam dicta, totam vitae voluptatum et deserunt asperiores mollitia nemo consectetur tempore!</p>
                 </div>

@@ -43,6 +43,8 @@ $participante_genero = $controller->getAllParticipanteGenero();
                 <?php endwhile; ?>
             </tbody>
         </table>
+        <!-- Botón para volver a la página de inicio de sesión -->
+        <a href="menulogin.html" class="btn btn-secondary">Volver</a>
     </div>
 
     <!-- Bootstrap JS -->

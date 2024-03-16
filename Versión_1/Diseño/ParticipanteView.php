@@ -65,6 +65,7 @@ $participantes = $controller->getAllParticipantes();
                 <?php endwhile; ?>
             </tbody>
         </table>
+        <a href="menulogin.html" class="btn btn-secondary">Volver</a>
     </div>
 
     <!-- Bootstrap JS -->
