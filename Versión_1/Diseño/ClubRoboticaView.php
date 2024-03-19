@@ -6,8 +6,54 @@
     <title>Clubes de Robótica</title>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" /> 
+    <link rel="stylesheet" href="stylelogin.css">
+    <style>
+        .nav-links li {
+            position: relative;
+        }
+        .sub-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            padding: 10px;
+        }
+        .nav-links li:hover .sub-menu {
+            display: block;
+        }
+
+        /* Estilos personalizados */
+        .container {
+            margin-top: 150px; /* Ajuste del margen superior */
+            text-align: center; /* Centrar elementos dentro del contenedor */
+        }
+        .table {
+            background-color: white; /* Color de fondo de la tabla */
+        }
+        .btn {
+            color: white; /* Color del texto de los botones */
+        }
+        .btn-info {
+            background-color: #17a2b8; /* Color de fondo del botón Ver */
+        }
+        .btn-primary {
+            background-color: #007bff; /* Color de fondo del botón Editar */
+        }
+        .btn-danger {
+            background-color: #dc3545; /* Color de fondo del botón Eliminar */
+        }
+        h1{
+             color:white;
+        }
+    </style>
 </head>
 <body>
+<?php 
+    include 'navegador.php'
+    ?>
     <div class="container">
         <h1 class="mt-4 mb-4">Clubes de Robótica</h1>
         <table class="table">
@@ -48,7 +94,6 @@
                 <?php endwhile; ?>
             </tbody>
         </table>
-        <a href="menulogin.html" class="btn btn-secondary">Volver</a>
     </div>
 
     <!-- Bootstrap JS -->

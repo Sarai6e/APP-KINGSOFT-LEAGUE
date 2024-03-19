@@ -9,14 +9,53 @@ html{
     scroll-behavior: smooth;
 }
 /* sección INICIO */
+/* sección INICIO */
 .inicio {
-    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(img/fondo.gif);
     height: 100vh;
     background-size: cover;
     background-position: center center;
     position: relative;
     background-attachment: fixed;
+    overflow: hidden; /* Evita que el fondo se desborde en la sección de inicio */
 }
+
+.inicio::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)); /* Ajusta el color y la opacidad del fondo */
+    z-index: -1; /* Asegura que esté detrás del contenido */
+}
+
+.background-slider {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -2; /* Asegura que esté detrás del contenido */
+    overflow: hidden;
+}
+
+.background-slider img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+    z-index: -2; /* Asegura que esté detrás del fondo negro transparente */
+}
+
+.background-slider img.active {
+    opacity: 1;
+    z-index: -1; /* Asegura que esté delante del fondo negro transparente */
+}
+
 
 .contenido {
     max-width: 1300px;

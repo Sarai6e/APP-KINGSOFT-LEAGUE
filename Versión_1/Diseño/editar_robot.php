@@ -6,8 +6,25 @@
     <title>Editar Robot</title>
     <!-- Agregar Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+       .table{
+            background-color:white;
+        }
+        .container {
+            margin-top: 200px; /* Ajuste del margen superior */
+        }
+        label{
+            color:white;
+        }
+        h2{
+             color:white;
+        }
+    </style>
 </head>
 <body>
+<?php 
+    include 'navegador.php'
+    ?>
     <div class="container">
         <?php
         require_once 'RobotController.php';
@@ -51,25 +68,25 @@
                     <h2>Editar Robot</h2>
                     <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
                         <input type="hidden" name="id" value="<?php echo $robot['id']; ?>">
-                        <div>
+                        <div class="mb-3">
                             <label for="nombre">Nombre:</label>
-                            <input type="text" name="nombre" value="<?php echo $robot['nombre']; ?>">
+                            <input type="text" class="form-control" name="nombre" value="<?php echo $robot['nombre']; ?>">
                         </div>
-                        <div>
+                        <div class="mb-3">
                             <label for="peso">Peso:</label>
-                            <input type="text" name="peso" value="<?php echo $robot['peso']; ?>">
+                            <input type="text" class="form-control" name="peso" value="<?php echo $robot['peso']; ?>">
                         </div>
-                        <div>
+                        <div class="mb-3">
                             <label for="ancho">Ancho:</label>
-                            <input type="text" name="ancho" value="<?php echo $robot['ancho']; ?>">
+                            <input type="text" class="form-control" name="ancho" value="<?php echo $robot['ancho']; ?>">
                         </div>
-                        <div>
+                        <div class="mb-3">
                             <label for="alto">Alto:</label>
-                            <input type="text" name="alto" value="<?php echo $robot['alto']; ?>">
+                            <input type="text" class="form-control" name="alto" value="<?php echo $robot['alto']; ?>">
                         </div>
                         <div>
                             <input type="submit" value="Guardar" class="btn btn-primary">
-                            <a href="RobotView.php" class="btn btn-secondary">Inicio</a>
+                            <a href="RobotView.php" class="btn btn-secondary">Regresar</a>
                         </div>
                     </form>
         <?php

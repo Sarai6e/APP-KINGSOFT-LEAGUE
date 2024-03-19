@@ -23,16 +23,13 @@
             display: block;
         }
     </style>
-</head>
-<body>
-    <div class="background-slider">
+<div class="background-slider">
         <img src="img/1.png" alt="Background Image">
         <img src="img/2.png" alt="Background Image">
         <img src="img/3.png" alt="Background Image">
         <img src="img/4.png" alt="Background Image">
     </div>
-    <!-- Añadir enlaces -->
-    <nav class="navbar">
+<nav class="navbar">
         <div class="navbar-container">
             <h1><a href="#"><img id="logo" src="k.jpeg" alt="Logo"></a></h1>
             <ul class="nav-links">
@@ -58,6 +55,3 @@
             </ul>
         </div>
     </nav>
-    <script src="script_login.js"></script>
-</body>
-</html>

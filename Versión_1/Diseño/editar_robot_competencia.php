@@ -6,8 +6,25 @@
     <title>Editar Competencia del Robot</title>
     <!-- Agregar Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+       .table{
+            background-color:white;
+        }
+        .container {
+            margin-top: 200px; /* Ajuste del margen superior */
+        }
+        label{
+            color:white;
+        }
+        h2{
+             color:white;
+        }
+    </style>
 </head>
 <body>
+<?php 
+    include 'navegador.php'
+    ?>
     <div class="container">
         <?php
         require_once 'RobotCompetenciaController.php';

@@ -41,6 +41,29 @@ html {
     background-color: rgba(0, 0, 0, 0.5); /* Ajusta el valor de la opacidad según lo necesites */
     z-index: -1; /* Asegura que esté detrás del contenido */
 }
+.background-slider {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    overflow: hidden;
+    background-image: url('img/fondo.gif'); /* Reemplaza 'ruta/de/tu/imagen.gif' con la ruta de tu GIF */
+    background-size: cover;
+    background-position: center;
+}
+
+.background-slider::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 0;
+}
 
 /* ENCABEZADO */
 header {

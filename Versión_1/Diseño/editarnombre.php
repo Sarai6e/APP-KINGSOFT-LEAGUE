@@ -6,8 +6,25 @@
     <title>Actualizar Nombre de Institución</title>
     <!-- Agregar Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .table{
+            background-color:white;
+        }
+        .container {
+            margin-top: 200px; /* Ajuste del margen superior */
+        }
+        .form-label{
+            color:white;
+        }
+        h1{
+             color:white;
+        }
+    </style>
 </head>
 <body>
+<?php 
+    include 'navegador.php'
+    ?>
     <div class="container">
         <?php
         require_once 'NombreInstitucionController.php';
@@ -50,7 +67,7 @@
         ?>
 
         <!-- Botón de inicio -->
-        <a href="NombreInstitucionView.php" class="btn btn-secondary mt-3">Inicio</a>
+        <a href="NombreInstitucionView.php" class="btn btn-secondary mt-3">Regrsar</a>
     </div>
 
     <!-- Agregar Bootstrap JS (Opcional, si lo necesitas) -->

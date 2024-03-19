@@ -6,8 +6,25 @@
     <title>Editar Participante</title>
     <!-- Agregar Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+       .table{
+            background-color:white;
+        }
+        .container {
+            margin-top: 200px; /* Ajuste del margen superior */
+        }
+        label{
+            color:white;
+        }
+        h1{
+             color:white;
+        }
+    </style>
 </head>
 <body>
+<?php 
+    include 'navegador.php'
+    ?>
     <div class="container">
         <?php
         require_once 'ParticipanteController.php';
@@ -56,60 +73,61 @@
 
                 if ($participante) {
         ?>
-                    <h2>Editar Participante</h2>
+                    <h1>Editar Participante</h1>
                     <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
-                        <input type="hidden" name="id" value="<?php echo $participante['id']; ?>">
-                        <div>
-                            <label for="nombre">Nombre:</label>
-                            <input type="text" name="nombre" value="<?php echo $participante['nombre']; ?>">
+                        <input type="hidden" class="form-control" name="id" value="<?php echo $participante['id']; ?>">
+                        
+                        <div class="mb-3">
+                            <label for="nombre" class="form-label">Nombre:</label>
+                            <input type="text" class="form-control" name="nombre" value="<?php echo $participante['nombre']; ?>">
                         </div>
-                        <div>
-                            <label for="apellido">Apellido:</label>
-                            <input type="text" name="apellido" value="<?php echo $participante['apellido']; ?>">
+                        <div class="mb-3">
+                            <label for="apellido" class="form-label">Apellido:</label>
+                            <input type="text" class="form-control" name="apellido" value="<?php echo $participante['apellido']; ?>">
                         </div>
-                        <div>
-                            <label for="dni">DNI:</label>
-                            <input type="text" name="dni" value="<?php echo $participante['dni']; ?>">
+                        <div class="mb-3">
+                            <label for="dni" class="form-label">DNI:</label>
+                            <input type="text" class="form-control" name="dni" value="<?php echo $participante['dni']; ?>">
                         </div>
-                        <div>
-                            <label for="genero_id">Participante Género ID:</label>
-                            <input type="text" name="genero_id" value="<?php echo $participante['participante_genero_id']; ?>">
+                        <div class="mb-3">
+                            <label for="genero_id" class="form-label">Participante Género ID:</label>
+                            <input type="text" class="form-control" name="genero_id" value="<?php echo $participante['participante_genero_id']; ?>">
                         </div>
-                        <div>
-                            <label for="grado_estudio_id">Grado Estudio ID:</label>
-                            <input type="text" name="grado_estudio_id" value="<?php echo $participante['grado_estudio_id']; ?>">
+                        <div class="mb-3">
+                            <label for="grado_estudio_id" class="form-label">Grado Estudio ID:</label>
+                            <input type="text" class="form-control" name="grado_estudio_id" value="<?php echo $participante['grado_estudio_id']; ?>">
                         </div>
-                        <div>
-                            <label for="año_estudio">Año Estudio:</label>
-                            <input type="text" name="año_estudio" value="<?php echo $participante['año_estudio']; ?>">
+                        <div class="mb-3">
+                            <label for="año_estudio" class="form-label">Año Estudio:</label>
+                            <input type="text" class="form-control" name="año_estudio" value="<?php echo $participante['año_estudio']; ?>">
                         </div>
-                        <div>
-                            <label for="especialidad">Especialidad:</label>
-                            <input type="text" name="especialidad" value="<?php echo $participante['especialidad']; ?>">
+                        <div class="mb-3">
+                            <label for="especialidad" class="form-label">Especialidad:</label>
+                            <input type="text" class="form-control" name="especialidad" value="<?php echo $participante['especialidad']; ?>">
                         </div>
-                        <div>
-                            <label for="correo">Correo:</label>
-                            <input type="text" name="correo" value="<?php echo $participante['correo']; ?>">
+                        <div class="mb-3">
+                            <label for="correo" class="form-label">Correo:</label>
+                            <input type="text" class="form-control" name="correo" value="<?php echo $participante['correo']; ?>">
                         </div>
-                        <div>
-                            <label for="clave">Clave:</label>
-                            <input type="password" name="clave" value="<?php echo $participante['clave']; ?>">
+                        <div class="mb-3">
+                            <label for="clave" class="form-label">Clave:</label>
+                            <input type="password" class="form-control" name="clave" value="<?php echo $participante['clave']; ?>">
                         </div>
-                        <div>
-                            <label for="robot_id">Robot ID:</label>
-                            <input type="text" name="robot_id" value="<?php echo $participante['robot_id']; ?>">
+                        <div class="mb-3">
+                            <label for="robot_id" class="form-label">Robot ID:</label>
+                            <input type="text" class="form-control" name="robot_id" value="<?php echo $participante['robot_id']; ?>">
                         </div>
-                        <div>
-                            <label for="club_robotica_id">Club Robótica ID:</label>
-                            <input type="text" name="club_robotica_id" value="<?php echo $participante['club_robotica_id']; ?>">
+                        <div class="mb-3">
+                            <label for="club_robotica_id" class="form-label">Club Robótica ID:</label>
+                            <input type="text" class="form-control" name="club_robotica_id" value="<?php echo $participante['club_robotica_id']; ?>">
                         </div>
-                        <div>
-                            <label for="fecha_nacimiento">Fecha Nacimiento:</label>
-                            <input type="date" name="fecha_nacimiento" value="<?php echo $participante['fecha_nacimiento']; ?>">
+                        <div class="mb-3">
+                            <label for="fecha_nacimiento" class="form-label">Fecha Nacimiento:</label>
+                            <input type="date" class="form-control" name="fecha_nacimiento" value="<?php echo $participante['fecha_nacimiento']; ?>">
                         </div>
-                        <div>
-                            <input type="submit" value="Guardar Cambios">
-                            <a href="ParticipanteView.php" class="btn btn-secondary">Cancelar</a>
+                        <div class="mb-3">
+                            <input type="submit" class= "btn btn-success" value="Guardar Cambios">
+                            <a href="ParticipanteView.php" class="btn btn-secondary">Regresar</a>
                         </div>
                     </form>
         <?php

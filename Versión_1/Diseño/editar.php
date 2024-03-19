@@ -6,8 +6,25 @@
     <title>Editar Club</title>
     <!-- Agregar Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .table{
+            background-color:white;
+        }
+        .container {
+            margin-top: 200px; /* Ajuste del margen superior */
+        }
+        .form-label{
+            color:white;
+        }
+        h1{
+             color:white;
+        }
+    </style>
 </head>
 <body>
+<?php 
+    include 'navegador.php'
+    ?>
     <div class="container">
         <?php
         require_once 'ClubRoboticaController.php';
@@ -32,6 +49,7 @@
             $club = $controller->ver($id);
             // Aquí puedes mostrar un formulario prellenado con los datos del club
         ?>
+            <h1>Actualizar Club Robotica</h1>
             <form method="post" action="">
                 <input type="hidden" name="id" value="<?php echo $club['id']; ?>">
                 <div class="mb-3">
@@ -52,8 +70,7 @@
         }
         ?>
 
-        <!-- Botón para regresar al inicio -->
-        <a href="ClubRoboticaView.php" class="btn btn-secondary mt-3">Inicio</a>
+<a href="GradoEstudioView.php" class="btn btn-secondary mt-3">Regresar</a>
     </div>
 
     <!-- Agregar Bootstrap JS (Opcional, si lo necesitas) -->

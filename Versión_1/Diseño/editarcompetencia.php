@@ -6,8 +6,25 @@
     <title>Actualizar Competencia</title>
     <!-- Agregar Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .table{
+            background-color:white;
+        }
+        .container {
+            margin-top: 200px; /* Ajuste del margen superior */
+        }
+        .form-label{
+            color:white;
+        }
+        h1{
+             color:white;
+        }
+    </style>
 </head>
 <body>
+<?php 
+    include 'navegador.php'
+    ?>
     <div class="container">
         <?php
         require_once 'CompetenciaController.php';
@@ -35,7 +52,7 @@
             $competencia = $controller->getCompetenciaById($id);
             if ($competencia) {
         ?>
-                <h1 class="mt-3">Actualizar Competencia</h1>
+                        <h1>Actualizar Competencia</h1>
                 <form method="post" action="">
                     <input type="hidden" name="id" value="<?php echo $competencia['id']; ?>">
                     <div class="mb-3">
@@ -70,7 +87,7 @@
         ?>
 
         <!-- Botón para regresar al inicio -->
-        <a href="competenciaView.php" class="btn btn-secondary mt-3">Inicio</a>
+        <a href="competenciaView.php" class="btn btn-secondary mt-3">Regresar</a>
     </div>
 
     <!-- Agregar Bootstrap JS (Opcional, si lo necesitas) -->

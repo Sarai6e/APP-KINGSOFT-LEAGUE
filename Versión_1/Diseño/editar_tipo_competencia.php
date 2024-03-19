@@ -32,8 +32,25 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <title>Editar Tipo de Competencia</title>
                 <!-- Agregar Bootstrap CSS -->
                 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+                <style>
+       .table{
+            background-color:white;
+        }
+        .container {
+            margin-top: 200px; /* Ajuste del margen superior */
+        }
+        label{
+            color:white;
+        }
+        h1{
+             color:white;
+        }
+    </style>
             </head>
             <body>
+            <?php 
+    include 'navegador.php'
+    ?>
                 <div class="container">
                     <h1>Editar Tipo de Competencia</h1>
                     <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">

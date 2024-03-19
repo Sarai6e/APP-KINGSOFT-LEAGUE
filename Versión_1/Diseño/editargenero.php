@@ -6,8 +6,25 @@
     <title>Editar Género del Participante</title>
     <!-- Agregar Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+       .table{
+            background-color:white;
+        }
+        .container {
+            margin-top: 200px; /* Ajuste del margen superior */
+        }
+        label{
+            color:white;
+        }
+        h2{
+             color:white;
+        }
+    </style>
 </head>
 <body>
+<?php 
+    include 'navegador.php'
+    ?>
     <div class="container">
         <?php
         require_once 'ParticipanteGeneroController.php';
@@ -48,9 +65,9 @@
                     <h2>Editar Género del Participante</h2>
                     <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
                         <input type="hidden" name="id" value="<?php echo $genero['id']; ?>">
-                        <div>
+                        <div class="mb-3">
                             <label for="genero">Género:</label>
-                            <input type="text" name="genero" value="<?php echo $genero['genero']; ?>">
+                            <input type="text" class="form-control" name="genero" value="<?php echo $genero['genero']; ?>">
                         </div>
                         <div>
                             <input type="submit" value="Guardar" class="btn btn-primary">
