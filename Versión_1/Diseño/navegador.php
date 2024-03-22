@@ -29,6 +29,7 @@
         <img src="img/3.png" alt="Background Image">
         <img src="img/4.png" alt="Background Image">
     </div>
+
 <nav class="navbar">
         <div class="navbar-container">
             <h1><a href="#"><img id="logo" src="k.jpeg" alt="Logo"></a></h1>
@@ -54,4 +55,10 @@
                 <li><a href="#contacto"></a></li>
             </ul>
         </div>
+        <div id="bienvenida">
+    <!-- Aquí aparecerá el mensaje de bienvenida -->
+</div>
     </nav>
+
+
+    

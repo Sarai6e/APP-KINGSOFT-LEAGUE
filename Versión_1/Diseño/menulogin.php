@@ -12,5 +12,7 @@
     <?php 
     include 'navegador.php'
     ?>
+
+
 </body>
 </html>

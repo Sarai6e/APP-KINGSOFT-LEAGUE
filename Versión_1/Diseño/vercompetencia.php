@@ -6,8 +6,25 @@
     <title>Detalles de Competencia</title>
     <!-- Enlace a Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .table{
+            background-color:white;
+        }
+        .container {
+            margin-top: 200px; /* Ajuste del margen superior */
+        }
+        .form-label{
+            color:white;
+        }
+        h1{
+             color:white;
+        }
+    </style>
 </head>
 <body>
+<?php 
+    include 'navegador.php'
+    ?>
     <div class="container">
         <?php
         require_once 'CompetenciaController.php';
@@ -38,7 +55,7 @@
         }
         ?>
         <!-- Botón para regresar al inicio -->
-        <a href="competenciaView.php" class="btn btn-primary mt-3">Regresar al Inicio</a>
+        <a href="competenciaView.php" class="btn btn-primary mt-3">Regresar</a>
     </div>
     <!-- Scripts de Bootstrap (jQuery primero, luego Popper.js, luego Bootstrap JS) -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>

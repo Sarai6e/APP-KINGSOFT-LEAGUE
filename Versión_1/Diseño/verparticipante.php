@@ -6,8 +6,30 @@
     <title>Detalles del Participante</title>
     <!-- Agregar Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+    body {
+      background-color: #f8f9fa;
+    }
+    .container {
+      margin-top: 200px; /* Ajuste del margen superior */
+      background-color: #fff;
+      padding: 100px 50px; /* Relleno superior e inferior reducido */
+      border-radius: 5px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    h1 {
+      color: #343a40;
+      margin-bottom: 20px;
+    }
+    p {
+      color: #6c757d;
+    }
+  </style>
 </head>
 <body>
+<?php 
+    include 'navegador.php'
+    ?>
 
 <div class="container mt-5">
     <?php
@@ -38,7 +60,7 @@
             echo "<p><strong>Robot ID:</strong> " . $participante['robot_id'] . "</p>";
             echo "<p><strong>Club Robótica ID:</strong> " . $participante['club_robotica_id'] . "</p>";
             echo "<p><strong>Fecha Nacimiento:</strong> " . $participante['fecha_nacimiento'] . "</p>";
-            echo "<p><a href='ParticipanteView.php' class='btn btn-primary'>Volver a la lista de participantes</a></p>";
+            echo "<p><a href='ParticipanteView.php' class='btn btn-primary'>Regresar</a></p>";
         } else {
             echo "<h1>No se encontró el participante.</h1>";
         }

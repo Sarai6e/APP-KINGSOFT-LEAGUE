@@ -6,8 +6,25 @@
     <title>Detalles del Club</title>
     <!-- Agregamos los archivos CSS de Bootstrap -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .table{
+            background-color:white;
+        }
+        .container {
+            margin-top: 200px; /* Ajuste del margen superior */
+        }
+        .form-label{
+            color:white;
+        }
+        h1{
+             color:white;
+        }
+    </style>
 </head>
 <body>
+<?php 
+    include 'navegador.php'
+    ?>
     <div class="container">
         <?php
         require_once 'ClubRoboticaController.php';
@@ -34,7 +51,7 @@
         ?>
 
         <!-- Botón para regresar al inicio -->
-        <a href="clubRoboticaView.php" class="btn btn-primary mt-3">Regresar al Inicio</a>
+        <a href="clubRoboticaView.php" class="btn btn-primary mt-3">Regresar </a>
     </div>
 
     <!-- Agregamos el archivo JavaScript de Bootstrap (opcional, solo si necesitas funcionalidades de Bootstrap) -->
