@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 12-03-2024 a las 17:49:58
--- Versión del servidor: 10.4.32-MariaDB
--- Versión de PHP: 8.2.12
+-- Tiempo de generación: 22-03-2024 a las 18:44:13
+-- Versión del servidor: 10.4.28-MariaDB
+-- Versión de PHP: 8.0.28
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -41,9 +41,8 @@ CREATE TABLE `club_robotica` (
 --
 
 INSERT INTO `club_robotica` (`id`, `nombre`, `ciudad`, `pais`, `logo`, `nombre_institucion_id`) VALUES
-(1, 'Club de Robótica A', 'Ciudad A', 'País A', '\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0', 1),
-(2, 'Club de Robótica B', 'Ciudad B', 'País B', '	\n\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0', 2),
-(3, 'Club de Robótica C', 'Ciudad C', 'País C', '\r\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0', 3);
+(1, 'Robot I', 'Huánuco', 'Argentina', '2deqfrqvqrtvt', 14),
+(3, 'zsdf g', 'sdzg dd', 'cxb', 'zsvccbnc', 3);
 
 -- --------------------------------------------------------
 
@@ -65,9 +64,7 @@ CREATE TABLE `competencia` (
 --
 
 INSERT INTO `competencia` (`id`, `nombre`, `fecha_inicio_inscripcion`, `fecha_fin_inscripcion`, `fecha_compentencia`, `tipo_competencia`) VALUES
-(1, 'Competencia X', '2024-04-01', '2024-04-15', '2024-05-01', 1),
-(2, 'Competencia Y', '2024-06-01', '2024-06-15', '2024-07-01', 2),
-(3, 'Competencia Z', '2024-08-01', '2024-08-15', '2024-09-01', 3),
+(3, 'Competencia ', '2024-08-01', '2024-08-15', '2024-09-01', 3),
 (4, 'sarairomero', '2024-03-04', '2024-03-06', '2024-03-12', 3);
 
 -- --------------------------------------------------------
@@ -86,7 +83,7 @@ CREATE TABLE `grado_estudio` (
 --
 
 INSERT INTO `grado_estudio` (`id`, `grado`) VALUES
-(1, 'Primaria'),
+(1, 'Secundaria'),
 (2, 'Secundaria'),
 (3, 'Universidad');
 
@@ -106,7 +103,7 @@ CREATE TABLE `nombre_institucion` (
 --
 
 INSERT INTO `nombre_institucion` (`id`, `nombre`) VALUES
-(1, 'Institución D'),
+(1, 'Institución C'),
 (2, 'Institución B'),
 (3, 'Institución C');
 
@@ -138,9 +135,8 @@ CREATE TABLE `participantes` (
 --
 
 INSERT INTO `participantes` (`id`, `nombre`, `apellido`, `dni`, `participante_genero_id`, `grado_estudio_id`, `año_estudio`, `especialidad`, `correo`, `clave`, `fecha_de_actualizacion`, `robot_id`, `club_robotica_id`, `fecha_nacimiento`) VALUES
-(1, 'Juan', 'García', '1234567890', 1, 1, 2, 'Ingeniería Mecánica', 'juan@example.com', 'clave123', '2024-03-12 16:47:35', 1, 1, '1990-05-15'),
-(2, 'María', 'López', '0987654321', 2, 2, 3, 'Ingeniería Eléctrica', 'maria@example.com', 'password123', '2024-03-12 16:47:35', 2, 1, '1992-08-20'),
-(3, 'Pedro', 'Martínez', '5678901234', 1, 3, 1, 'Ingeniería de Software', 'pedro@example.com', 'securepwd', '2024-03-12 16:47:35', 3, 2, '1995-03-10');
+(2, 'Yefell', 'López', '0987654321', 2, 2, 3, 'Ingeniería Eléctrica', 'Rut@gmail.com', 'password123', '2024-03-19 17:40:57', 2, 1, '2003-11-05'),
+(3, 'Pedro', 'Martínez', '5678901234', 1, 3, 1, 'Ingeniería de Software', 'pedro@example.com', 'securepwd', '2024-03-12 21:47:35', 3, 2, '1995-03-10');
 
 -- --------------------------------------------------------
 
@@ -160,7 +156,32 @@ CREATE TABLE `participante_genero` (
 INSERT INTO `participante_genero` (`id`, `genero`) VALUES
 (2, 'Femenino'),
 (1, 'Masculino'),
-(3, 'Otro');
+(3, 'Femenino');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `registros`
+--
+
+CREATE TABLE `registros` (
+  `id` int(11) NOT NULL,
+  `id_usuario` int(11) NOT NULL,
+  `ip_usuario` varchar(45) NOT NULL,
+  `fecha_hora` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `registros`
+--
+
+INSERT INTO `registros` (`id`, `id_usuario`, `ip_usuario`, `fecha_hora`) VALUES
+(1, 1, '::1', '2024-03-22 17:50:04'),
+(2, 4, '::1', '2024-03-22 17:51:44'),
+(3, 1, '::1', '2024-03-22 18:21:13'),
+(4, 1, '::1', '2024-03-22 18:23:36'),
+(5, 1, '::1', '2024-03-22 18:27:20'),
+(6, 1, '::1', '2024-03-22 18:40:49');
 
 -- --------------------------------------------------------
 
@@ -181,9 +202,7 @@ CREATE TABLE `robot` (
 --
 
 INSERT INTO `robot` (`id`, `nombre`, `peso`, `ancho`, `alto`) VALUES
-(1, 'Robot A', 5.50, 30.00, 20.00),
-(2, 'Robot B', 4.00, 25.00, 15.00),
-(3, 'Robot C', 6.20, 35.00, 22.00);
+(3, 'Robot', 6.20, 35.00, 23.00);
 
 -- --------------------------------------------------------
 
@@ -203,8 +222,7 @@ CREATE TABLE `robot_competencia` (
 
 INSERT INTO `robot_competencia` (`id`, `id_robot`, `id_competencia`) VALUES
 (1, 1, 1),
-(2, 2, 2),
-(3, 3, 3);
+(2, 2, 2);
 
 -- --------------------------------------------------------
 
@@ -223,68 +241,44 @@ CREATE TABLE `tipo_competencia` (
 --
 
 INSERT INTO `tipo_competencia` (`id`, `nombre`, `descripcion`) VALUES
-(1, 'Tipo A', 'dzvgfbchngjbnhj'),
-(2, 'Tipo B', 'szdvghv'),
-(3, 'Tipo C', 'sadknijzgwsdfzghde');
+(1, 'Rut', 'asfdb');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `usuarios`
+--
+
+CREATE TABLE `usuarios` (
+  `id` int(11) NOT NULL,
+  `usuario` varchar(100) NOT NULL,
+  `contrasena` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `usuarios`
+--
+
+INSERT INTO `usuarios` (`id`, `usuario`, `contrasena`) VALUES
+(1, 'sarai@gmail.com', '123456789'),
+(2, 'Camila@gmail.com', '123456'),
+(3, 'romero@gmail.com', '123456'),
+(4, 'Villanueva@gmail.com', '145638');
 
 --
 -- Índices para tablas volcadas
 --
 
 --
--- Indices de la tabla `club_robotica`
+-- Indices de la tabla `registros`
 --
-ALTER TABLE `club_robotica`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `nombre_institucion_id` (`nombre_institucion_id`);
-
---
--- Indices de la tabla `competencia`
---
-ALTER TABLE `competencia`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `tipo_competencia` (`tipo_competencia`);
-
---
--- Indices de la tabla `grado_estudio`
---
-ALTER TABLE `grado_estudio`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `grado` (`grado`);
-
---
--- Indices de la tabla `nombre_institucion`
---
-ALTER TABLE `nombre_institucion`
+ALTER TABLE `registros`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indices de la tabla `participantes`
+-- Indices de la tabla `usuarios`
 --
-ALTER TABLE `participantes`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `participante_genero_id` (`participante_genero_id`),
-  ADD KEY `grado_estudio_id` (`grado_estudio_id`),
-  ADD KEY `robot_id` (`robot_id`),
-  ADD KEY `club_robotica_id` (`club_robotica_id`);
-
---
--- Indices de la tabla `participante_genero`
---
-ALTER TABLE `participante_genero`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `genero` (`genero`);
-
---
--- Indices de la tabla `robot`
---
-ALTER TABLE `robot`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indices de la tabla `tipo_competencia`
---
-ALTER TABLE `tipo_competencia`
+ALTER TABLE `usuarios`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -292,77 +286,16 @@ ALTER TABLE `tipo_competencia`
 --
 
 --
--- AUTO_INCREMENT de la tabla `club_robotica`
+-- AUTO_INCREMENT de la tabla `registros`
 --
-ALTER TABLE `club_robotica`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+ALTER TABLE `registros`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
--- AUTO_INCREMENT de la tabla `competencia`
+-- AUTO_INCREMENT de la tabla `usuarios`
 --
-ALTER TABLE `competencia`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
---
--- AUTO_INCREMENT de la tabla `grado_estudio`
---
-ALTER TABLE `grado_estudio`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
---
--- AUTO_INCREMENT de la tabla `nombre_institucion`
---
-ALTER TABLE `nombre_institucion`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
---
--- AUTO_INCREMENT de la tabla `participantes`
---
-ALTER TABLE `participantes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
---
--- AUTO_INCREMENT de la tabla `participante_genero`
---
-ALTER TABLE `participante_genero`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
---
--- AUTO_INCREMENT de la tabla `robot`
---
-ALTER TABLE `robot`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
---
--- AUTO_INCREMENT de la tabla `tipo_competencia`
---
-ALTER TABLE `tipo_competencia`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
---
--- Restricciones para tablas volcadas
---
-
---
--- Filtros para la tabla `club_robotica`
---
-ALTER TABLE `club_robotica`
-  ADD CONSTRAINT `club_robotica_ibfk_1` FOREIGN KEY (`nombre_institucion_id`) REFERENCES `nombre_institucion` (`id`);
-
---
--- Filtros para la tabla `competencia`
---
-ALTER TABLE `competencia`
-  ADD CONSTRAINT `competencia_ibfk_1` FOREIGN KEY (`tipo_competencia`) REFERENCES `tipo_competencia` (`id`);
-
---
--- Filtros para la tabla `participantes`
---
-ALTER TABLE `participantes`
-  ADD CONSTRAINT `participantes_ibfk_1` FOREIGN KEY (`participante_genero_id`) REFERENCES `participante_genero` (`id`),
-  ADD CONSTRAINT `participantes_ibfk_2` FOREIGN KEY (`grado_estudio_id`) REFERENCES `grado_estudio` (`id`),
-  ADD CONSTRAINT `participantes_ibfk_3` FOREIGN KEY (`robot_id`) REFERENCES `robot` (`id`),
-  ADD CONSTRAINT `participantes_ibfk_4` FOREIGN KEY (`club_robotica_id`) REFERENCES `club_robotica` (`id`);
+ALTER TABLE `usuarios`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
