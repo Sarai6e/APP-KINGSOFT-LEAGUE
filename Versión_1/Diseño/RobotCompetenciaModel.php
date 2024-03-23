@@ -7,7 +7,7 @@ class RobotCompetenciaModel {
     }
 
     public function getAllRobotCompetencias() {
-        $query = "SELECT * FROM robot_competencia";
+        $query = "SELECT robot_competencia.id, robot.nombre as robot, competencia.nombre as competencia, competencia.fecha_compentencia as fecha FROM robot_competencia inner join robot on robot.id=robot_competencia.id_robot inner join competencia on competencia.id=robot_competencia.id_competencia";
         $stmt = $this->db->prepare($query);
         $stmt->execute();
         return $stmt;

@@ -1,11 +1,12 @@
 <?php
+session_start();
 require_once 'RobotController.php';
 
 $db = new PDO('mysql:host=localhost;dbname=datosks', 'root', '');
 $controller = new RobotController($db);
 
 // Ver todos los robots
-$robots = $controller->index();
+$robots = $controller->index($_SESSION['id_usuario']);
 ?>
 <!DOCTYPE html>
 <html lang="en">

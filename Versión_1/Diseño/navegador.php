@@ -48,7 +48,7 @@
                         <li><a href="TipoCompetenciaView.php">Tipo competencia</a></li>
                     </ul>
                 </li>
-                <li><a href="#trabajos">LOGIN</a></li>
+                <li><a href="login.php">LOGIN</a></li>
                 <li><a href="#sobre-mi">REGISTRATE</a></li>
                 <li><a href="#servicios">RECUPERAR CONTRASEÑA</a></li>
                 <li><a href="#curriculum"></a></li>
@@ -60,5 +60,7 @@
 </div>
     </nav>
 
+
+</html>
 
     

@@ -70,7 +70,7 @@
         }
         ?>
 
-<a href="GradoEstudioView.php" class="btn btn-secondary mt-3">Regresar</a>
+<a href="ClubRoboticaView.php" class="btn btn-secondary mt-3">Regresar</a>
     </div>
 
     <!-- Agregar Bootstrap JS (Opcional, si lo necesitas) -->

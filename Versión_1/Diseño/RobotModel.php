@@ -7,7 +7,7 @@ class RobotModel {
     }
 
     public function getAllRobots() {
-        $query = "SELECT * FROM robot";
+        $query = "SELECT * FROM robot where id_participante = 2";
         $stmt = $this->db->prepare($query);
         $stmt->execute();
         return $stmt;

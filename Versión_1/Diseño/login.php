@@ -55,7 +55,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     // Cierra la conexión
     $stmt->close();
-    $stmt_registro->close();
+    if (isset($stmt_registro)) {
+        $stmt_registro->close();
+    }
     $conexion->close();
 }
 ?>
@@ -66,16 +68,78 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Iniciar sesión</title>
+    <style>
+        body {
+            background-color: #f2f2f2;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        
+        #login-form {
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        
+        h2 {
+            color: #333;
+        }
+        
+        label {
+            color: #333;
+        }
+        
+        input[type="text"],
+        input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        
+        input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+        
+        .error-message {
+            color: #ff0000;
+        }
+    </style>
 </head>
 <body>
-    <h2>Iniciar sesión</h2>
-    <?php if (isset($mensaje_error)) { echo "<p>$mensaje_error</p>"; } ?>
-    <form method="post" action="">
-        <label for="usuario">Usuario:</label><br>
-        <input type="text" id="usuario" name="usuario" required><br>
-        <label for="contrasena">Contraseña:</label><br>
-        <input type="password" id="contrasena" name="contrasena" required><br><br>
-        <input type="submit" value="Iniciar sesión">
-    </form>
+<?php 
+    include 'navegador.php'
+    ?>
+    <div id="login-form">
+        <h2>Iniciar sesión</h2>
+        <?php if (isset($mensaje_error)) { echo "<p class='error-message'>$mensaje_error</p>"; } ?>
+        <form method="post" action="">
+            <label for="usuario">Usuario:</label><br>
+            <input type="text" id="usuario" name="usuario" required><br>
+            <label for="contrasena">Contraseña:</label><br>
+            <input type="password" id="contrasena" name="contrasena" required><br><br>
+            <input type="submit" value="Iniciar sesión">
+        </form>
+    </div>
 </body>
 </html>
