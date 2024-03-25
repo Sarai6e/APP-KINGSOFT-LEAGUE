@@ -33,8 +33,12 @@ $robots = $controller->index($_SESSION['id_usuario']);
 <?php 
     include 'navegador.php'
     ?>
-    <div class="container">
-        <h1>Robots</h1>
+        <div class="container">
+        <!-- Título y botón de agregar -->
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h1 class="mt-4 mb-4">Robot</h1>
+            <a href="agregar_club.php" class="btn btn-success">AgregarRobot</a>
+        </div>
         <table class="table table-bordered">
             <thead class="thead-dark">
                 <tr>

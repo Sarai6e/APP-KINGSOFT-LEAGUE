@@ -1,40 +1,13 @@
 <?php
 session_start();
 
-// Función para registrar eventos
-function registrarEvento($tipo, $id_usuario = null) {
-    // Conexión a la base de datos (asegúrate de cambiar los valores a los de tu base de datos)
-    $conexion = new mysqli("localhost", "root", "", "datosks");
-
-    // Verifica la conexión
-    if ($conexion->connect_error) {
-        die("Conexión fallida: " . $conexion->connect_error);
-    }
-
-    // Obtiene la dirección IP del usuario
-    $ip_usuario = $_SERVER['REMOTE_ADDR'];
-
-    // Obtiene la fecha y hora actual
-    $fecha_hora = date("Y-m-d H:i:s");
-
-    // Consulta para insertar el registro del evento
-    $sql_registro = "INSERT INTO registros (tipo_evento, id_usuario, ip_usuario, fecha_hora) VALUES (?, ?, ?, ?)";
-    $stmt_registro = $conexion->prepare($sql_registro);
-    $stmt_registro->bind_param("siss", $tipo, $id_usuario, $ip_usuario, $fecha_hora);
-    $stmt_registro->execute();
-
-    // Cierra la conexión
-    $stmt_registro->close();
-    $conexion->close();
-}
-
 // Verifica si el usuario ya está autenticado, en ese caso redirige al dashboard
 if (isset($_SESSION['usuario'])) {
     header("Location: dashboard.php");
     exit();
 }
 
-// Verifica si se ha enviado el formulario de inicio de sesión
+// Verifica si se ha enviado el formulario de registro de usuarios
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Conexión a la base de datos (asegúrate de cambiar los valores a los de tu base de datos)
     $conexion = new mysqli("localhost", "root", "", "datosks");
@@ -44,40 +17,69 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         die("Conexión fallida: " . $conexion->connect_error);
     }
 
-    // Recupera los datos del formulario
+    // Recupera los datos del formulario de registro de usuarios
     $usuario = $_POST['usuario'];
     $contrasena = $_POST['contrasena'];
 
-    // Consulta para verificar el usuario y la contraseña
-    $sql = "SELECT id, usuario FROM usuarios WHERE usuario = ? AND contrasena = ?";
+    // Consulta para verificar si el usuario ya existe
+    $sql = "SELECT id FROM usuarios WHERE usuario = ?";
     $stmt = $conexion->prepare($sql);
-    $stmt->bind_param("ss", $usuario, $contrasena);
+    $stmt->bind_param("s", $usuario);
     $stmt->execute();
     $resultado = $stmt->get_result();
 
-    // Verifica si se encontró un usuario con la contraseña proporcionada
+    // Verifica si el usuario ya existe
     if ($resultado->num_rows > 0) {
-        // Inicia la sesión y guarda el nombre de usuario y el ID
-        $fila = $resultado->fetch_assoc();
-        $_SESSION['usuario'] = $fila['usuario'];
-        $_SESSION['id_usuario'] = $fila['id'];
-
-        // Registra el evento de inicio de sesión exitoso
-        registrarEvento("Inicio de sesión exitoso", $_SESSION['id_usuario']);
-
-        // Redirige al dashboard
-        header("Location: dashboard.php");
-        exit();
+        $mensaje_error = "El usuario ya está registrado";
     } else {
-        // Usuario o contraseña incorrectos
-        $mensaje_error = "Usuario o contraseña incorrectos";
+        // Inserta el nuevo usuario en la base de datos
+        $sql_insert = "INSERT INTO usuarios (usuario, contrasena) VALUES (?, ?)";
+        $stmt_insert = $conexion->prepare($sql_insert);
+        $stmt_insert->bind_param("ss", $usuario, $contrasena);
+        $stmt_insert->execute();
 
-        // Registra el evento de inicio de sesión fallido
-        registrarEvento("Inicio de sesión fallido");
+        // Redirige al login
+        header("Location: login.php");
+        exit();
     }
 
     // Cierra la conexión
     $stmt->close();
+    if (isset($stmt_insert)) {
+        $stmt_insert->close();
+    }
+    $conexion->close();
+}
+
+// Verifica si se ha enviado el formulario de registro de participantes
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['nombre_participante'])) {
+    // Conexión a la base de datos (asegúrate de cambiar los valores a los de tu base de datos)
+    $conexion = new mysqli("localhost", "root", "", "datosks");
+
+    // Verifica la conexión
+    if ($conexion->connect_error) {
+        die("Conexión fallida: " . $conexion->connect_error);
+    }
+
+    // Recupera los datos del formulario de registro de participantes
+    $nombre_participante = $_POST['nombre_participante'];
+    // Agregar aquí el procesamiento de otros datos del participante
+
+    // Consulta para insertar el participante en la base de datos
+    $sql_insert = "INSERT INTO participantes (nombre) VALUES (?)";
+    $stmt_insert = $conexion->prepare($sql_insert);
+    $stmt_insert->bind_param("s", $nombre_participante);
+    $stmt_insert->execute();
+
+    // Verifica si se insertó correctamente
+    if ($stmt_insert->affected_rows > 0) {
+        $mensaje_participante = "Participante agregado exitosamente.";
+    } else {
+        $mensaje_participante = "Error al agregar participante.";
+    }
+
+    // Cierra la conexión
+    $stmt_insert->close();
     $conexion->close();
 }
 ?>
@@ -87,10 +89,82 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Iniciar sesión</title>
-    <!-- Estilos CSS -->
+    <title>Registro</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: rgba(255, 255, 255, 0.8); /* Fondo blanco transparente */
+        }
+
+        .container {
+            max-width: 400px;
+            padding: 20px;
+            background-color: white; /* Fondo blanco */
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Sombra suave */
+        }
+
+        /* Estilos adicionales */
+        .error-message {
+            color: red;
+        }
+
+        form {
+            margin-top: 20px;
+        }
+
+        form label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        form input[type="text"],
+        form input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        form input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        form input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+    </style>
 </head>
 <body>
-    <!-- Contenido HTML -->HFJDJ
-</body>
-</html>
+<?php 
+    include 'navegador.php'
+    ?>
+
+    <!-- Formulario de registro de usuarios -->
+    <div class="container">
+        <h2>Registro de Usuarios</h2>
+        <?php if (isset($mensaje_error)) { echo "<p class='error-message'>$mensaje_error</p>"; } ?>
+        <form method="post" action="">
+            <label for="usuario">Usuario:</label><br>
+            <input type="text" id="usuario" name="usuario" required><br>
+            <label for="contrasena">Contraseña:</label><br>
+            <input type="password" id="contrasena" name="contrasena" required><br><br>
+            <input type="submit" value="Registrarse">
+        </form>
+        <p>¿Ya tienes una cuenta? <a href="login.php">Inicia sesión aquí</a>.</p>
+        <p>Agregar participante: <a href="agregar_participantes.php">Haz clic aquí</a>.</p>
+    </div>
+
+

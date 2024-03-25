@@ -33,8 +33,13 @@ $grados_estudio = $controller->getAllGradosEstudio();
 <?php 
     include 'navegador.php'
     ?>
-    <div class="container">
-        <h1>Grados de Estudio</h1>
+<div class="container">
+        <!-- Título y botón de agregar -->
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h1 class="mt-4 mb-4">Grado de Estudio</h1>
+            <a href="agregar_club.php" class="btn btn-success">Agregar Grado de Estudio</a>
+        </div>
+
         <table class="table table-bordered">
             <thead class="thead-dark">
                 <tr>

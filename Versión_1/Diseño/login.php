@@ -153,7 +153,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             
             if (passwordFieldType === 'password') {
                 passwordField.setAttribute('type', 'text');
-                this.textContent = 'Ocultar contraseña';
+                this.textContent = 'Ocultar';
             } else {
                 passwordField.setAttribute('type', 'password');
                 this.textContent = 'Ver contraseña';

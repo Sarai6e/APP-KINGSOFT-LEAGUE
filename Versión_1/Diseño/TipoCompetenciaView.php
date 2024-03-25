@@ -34,8 +34,12 @@ $tiposCompetencia = $controller->index();
 <?php 
     include 'navegador.php'
     ?>
-    <div class="container">
-        <h1>Tipos de Competencia</h1>
+        <div class="container">
+        <!-- Título y botón de agregar -->
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h1 class="mt-4 mb-4">Tipo Competencia</h1>
+            <a href="agregar_club.php" class="btn btn-success">agregar Tipo Competencia</a>
+        </div>
         <table class="table table-bordered">
             <thead class="thead-dark">
                 <tr>

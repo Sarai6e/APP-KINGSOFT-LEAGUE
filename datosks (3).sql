@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 23-03-2024 a las 18:55:06
+-- Tiempo de generación: 26-03-2024 a las 00:12:09
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.0.28
 
@@ -66,7 +66,7 @@ CREATE TABLE `competencia` (
 --
 
 INSERT INTO `competencia` (`id`, `nombre`, `fecha_inicio_inscripcion`, `fecha_fin_inscripcion`, `fecha_compentencia`, `tipo_competencia`) VALUES
-(1, 'Competencia A', '2024-03-01', '2024-03-16', '2024-03-30', 1),
+(1, 'Competencia A', '2024-03-01', '2024-03-16', '2024-03-30', 4),
 (2, 'Competencia B', '2024-03-01', '2024-03-09', '2024-03-23', 2),
 (3, 'Competencia C', '2024-03-14', '2024-03-16', '2024-03-31', 3),
 (4, 'Competencia D', '2024-04-06', '2024-03-12', '2024-03-30', 4);
@@ -136,16 +136,6 @@ CREATE TABLE `participantes` (
   `fecha_nacimiento` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Volcado de datos para la tabla `participantes`
---
-
-INSERT INTO `participantes` (`id`, `nombre`, `apellido`, `dni`, `participante_genero_id`, `grado_estudio_id`, `año_estudio`, `especialidad`, `correo`, `clave`, `fecha_de_actualizacion`, `robot_id`, `club_robotica_id`, `fecha_nacimiento`) VALUES
-(1, 'Sarai', 'Romero', '77382908', 1, 1, 1, 'a fdhgf', 'gh@gmail.com', '123456789', '2024-03-01 16:37:17', 1, 1, '2024-03-07'),
-(2, 'Lourdes', 'Villanueva', '78965412', 2, 2, 2, 'Profesor', 'villa@gmail.com', '123456', '2024-03-23 16:55:12', 2, 2, '2024-03-01'),
-(3, 'Luis', 'Rodrigues', '6547895', 3, 3, 3, 'Doctor', 's@gmail.com', '123456789', '2024-03-08 16:51:57', 3, 3, '2024-03-27'),
-(4, 'Camila', 'Paulino', '78745874', 4, 4, 4, 'Maestra', 'cami@gmail.com', '23457769', '2024-03-01 16:51:57', 4, 4, '2024-03-29');
-
 -- --------------------------------------------------------
 
 --
@@ -207,7 +197,15 @@ INSERT INTO `registros` (`id`, `id_usuario`, `ip_usuario`, `fecha_hora`) VALUES
 (20, 1, '::1', '2024-03-23 17:58:38'),
 (21, 1, '::1', '2024-03-23 18:11:12'),
 (22, 1, '::1', '2024-03-23 18:19:35'),
-(23, 1, '::1', '2024-03-23 18:22:29');
+(23, 1, '::1', '2024-03-23 18:22:29'),
+(24, 1, '::1', '2024-03-25 15:39:40'),
+(25, 1, '::1', '2024-03-25 15:40:35'),
+(26, 1, '::1', '2024-03-25 15:42:37'),
+(27, 2, '::1', '2024-03-25 15:44:28'),
+(28, 1, '::1', '2024-03-25 18:00:01'),
+(29, 1, '::1', '2024-03-25 18:10:49'),
+(30, 1, '::1', '2024-03-25 18:15:41'),
+(31, 1, '::1', '2024-03-25 22:21:12');
 
 -- --------------------------------------------------------
 
@@ -252,7 +250,7 @@ CREATE TABLE `robot_competencia` (
 
 INSERT INTO `robot_competencia` (`id`, `id_robot`, `id_competencia`) VALUES
 (1, 1, 1),
-(2, 2, 2),
+(2, 2, 3),
 (3, 3, 3),
 (4, 4, 4);
 
@@ -273,10 +271,10 @@ CREATE TABLE `tipo_competencia` (
 --
 
 INSERT INTO `tipo_competencia` (`id`, `nombre`, `descripcion`) VALUES
-(1, 'Rut', 'asfdb'),
-(2, 'Sarai', 'sdagsdfh'),
-(3, 'Rut', 'watwet'),
-(4, 'amos', 'wfresy');
+(1, 'Zumo', 'asfdb'),
+(2, 'zumo', 'sdagsdfh'),
+(3, 'zumo', 'watwet'),
+(4, 'zumo', 'wfresy');
 
 -- --------------------------------------------------------
 
@@ -298,11 +296,53 @@ INSERT INTO `usuarios` (`id`, `usuario`, `contrasena`) VALUES
 (1, 'sarai@gmail.com', '123456789'),
 (2, 'Camila@gmail.com', '123456'),
 (3, 'romero@gmail.com', '123456'),
-(4, 'Villanueva@gmail.com', '145638');
+(4, 'Villanueva@gmail.com', '145638'),
+(5, 'Deivis@gmail.com', '1234'),
+(6, 'sscsavdjs@gmail.com', 'aweavfshx'),
+(7, 'jda@gmail.com', '123'),
+(8, 'rutrai@gmail.com', 'xfgjgc');
 
 --
 -- Índices para tablas volcadas
 --
+
+--
+-- Indices de la tabla `club_robotica`
+--
+ALTER TABLE `club_robotica`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `competencia`
+--
+ALTER TABLE `competencia`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `grado_estudio`
+--
+ALTER TABLE `grado_estudio`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id` (`id`);
+
+--
+-- Indices de la tabla `nombre_institucion`
+--
+ALTER TABLE `nombre_institucion`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `participantes`
+--
+ALTER TABLE `participantes`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id` (`id`);
+
+--
+-- Indices de la tabla `participante_genero`
+--
+ALTER TABLE `participante_genero`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indices de la tabla `registros`
@@ -314,6 +354,18 @@ ALTER TABLE `registros`
 -- Indices de la tabla `robot`
 --
 ALTER TABLE `robot`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `robot_competencia`
+--
+ALTER TABLE `robot_competencia`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `tipo_competencia`
+--
+ALTER TABLE `tipo_competencia`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -330,13 +382,13 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `registros`
 --
 ALTER TABLE `registros`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
