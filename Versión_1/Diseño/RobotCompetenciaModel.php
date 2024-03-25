@@ -25,5 +25,11 @@ class RobotCompetenciaModel {
         $stmt = $this->db->prepare($query);
         return $stmt->execute([$id]);
     }
+
+    public function updateRobotCompetencia($id, $id_robot, $id_competencia) {
+        $query = "UPDATE robot_competencia SET id_robot = ?, id_competencia = ? WHERE id = ?";
+        $stmt = $this->db->prepare($query);
+        return $stmt->execute([$id_robot, $id_competencia, $id]);
+    }
 }
 ?>

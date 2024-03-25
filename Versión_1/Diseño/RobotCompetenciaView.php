@@ -48,8 +48,7 @@ $robotCompetencias = $controller->index();
                     <tr>
                         <td><?php echo $robotCompetencia['id']; ?></td>
                         <td><?php echo $robotCompetencia['robot']; ?></td>
-                        <td><?php echo $robotCompetencia['competencia']; ?></td>       
-                        <td><?php echo $robotCompetencia['competencia']; ?></td>                    <td>
+                        <td><?php echo $robotCompetencia['competencia']; ?></td>                          <td>
                             <a href="ver_robot_competencia.php?id=<?php echo $robotCompetencia['id']; ?>" class="btn btn-info btn-sm">Ver</a>
                             <a href="editar_robot_competencia.php?id=<?php echo $robotCompetencia['id']; ?>" class="btn btn-primary btn-sm">Editar</a>
                             <a href="eliminar_robot_competencia.php?id=<?php echo $robotCompetencia['id']; ?>" class="btn btn-danger btn-sm">Eliminar</a>

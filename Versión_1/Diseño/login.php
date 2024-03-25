@@ -138,8 +138,27 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <input type="text" id="usuario" name="usuario" required><br>
             <label for="contrasena">Contraseña:</label><br>
             <input type="password" id="contrasena" name="contrasena" required><br><br>
+            <button type="button" id="toggle-password">Ver contraseña</button><br><br>
             <input type="submit" value="Iniciar sesión">
         </form>
+        <p>¿No tienes una cuenta? <a href="registro.php">Regístrate aquí</a>.</p>
+        <p><a href="recuperar_contrasena.php">¿Olvidaste tu contraseña?</a></p>
     </div>
+
+
+    <script>
+        document.getElementById('toggle-password').addEventListener('click', function() {
+            var passwordField = document.getElementById('contrasena');
+            var passwordFieldType = passwordField.getAttribute('type');
+            
+            if (passwordFieldType === 'password') {
+                passwordField.setAttribute('type', 'text');
+                this.textContent = 'Ocultar contraseña';
+            } else {
+                passwordField.setAttribute('type', 'password');
+                this.textContent = 'Ver contraseña';
+            }
+        });
+    </script>
 </body>
 </html>

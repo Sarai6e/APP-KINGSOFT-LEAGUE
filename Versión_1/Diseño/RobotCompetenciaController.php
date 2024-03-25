@@ -19,5 +19,9 @@ class RobotCompetenciaController {
     public function getRobotCompetenciaById($id) {
         return $this->model->getRobotCompetenciaById($id);
     }
+
+    public function updateRobotCompetencia($id, $id_robot, $id_competencia) {
+        return $this->model->updateRobotCompetencia($id, $id_robot, $id_competencia);
+    }
 }
 ?>

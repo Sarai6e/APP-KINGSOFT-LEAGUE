@@ -30,9 +30,7 @@ $competencias = $controller->getAllCompetencias();
     </style>
 </head>
 <body>
-<?php 
-    include 'navegador.php'
-    ?>
+<?php include 'navegador.php'; ?>
     <div class="container">
         <h1>Competencias</h1>
         <table class="table table-bordered">
@@ -55,7 +53,7 @@ $competencias = $controller->getAllCompetencias();
                         <td><?php echo $competencia['fecha_inicio_inscripcion']; ?></td>
                         <td><?php echo $competencia['fecha_fin_inscripcion']; ?></td>
                         <td><?php echo $competencia['fecha_compentencia']; ?></td>
-                        <td><?php echo $competencia['tipo_competencia']; ?></td>
+                        <td><?php echo obtenerNombreTipoCompetencia($competencia['tipo_competencia'], $db); ?></td>
                         <td>
                             <a href="vercompetencia.php?id=<?php echo $competencia['id']; ?>" class="btn btn-info btn-sm">Ver</a>
                             <a href="editarcompetencia.php?id=<?php echo $competencia['id']; ?>" class="btn btn-primary btn-sm">Editar</a>
@@ -71,5 +69,17 @@ $competencias = $controller->getAllCompetencias();
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<?php
+// Función para obtener el nombre del tipo de competencia
+function obtenerNombreTipoCompetencia($tipo_competencia_id, $db) {
+    $query = "SELECT nombre FROM tipo_competencia WHERE id = ?";
+    $stmt = $db->prepare($query);
+    $stmt->bindParam(1, $tipo_competencia_id);
+    $stmt->execute();
+    $resultado = $stmt->fetch(PDO::FETCH_ASSOC);
+    return $resultado['nombre'];
+}
+?>
 </body>
 </html>
