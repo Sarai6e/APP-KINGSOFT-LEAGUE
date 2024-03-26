@@ -259,8 +259,8 @@ nav ul li a {
     cursor: pointer;
 }
 .sobre-mi .fila .info .opciones button.selected{
-    border-bottom: 3px solid #d04e60;
-    color: #d04e60;
+    border-bottom: 3px solid #c5ae2b;
+    color: #c5ae2b;
 }
 .sobre-mi .fila .info .info-opcion{
     margin-top: 40px;
@@ -272,7 +272,7 @@ nav ul li a {
     margin-bottom: 20px;
 }
 .color{
-    color: #d04e60;
+    color: #c5ae2b;
 }
 .sobre-mi .fila .info .info-opcion p{
     line-height: 30px;
@@ -303,7 +303,7 @@ nav ul li a {
     height: 10px;
     position: absolute;
     width: 0;
-    background-color: #d04e60;
+    background-color: #c5ae2b;
 
 }
 @keyframes animHtml {
@@ -384,7 +384,7 @@ nav ul li a {
     position: absolute;
     top: 0;
     left: 0;
-    background: linear-gradient(rgba(208, 78, 96,.9),rgba(240, 192, 199, 0.8));
+    background: linear-gradient(#c5ae2b,rgba(248, 232, 0, 0.8));
     width: 100%;
     height: 100%;
     display: flex;
@@ -436,7 +436,7 @@ nav ul li a {
     display: block;
     font-size: 4rem;
     font-weight: bold;
-    color: #d04e60;
+    color: #c5ae2b;
     line-height: 4rem;
 }
 .curriculum .numeros .item .txt{

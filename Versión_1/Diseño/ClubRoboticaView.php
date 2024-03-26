@@ -54,8 +54,12 @@
 <?php 
     include 'navegador.php'
     ?>
-    <div class="container">
-        <h1 class="mt-4 mb-4">Clubes de Robótica</h1>
+        <div class="container">
+        <!-- Título y botón de agregar -->
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h1 class="mt-4 mb-4">Club Robótica</h1>
+            <a href="agregar_club.php" class="btn btn-success">Agregar Club Robótica</a>
+        </div>
         <table class="table">
             <thead class="thead-dark">
                 <tr>

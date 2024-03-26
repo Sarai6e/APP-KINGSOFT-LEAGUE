@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 26-03-2024 a las 00:12:09
+-- Tiempo de generación: 26-03-2024 a las 18:49:35
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.0.28
 
@@ -120,7 +120,7 @@ INSERT INTO `nombre_institucion` (`id`, `nombre`) VALUES
 --
 
 CREATE TABLE `participantes` (
-  `id` int(11) NOT NULL,
+  `id` bigint(20) UNSIGNED NOT NULL,
   `nombre` varchar(50) DEFAULT NULL,
   `apellido` varchar(50) DEFAULT NULL,
   `dni` varchar(10) DEFAULT NULL,
@@ -135,6 +135,16 @@ CREATE TABLE `participantes` (
   `club_robotica_id` int(11) DEFAULT NULL,
   `fecha_nacimiento` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `participantes`
+--
+
+INSERT INTO `participantes` (`id`, `nombre`, `apellido`, `dni`, `participante_genero_id`, `grado_estudio_id`, `año_estudio`, `especialidad`, `correo`, `clave`, `fecha_de_actualizacion`, `robot_id`, `club_robotica_id`, `fecha_nacimiento`) VALUES
+(1, 'Juan', 'Pérez', '12345678', 1, 1, 2024, 'Ingeniería Electrónica', 'juan@example.com', 'clave123', '2024-03-26 16:24:51', 1, 1, '2000-05-15'),
+(2, 'María', 'González', '87654321', 2, 2, 2023, 'Inteligencia Artificial', 'maria@example.com', 'contraseña456', '2024-03-26 16:24:51', 2, 1, '2002-10-20'),
+(3, 'Pedro', 'López', '45678901', 1, 3, 2025, 'Robótica Industrial', 'pedro@example.com', 'qwerty', '2024-03-26 16:24:51', 3, 2, '1998-03-10'),
+(4, 'Tipo C', 'Romero', '77569823', 3, 3, 4, 'lkj', '78@gmail.com', '84*7', '2024-03-26 16:38:24', 2, 2, '2024-03-01');
 
 -- --------------------------------------------------------
 
@@ -175,6 +185,7 @@ CREATE TABLE `registros` (
 --
 
 INSERT INTO `registros` (`id`, `id_usuario`, `ip_usuario`, `fecha_hora`) VALUES
+(0, 1, '::1', '2024-03-26 16:47:41'),
 (1, 1, '::1', '2024-03-22 17:50:04'),
 (2, 4, '::1', '2024-03-22 17:51:44'),
 (3, 1, '::1', '2024-03-22 18:21:13'),
@@ -322,8 +333,7 @@ ALTER TABLE `competencia`
 -- Indices de la tabla `grado_estudio`
 --
 ALTER TABLE `grado_estudio`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `id` (`id`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indices de la tabla `nombre_institucion`
@@ -335,8 +345,7 @@ ALTER TABLE `nombre_institucion`
 -- Indices de la tabla `participantes`
 --
 ALTER TABLE `participantes`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `id` (`id`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indices de la tabla `participante_genero`
@@ -379,16 +388,10 @@ ALTER TABLE `usuarios`
 --
 
 --
--- AUTO_INCREMENT de la tabla `registros`
+-- AUTO_INCREMENT de la tabla `participantes`
 --
-ALTER TABLE `registros`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
-
---
--- AUTO_INCREMENT de la tabla `usuarios`
---
-ALTER TABLE `usuarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+ALTER TABLE `participantes`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -29,11 +29,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $correo = $_POST["correo"];
     $clave = $_POST["clave"];
     $fecha_nacimiento = $_POST["fecha_nacimiento"];
-    $club_robotica = $_POST["club_robotica"];
+    $club_robotica_id = $_POST["club_robotica"];
 
     // Insertar datos en la tabla participantes
     $query = "INSERT INTO participantes (nombre, apellido, dni, participante_genero_id, grado_estudio_id, año_estudio, especialidad, correo, clave, fecha_nacimiento, club_robotica_id) 
-              VALUES ('$nombre', '$apellido', '$dni', '$genero', '$grado_estudio', '$año_estudio', '$especialidad', '$correo', '$clave', '$fecha_nacimiento', '$club_robotica')";
+              VALUES ('$nombre', '$apellido', '$dni', '$genero', '$grado_estudio', '$año_estudio', '$especialidad', '$correo', '$clave', '$fecha_nacimiento', '$club_robotica_id')";
     
     if (mysqli_query($conn, $query)) {
         $message = "Participante agregado correctamente.";
@@ -49,6 +49,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Agregar Participantes</title>
+        <!-- Agregar Bootstrap CSS -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
         /* Estilos CSS */
         body {
@@ -74,56 +76,25 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             margin-bottom: 10px;
         }
 
-        input[type="text"],
-        input[type="email"],
-        input[type="password"],
-        select,
-        input[type="number"],
-        input[type="date"] {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            box-sizing: border-box;
-        }
-
-        input[type="submit"] {
-            width: 100%;
-            padding: 10px;
-            background-color: #007bff;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        input[type="submit"]:hover {
-            background-color: #0056b3;
-        }
-
         p {
             text-align: center;
         }
 
         .message {
             text-align: center;
-            margin-top: 10px;
+            padding-top: 10px;
             color: green;
         }
     </style>
 </head>
 <body>
-<?php 
-    include 'navegador.php';
-    ?>
+    <?php include 'navegador.php'; ?>
     <div class="message"><?php echo $message; ?></div>
-    <!-- Formulario de registro de participantes -->
     <!-- Formulario de registro de participantes -->
     <form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
         <h2 style="text-align: center;">Agregar Participantes</h2>
-        <label for="nombre">Nombre:</label>
-        <input type="text" name="nombre" required><br>
+        <label  for="nombre">Nombre:</label>
+        <input  type="text" name="nombre" required><br>
         <label for="apellido">Apellido:</label>
         <input type="text" name="apellido" required><br>
         <label for="dni">DNI:</label>
@@ -150,15 +121,40 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <input type="date" name="fecha_nacimiento" required><br>
         <label for="club_robotica">Club de Robótica:</label>
         <select name="club_robotica">
-            <option value="1">Robot A</option>
-            <option value="2">Robot B</option>
-            <option value="3">Robot C</option>
-            <option value="4">Robot D</option>
+            <!-- Opciones del club de robótica -->
+            <?php
+            // Consulta para obtener los clubes de robótica
+            $query_clubes = "SELECT id, nombre FROM club_robotica";
+            $result_clubes = mysqli_query($conn, $query_clubes);
+
+            // Iterar sobre los resultados y mostrar las opciones
+            while ($row = mysqli_fetch_assoc($result_clubes)) {
+                echo "<option value='" . $row['id'] . "'>" . $row['nombre'] . "</option>";
+            }
+            ?>
         </select><br>
         <input type="submit" value="Agregar Participante">
-        <p>¿Quieres volver al registro de usuarios? <a href="registro.php">Haz clic aquí</a>.</p>
+        <!--<p>¿Quieres volver al registro de usuarios? <a href="registro.php">Haz clic aquí</a>.</p>-->
+        <nav aria-label="Page navigation example">
+  <ul class="pagination">
+    <li class="page-item">
+      <a class="page-link" href="registro.php" aria-label="Previous">
+        <span aria-hidden="true">&laquo;</span>
+      </a>
+    </li>
+    <li class="page-item"><a class="page-link" href="registro.php">1</a></li>
+    <li class="page-item"><a class="page-link" href="agregar_participantes.php">2</a></li>
+    <li class="page-item">
+      <a class="page-link" href="agregar_participantes.php" aria-label="Next">
+        <span aria-hidden="true">&raquo;</span>
+      </a>
+    </li>
+  </ul>
+</nav>
     </form>
 
-    <div class="message"><?php echo $message; ?></div>
+
+        <!-- Agregar Bootstrap JS (Opcional, si lo necesitas) -->
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
