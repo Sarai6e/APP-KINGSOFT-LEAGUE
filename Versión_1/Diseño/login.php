@@ -1,73 +1,73 @@
 <?php
-session_start();
 
-// Verifica si el usuario ya está autenticado, en ese caso redirige al dashboard
-if (isset($_SESSION['usuario'])) {
-    header("Location: dashboard.php");
-    exit();
+
+// Incluir el archivo de conexión a la base de datos si es necesario
+// include 'conexion.php';
+
+// Función para obtener la dirección IP del usuario
+function obtenerIP() {
+    // Comprobación de la dirección IP desde el proxy de Internet compartido
+    if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
+        $ip = $_SERVER['HTTP_CLIENT_IP'];
+    } 
+    // Comprobación de la dirección IP desde el proxy
+    elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+        $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+    } 
+    // Comprobación de la dirección IP desde la conexión remota
+    else {
+        $ip = $_SERVER['REMOTE_ADDR'];
+    }
+    return $ip;
 }
 
-// Verifica si se ha enviado el formulario de inicio de sesión
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    // Conexión a la base de datos (asegúrate de cambiar los valores a los de tu base de datos)
-    $conexion = new mysqli("localhost", "root", "", "datosks");
+// Iniciar sesión si no está iniciada
+session_start();
 
-    // Verifica la conexión
-    if ($conexion->connect_error) {
-        die("Conexión fallida: " . $conexion->connect_error);
-    }
+// Verificar si el usuario ya está autenticado
+if(isset($_SESSION["id_usuario"])) {
+    // Si el usuario ya está autenticado, redirigirlo a la página de inicio
+    header("location: inicio.php");
+    exit;
+}
 
-    // Recupera los datos del formulario
-    $usuario = $_POST['usuario'];
-    $contrasena = $_POST['contrasena'];
+// Verificar si se ha enviado el formulario de inicio de sesión
+if($_SERVER["REQUEST_METHOD"] == "POST"){
+    // Procesar los datos del formulario
+    $correo = $_POST['correo'];
+    $clave = $_POST['clave'];
 
-    // Consulta para verificar el usuario y la contraseña
-    $sql = "SELECT id, usuario FROM usuarios WHERE usuario = ? AND contrasena = ?";
-    $stmt = $conexion->prepare($sql);
-    $stmt->bind_param("ss", $usuario, $contrasena);
-    $stmt->execute();
-    $resultado = $stmt->get_result();
+    // Validar los datos y autenticar al usuario (agrega tu lógica de autenticación aquí)
 
-    // Verifica si se encontró un usuario con la contraseña proporcionada
-    if ($resultado->num_rows > 0) {
-        // Inicia la sesión y guarda el nombre de usuario y el ID
-        $fila = $resultado->fetch_assoc();
-        $_SESSION['usuario'] = $fila['usuario'];
-        $_SESSION['id_usuario'] = $fila['id'];
-        
-        // Registra el ID del usuario que inició sesión en la tabla de registros (logs)
-        $id_usuario = $fila['id'];
-        $ip_usuario = $_SERVER['REMOTE_ADDR']; // Obtén la dirección IP del usuario
-        $fecha_hora = date("Y-m-d H:i:s"); // Obtiene la fecha y hora actual
+    // Ejemplo de autenticación simple (por favor, implementa un método más seguro en tu aplicación)
+    if($correo == 'usuario@example.com' && $clave == 'contraseña') {
+        // Usuario autenticado con éxito
 
-        $sql_registro = "INSERT INTO registros (id_usuario, ip_usuario, fecha_hora) VALUES (?, ?, ?)";
-        $stmt_registro = $conexion->prepare($sql_registro);
-        $stmt_registro->bind_param("iss", $id_usuario, $ip_usuario, $fecha_hora);
-        $stmt_registro->execute();
-        
-        // Redirige al dashboard
-        header("Location: dashboard.php");
-        exit();
+        // Obtener la dirección IP del usuario
+        $ip_usuario = obtenerIP();
+
+        // Obtener el ID del usuario (esto dependerá de cómo manejas las sesiones y la autenticación en tu aplicación)
+        $id_usuario = 1; // Aquí deberías obtener el ID del usuario autenticado
+
+        // Insertar registro en la tabla 'registros'
+        // NOTA: Asegúrate de manejar las consultas de forma segura para evitar inyección de SQL
+        // $sql = "INSERT INTO registros (id_usuario, ip_usuario) VALUES ('$id_usuario', '$ip_usuario')";
+        // mysqli_query($conexion, $sql); // Ejecutar la consulta en tu conexión a la base de datos
+
+        // Redirigir al usuario a la página de inicio después de iniciar sesión
+        header("location: inicio.php");
+        exit;
     } else {
-        // Usuario o contraseña incorrectos
-        $mensaje_error = "Usuario o contraseña incorrectos";
+        // Autenticación fallida
+        $error = "Credenciales incorrectas";
     }
-
-    // Cierra la conexión
-    $stmt->close();
-    if (isset($stmt_registro)) {
-        $stmt_registro->close();
-    }
-    $conexion->close();
 }
 ?>
 
 <!DOCTYPE html>
-<html lang="es">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Iniciar sesión</title>
+    <title>Iniciar Sesión</title>
     <style>
         body {
             background-color: #f2f2f2;
@@ -85,6 +85,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             text-align: center;
+            width: 300px; /* Ajusta el ancho del formulario */
         }
         
         h2 {
@@ -96,10 +97,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
         
         input[type="text"],
-        input[type="password"] {
+        input[type="password"],
+        input[type="email"] {
             width: 100%;
             padding: 10px;
-            margin: 10px 0;
+            margin: 5px 0;
             border: 1px solid #ccc;
             border-radius: 5px;
             box-sizing: border-box;
@@ -124,41 +126,44 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         .error-message {
             color: #ff0000;
         }
+
+        /* Estilos para el enlace de mostrar contraseña */
+        .show-password {
+            margin-top: 5px;
+            display: inline-block;
+            text-decoration: none;
+            color: #007bff; /* Cambia el color del enlace */
+            font-size: 14px; /* Ajusta el tamaño del texto */
+        }
     </style>
+
 </head>
 <body>
-<?php 
-    include 'navegador.php'
-    ?>
-    <div id="login-form">
-        <h2>Iniciar sesión</h2>
-        <?php if (isset($mensaje_error)) { echo "<p class='error-message'>$mensaje_error</p>"; } ?>
-        <form method="post" action="">
-            <label for="usuario">Usuario:</label><br>
-            <input type="text" id="usuario" name="usuario" required><br>
-            <label for="contrasena">Contraseña:</label><br>
-            <input type="password" id="contrasena" name="contrasena" required><br><br>
-            <button type="button" id="toggle-password">Ver contraseña</button><br><br>
-            <input type="submit" value="Iniciar sesión">
-        </form>
-        <p>¿No tienes una cuenta? <a href="registro.php">Regístrate aquí</a>.</p>
-        <p><a href="recuperar_contrasena.php">¿Olvidaste tu contraseña?</a></p>
-    </div>
-
+<?php include 'navegador.php'; ?>
+<form id="login-form" action="autenticar.php" method="post">
+    <h2>Iniciar Sesión</h2>
+    <label for="correo">Correo:</label>
+    <input type="email" name="correo" required><br>
+    <label for="clave">Clave:</label>
+    <input type="password" name="clave" id="password" required>
+    <!-- Enlace para mostrar la contraseña -->
+    <a href="#" class="show-password" onclick="togglePassword()">Ver Contraseña</a><br>
+    <!-- Enlace para recuperar contraseña -->
+    <a href="recuperar_contrasena.php" style="font-size: 14px; color: #007bff; text-decoration: none; margin-top: 10px; display: block;">¿Olvidaste tu contraseña?</a>
+    <input type="submit" value="Iniciar Sesión">
+    <p>¿No tienes una cuenta? <a href="registro.php">Regístrate</a></p>
+</form>
 
     <script>
-        document.getElementById('toggle-password').addEventListener('click', function() {
-            var passwordField = document.getElementById('contrasena');
-            var passwordFieldType = passwordField.getAttribute('type');
-            
-            if (passwordFieldType === 'password') {
-                passwordField.setAttribute('type', 'text');
-                this.textContent = 'Ocultar';
+        // Función para alternar la visibilidad de la contraseña
+        function togglePassword() {
+            var passwordField = document.getElementById("password");
+            if (passwordField.type === "password") {
+                passwordField.type = "text";
             } else {
-                passwordField.setAttribute('type', 'password');
-                this.textContent = 'Ver contraseña';
+                passwordField.type = "password";
             }
-        });
+        }
     </script>
 </body>
 </html>

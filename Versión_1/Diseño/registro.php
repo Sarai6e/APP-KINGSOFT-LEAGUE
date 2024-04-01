@@ -1,175 +1,113 @@
-<?php
-session_start();
-
-// Verifica si el usuario ya está autenticado, en ese caso redirige al dashboard
-if (isset($_SESSION['usuario'])) {
-    header("Location: dashboard.php");
-    exit();
-}
-
-// Verifica si se ha enviado el formulario de registro de usuarios
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    // Conexión a la base de datos (asegúrate de cambiar los valores a los de tu base de datos)
-    $conexion = new mysqli("localhost", "root", "", "datosks");
-
-    // Verifica la conexión
-    if ($conexion->connect_error) {
-        die("Conexión fallida: " . $conexion->connect_error);
-    }
-
-    // Recupera los datos del formulario de registro de usuarios
-    $usuario = $_POST['usuario'];
-    $contrasena = $_POST['contrasena'];
-
-    // Consulta para verificar si el usuario ya existe
-    $sql = "SELECT id FROM usuarios WHERE usuario = ?";
-    $stmt = $conexion->prepare($sql);
-    $stmt->bind_param("s", $usuario);
-    $stmt->execute();
-    $resultado = $stmt->get_result();
-
-    // Verifica si el usuario ya existe
-    if ($resultado->num_rows > 0) {
-        $mensaje_error = "El usuario ya está registrado";
-    } else {
-        // Inserta el nuevo usuario en la base de datos
-        $sql_insert = "INSERT INTO usuarios (usuario, contrasena) VALUES (?, ?)";
-        $stmt_insert = $conexion->prepare($sql_insert);
-        $stmt_insert->bind_param("ss", $usuario, $contrasena);
-        $stmt_insert->execute();
-
-        // Redirige al login
-        header("Location: login.php");
-        exit();
-    }
-
-    // Cierra la conexión
-    $stmt->close();
-    if (isset($stmt_insert)) {
-        $stmt_insert->close();
-    }
-    $conexion->close();
-}
-
-// Verifica si se ha enviado el formulario de registro de participantes
-if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['nombre_participante'])) {
-    // Conexión a la base de datos (asegúrate de cambiar los valores a los de tu base de datos)
-    $conexion = new mysqli("localhost", "root", "", "datosks");
-
-    // Verifica la conexión
-    if ($conexion->connect_error) {
-        die("Conexión fallida: " . $conexion->connect_error);
-    }
-
-    // Recupera los datos del formulario de registro de participantes
-    $nombre_participante = $_POST['nombre_participante'];
-    // Agregar aquí el procesamiento de otros datos del participante
-
-    // Consulta para insertar el participante en la base de datos
-    $sql_insert = "INSERT INTO participantes (nombre) VALUES (?)";
-    $stmt_insert = $conexion->prepare($sql_insert);
-    $stmt_insert->bind_param("s", $nombre_participante);
-    $stmt_insert->execute();
-
-    // Verifica si se insertó correctamente
-    if ($stmt_insert->affected_rows > 0) {
-        $mensaje_participante = "Participante agregado exitosamente.";
-    } else {
-        $mensaje_participante = "Error al agregar participante.";
-    }
-
-    // Cierra la conexión
-    $stmt_insert->close();
-    $conexion->close();
-}
-?>
-
 <!DOCTYPE html>
-<html lang="es">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registro</title>
-        <!-- Agregar Bootstrap CSS -->
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <title>Registrarse</title>
     <style>
         body {
+            background-color: #f2f2f2;
+            font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            background-color: rgba(255, 255, 255, 0.8); /* Fondo blanco transparente */
         }
-
-        .container {
-            max-width: 400px;
+        
+        #register-form {
+            background-color: rgba(255, 255, 255, 0.8);
             padding: 20px;
-            background-color: white; /* Fondo blanco */
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Sombra suave */
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            margin-top: 100px; /* Ajusta el margen superior */
+            max-width: 500px; /* Ancho máximo del formulario */
+            margin-left: auto;
+            margin-right: auto;
         }
-
-        /* Estilos adicionales */
-        .error-message {
-            color: red;
+        
+        h2 {
+            color: #333;
         }
-
-        form {
-            margin-top: 20px;
-        }
-
-        form label {
+        
+        label {
+            color: #333;
             display: block;
-            margin-bottom: 5px;
+            margin-top: 10px;
+            text-align: left;
         }
-
-        form input[type="text"],
-        form input[type="password"] {
+        
+        input[type="text"],
+        input[type="password"],
+        input[type="email"],
+        input[type="number"],
+        select {
             width: 100%;
             padding: 10px;
-            margin-bottom: 10px;
+            margin: 5px 0;
             border: 1px solid #ccc;
             border-radius: 5px;
+            box-sizing: border-box;
         }
-
-        form input[type="submit"] {
-            width: 100%;
+        
+        input[type="submit"] {
+            width: 50%;
             padding: 10px;
-            background-color: #007bff;
+            margin-top: 10px;
+            background-color: #4CAF50;
             color: white;
             border: none;
             border-radius: 5px;
             cursor: pointer;
+            transition: background-color 0.3s;
         }
-
-        form input[type="submit"]:hover {
-            background-color: #0056b3;
+        
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+        
+        .error-message {
+            color: #ff0000;
+            margin-top: 5px;
         }
     </style>
+
 </head>
 <body>
 <?php 
-    include 'navegador.php'
-    ?>
+    include 'navegador.php';
+?>
+    <form id="register-form" action="registrar_usuario.php" method="post">
+        <h2>Registrarse</h2>
+        <label for="nombre">Nombre:</label>
+        <input type="text" name="nombre" id="nombre" required>
+        <label for="apellido">Apellido:</label>
+        <input type="text" name="apellido" id="apellido" required>
+        <label for="dni">DNI:</label>
+        <input type="text" name="dni" id="dni" required>
+        <label for="genero_id">Género:</label>
+        <select name="genero_id" id="genero_id">
+            <option value="1">Masculino</option>
+            <option value="2">Femenino</option>
+        </select>
+        <label for="grado_estudio_id">Grado de estudio:</label>
+        <select name="grado_estudio_id" id="grado_estudio_id">
+            <option value="1">Secundaria</option>
+            <option value="2">Universidad</option>
+        </select>
+        <label for="año_estudio">Año de estudio:</label>
+        <input type="number" name="año_estudio" id="año_estudio" required>
+        <label for="especialidad">Especialidad:</label>
+        <input type="text" name="especialidad" id="especialidad" required>
+        <label for="correo">Correo:</label>
+        <input type="email" name="correo" id="correo" required>
+        <label for="clave">Clave:</label>
+        <input type="password" name="clave" id="clave" required>
+        <label for="robot_id">ID del robot:</label>
+        <input type="number" name="robot_id" id="robot_id" required>
+        <label for="club_robotica_id">ID del club de robótica:</label>
+        <input type="number" name="club_robotica_id" id="club_robotica_id" required>
+        <label for="fecha_nacimiento">Fecha de nacimiento:</label>
+        <input type="date" name="fecha_nacimiento" id="fecha_nacimiento" required>
+        <input type="submit" value="Registrarse">
+        <p>¿Ya tienes una cuenta? <a href="login.php">Iniciar Sesión</a></p>
+    </form>
 
-    <!-- Formulario de registro de usuarios -->
-    <div class="container">
-        <h2>Registro de Usuarios</h2>
-        <?php if (isset($mensaje_error)) { echo "<p class='error-message'>$mensaje_error</p>"; } ?>
-        <form method="post" action="">
-            <label for="usuario">Usuario:</label><br>
-            <input type="text" id="usuario" name="usuario" required><br>
-            <label for="contrasena">Contraseña:</label><br>
-            <input type="password" id="contrasena" name="contrasena" required><br><br>
-            <input type="submit" value="Registrarse">
-        </form>
-        <p>¿Ya tienes una cuenta? <a href="login.php">Inicia sesión aquí</a>.</p>
-
-    </div>
-
-
-    <!-- Agregar Bootstrap JS (Opcional, si lo necesitas) -->
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
+</body>
+</html>
