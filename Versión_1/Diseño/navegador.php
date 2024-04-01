@@ -37,11 +37,11 @@
                 <li><a href="menu.html">Inicio</a></li> 
                 <li><a href="#inicio">CONTROL <i class="fas fa-caret-down"></i></a>
                     <ul class="sub-menu">
+                    <li><a href="ParticipanteView.php">Participante</a></li>
                         <li><a href="ClubRoboticaView.php">Club Robotica</a></li>
                         <li><a href="CompetenciaView.php">Competencia</a></li>
                         <li><a href="GradoEstudioView.php">Grado Estudio</a></li>
                         <li><a href="NombreInstitucionView.php">Nombre Institucion</a></li>
-                        <li><a href="ParticipanteView.php">Participante</a></li>
                         <li><a href="ParticipanteGeneroView.php">Genero</a></li>
                         <li><a href="RobotView.php">Robot</a></li>
                         <li><a href="RobotCompetenciaView.php">Robot Competencia</a></li>

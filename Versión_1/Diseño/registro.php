@@ -166,24 +166,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['nombre_participante'])
             <input type="submit" value="Registrarse">
         </form>
         <p>¿Ya tienes una cuenta? <a href="login.php">Inicia sesión aquí</a>.</p>
-        <p>Agregar participante: <a href="agregar_participantes.php">Haz clic aquí</a>.</p>
-
-        <nav aria-label="Page navigation example">
-  <ul class="pagination">
-    <li class="page-item">
-      <a class="page-link" href="registro.php" aria-label="Previous">
-        <span aria-hidden="true">&laquo;</span>
-      </a>
-    </li>
-    <li class="page-item"><a class="page-link" href="registro.php">1</a></li>
-    <li class="page-item"><a class="page-link" href="agregar_participantes.php">2</a></li>
-    <li class="page-item">
-      <a class="page-link" href="agregar_participantes.php" aria-label="Next">
-        <span aria-hidden="true">&raquo;</span>
-      </a>
-    </li>
-  </ul>
-</nav>
 
     </div>
 
