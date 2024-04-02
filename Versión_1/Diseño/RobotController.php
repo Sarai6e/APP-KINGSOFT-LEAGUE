@@ -8,7 +8,7 @@ class RobotController {
 
     // Método para obtener todos los robots
     public function index($id) {
-        $query = "SELECT * FROM robot where id_participante = ".$id;
+        $query = "SELECT * FROM robot where id_participantes = ".$id;
         $stmt = $this->db->query($query);
         return $stmt;
     }

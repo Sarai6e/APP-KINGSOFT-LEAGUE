@@ -2,9 +2,18 @@
 session_start();
 
 // Verifica si el usuario no está autenticado, en ese caso redirige al inicio de sesión
-if (!isset($_SESSION['usuario'])) {
+if (!isset($_SESSION['nombre'])) {
     header("Location: login.php");
     exit();
+}
+
+// Verificar si se ha enviado el formulario de cierre de sesión
+if(isset($_GET['logout'])) {
+    // Destruir la sesión
+    session_destroy();
+    // Redirigir a la página de inicio de sesión
+    header("Location: login.php");
+    exit;
 }
 ?>
 
@@ -51,9 +60,10 @@ if (!isset($_SESSION['usuario'])) {
     include 'navegador.php';
 ?>
     <div class="container">
-        <h2>Bienvenido, <?php echo $_SESSION['usuario']; ?>!</h2>
+        <h2>Bienvenido, <?php echo $_SESSION['nombre']; ?>!</h2>
         <p></p>
-        <a href="logout.php">Cerrar sesión</a>
+        <!-- Agregar enlace para cerrar sesión -->
+        <a href="dashboard.php?logout=true">Cerrar sesión</a>
     
         <!-- Aquí puedes agregar el resto del contenido de tu página web -->
     </div>

@@ -6,7 +6,7 @@ $db = new PDO('mysql:host=localhost;dbname=datosks', 'root', '');
 $controller = new RobotController($db);
 
 // Ver todos los robots
-$robots = $controller->index($_SESSION['id_usuario']);
+$robots = $controller->index($_SESSION['id_participantes']);
 ?>
 <!DOCTYPE html>
 <html lang="en">

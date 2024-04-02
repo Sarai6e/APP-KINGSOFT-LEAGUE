@@ -1,3 +1,56 @@
+<?php
+session_start();
+
+// Verificar si el usuario ya está autenticado
+if(isset($_SESSION["nombre"])) {
+    // Si el usuario ya está autenticado, redirigirlo al dashboard
+    header("location: dashboard.php");
+    exit;
+}
+
+// Verificar si se ha enviado el formulario de cierre de sesión
+if(isset($_GET['logout'])) {
+    // Destruir la sesión
+    session_destroy();
+    // Redirigir a la página de inicio de sesión
+    header("Location: login.php");
+    exit;
+}
+
+// Verificar si se enviaron datos del formulario
+if(isset($_POST['correo']) && isset($_POST['clave'])) {
+    // Conexión a la base de datos
+    $conexion = mysqli_connect("localhost", "root", "", "datosks");
+
+    // Verificar la conexión
+    if (!$conexion) {
+        die("Error al conectar con la base de datos: " . mysqli_connect_error());
+    }
+
+    // Obtener datos del formulario de inicio de sesión
+    $correo = $_POST['correo'];
+    $clave = $_POST['clave'];
+
+    // Consulta para verificar el correo y la clave en la base de datos
+    $query = "SELECT * FROM participantes WHERE correo='$correo' AND clave='$clave'";
+    $resultado = mysqli_query($conexion, $query);
+
+    if (mysqli_num_rows($resultado) == 1) {
+        // Inicio de sesión exitoso, establecer la variable de sesión y redirigir al dashboard
+        $fila = mysqli_fetch_assoc($resultado);
+        $_SESSION['nombre'] = $fila['nombre'];
+        header("location: dashboard.php");
+        exit;
+    } else {
+        // Error en el inicio de sesión
+        $error = "Correo o clave incorrectos.";
+    }
+
+    // Cerrar conexión
+    mysqli_close($conexion);
+}
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -66,61 +119,31 @@
     </style>
 </head>
 <body>
-
-<?php
-session_start();
-
-// Verificar si se envió el formulario de cierre de sesión
-if(isset($_GET['logout'])) {
-    // Destruir la sesión
-    session_destroy();
-    // Redirigir a la página de inicio de sesión
-    header("Location: inicio_sesion.php");
-    exit;
-}
-
-// Verificar si se enviaron datos del formulario
-if(isset($_POST['correo']) && isset($_POST['clave'])) {
-    // Conexión a la base de datos
-    $conexion = mysqli_connect("localhost", "root", "", "datosks");
-
-    // Verificar la conexión
-    if (!$conexion) {
-        die("Error al conectar con la base de datos: " . mysqli_connect_error());
-    }
-
-    // Obtener datos del formulario de inicio de sesión
-    $correo = $_POST['correo'];
-    $clave = $_POST['clave'];
-
-    // Consulta para verificar el correo y la clave en la base de datos
-    $query = "SELECT * FROM participantes WHERE correo='$correo' AND clave='$clave'";
-    $resultado = mysqli_query($conexion, $query);
-
-    if (mysqli_num_rows($resultado) == 1) {
-        // Inicio de sesión exitoso, establecer la variable de sesión y dar la bienvenida
-        $fila = mysqli_fetch_assoc($resultado);
-        $_SESSION['nombre'] = $fila['nombre'];
-        echo "<h2>Bienvenido, <span>". $_SESSION['nombre'] ."</span>. Tine acceso a toda la página.</h2>";
-        
-        echo "<form action='login.php' method='get' class='logout-button'>";
-        echo "<input type='hidden' name='logout' value='true'>";
-        echo "<input type='submit' value='Cerrar sesión'>";
-        echo "</form>";
-    } else {
-        // Error en el inicio de sesión
-        echo "<h2 class='error-message'>Correo o clave incorrectos.</h2>";
-    }
-
-    // Cerrar conexión
-    mysqli_close($conexion);
-} else {
-    // Mostrar mensaje si no se enviaron datos del formulario
-    echo "<h2 class='error-message'>No se recibieron datos del formulario.</h2>";
-}
+<?php 
+    include 'navegador.php';
 ?>
+<div id="login-form">
+    <h2>Iniciar Sesión</h2>
+    <form action="login.php" method="post">
+        <label for="correo">Correo:</label>
+        <input type="email" name="correo" required><br>
+        <label for="clave">Clave:</label>
+        <input type="password" name="clave" required><br>
+        <input type="submit" value="Iniciar Sesión">
+    </form>
 
-<?php include 'navegador.php'; ?>
+    <?php if(isset($error)) { ?>
+        <p class="error-message"><?php echo $error; ?></p>
+    <?php } ?>
+
+    <!-- Mostrar botón de cerrar sesión si el usuario está autenticado -->
+    <?php if(isset($_SESSION["nombre"])) { ?>
+        <form action="login.php" method="get" class="logout-button">
+            <input type="hidden" name="logout" value="true">
+            <input type="submit" value="Cerrar Sesión">
+        </form>
+    <?php } ?>
+</div>
 
 </body>
 </html>
