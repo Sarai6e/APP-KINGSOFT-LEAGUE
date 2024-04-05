@@ -13,6 +13,7 @@ class RobotModel {
         return $stmt;
     }
 
+    
     public function getRobotById($id) {
         $query = "SELECT * FROM robot WHERE id = ?";
         $stmt = $this->db->prepare($query);
