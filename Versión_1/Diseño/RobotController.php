@@ -7,14 +7,11 @@ class RobotController {
     }
 
     // Método para obtener todos los robots
-// Método para obtener todos los robots asociados al participante que ha iniciado sesión
-public function index($id_participante) {
-    $query = "SELECT * FROM robot WHERE id_participantes = ?";
-    $stmt = $this->db->prepare($query);
-    $stmt->execute([$id_participante]);
-    return $stmt;
-}
-
+    public function index($id) {
+        $query = "SELECT * FROM robot where id_participantes = ".$id;
+        $stmt = $this->db->query($query);
+        return $stmt;
+    }
 
     // Método para obtener un robot por su ID
     public function getRobotById($id) {
