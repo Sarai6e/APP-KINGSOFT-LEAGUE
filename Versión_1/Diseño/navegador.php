@@ -46,6 +46,9 @@
                         <li><a href="RobotView.php">Robot</a></li>
                         <li><a href="RobotCompetenciaView.php">Robot Competencia</a></li>
                         <li><a href="TipoCompetenciaView.php">Tipo competencia</a></li>
+                        <li><a href="categoria_view.php">categoria</a></li>
+                        <li><a href="categoria_competencia_view.php">categoria competencia</a></li>
+                        <li><a href="inscripcion_view.php">Inscripcion</a></li>
                     </ul>
                 </li>
                 <li><a href="login.php">LOGIN</a></li>
