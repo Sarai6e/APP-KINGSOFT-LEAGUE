@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 08-04-2024 a las 16:05:15
--- Versión del servidor: 10.4.32-MariaDB
--- Versión de PHP: 8.2.12
+-- Tiempo de generación: 08-04-2024 a las 19:34:16
+-- Versión del servidor: 10.4.28-MariaDB
+-- Versión de PHP: 8.0.28
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -20,6 +20,55 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `datosks`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `categoria`
+--
+
+CREATE TABLE `categoria` (
+  `id` int(11) NOT NULL,
+  `amateur` varchar(50) DEFAULT NULL,
+  `senior` varchar(50) DEFAULT NULL,
+  `master` varchar(50) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `categoria`
+--
+
+INSERT INTO `categoria` (`id`, `amateur`, `senior`, `master`) VALUES
+(1, 'Amateur', 'Senior', 'Master'),
+(2, 'Beginner', 'Intermediate', 'Advanced'),
+(3, 'Novato', 'Experimentado', 'Experto'),
+(4, 'Junior', 'Senior', 'Elite'),
+(5, 'Novice', 'Intermediate', 'Expert');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `categoria_competencia`
+--
+
+CREATE TABLE `categoria_competencia` (
+  `id_competencia` int(11) NOT NULL,
+  `id_tipo_competencia` int(11) DEFAULT NULL,
+  `id_categoria_jugador` int(11) DEFAULT NULL,
+  `reglas` varchar(255) DEFAULT NULL,
+  `precio` decimal(10,2) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `categoria_competencia`
+--
+
+INSERT INTO `categoria_competencia` (`id_competencia`, `id_tipo_competencia`, `id_categoria_jugador`, `reglas`, `precio`) VALUES
+(1, 1, 1, 'https://www.example.com/reglas_amateur', 20.00),
+(2, 1, 2, 'https://www.example.com/reglas_senior', 30.00),
+(3, 2, 3, 'https://www.example.com/reglas_master', 50.00),
+(4, 2, 4, 'https://www.example.com/reglas_junior', 25.00),
+(5, 1, 5, 'https://www.example.com/reglas_expert', 40.00);
 
 -- --------------------------------------------------------
 
@@ -91,6 +140,32 @@ INSERT INTO `grado_estudio` (`id`, `grado`) VALUES
 (2, 'Secundaria'),
 (3, 'Universidad'),
 (4, 'Universidad\r\n');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `inscripcion`
+--
+
+CREATE TABLE `inscripcion` (
+  `id` int(11) NOT NULL,
+  `id_categoria_competencia` int(11) DEFAULT NULL,
+  `id_robot` int(11) DEFAULT NULL,
+  `boucher` varchar(255) DEFAULT NULL,
+  `confirmacion` tinyint(1) DEFAULT NULL,
+  `puntaje` decimal(10,2) DEFAULT NULL,
+  `posicion` int(11) DEFAULT NULL,
+  `descalificacion` tinyint(1) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `inscripcion`
+--
+
+INSERT INTO `inscripcion` (`id`, `id_categoria_competencia`, `id_robot`, `boucher`, `confirmacion`, `puntaje`, `posicion`, `descalificacion`) VALUES
+(1, 1, 101, 'https://www.example.com/boucher_90vj.jpg', 1, 85.50, 2, 0),
+(2, 2, 102, 'https://www.example.com/boucher_2.jpg', 1, 78.00, 3, 0),
+(3, 3, 103, 'https://www.example.com/boucher_3.jpg', 1, 90.25, 1, 0);
 
 -- --------------------------------------------------------
 
@@ -254,6 +329,19 @@ INSERT INTO `tipo_competencia` (`id`, `nombre`, `descripcion`) VALUES
 --
 
 --
+-- Indices de la tabla `categoria`
+--
+ALTER TABLE `categoria`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `categoria_competencia`
+--
+ALTER TABLE `categoria_competencia`
+  ADD PRIMARY KEY (`id_competencia`),
+  ADD KEY `id_categoria_jugador` (`id_categoria_jugador`);
+
+--
 -- Indices de la tabla `club_robotica`
 --
 ALTER TABLE `club_robotica`
@@ -270,6 +358,13 @@ ALTER TABLE `competencia`
 --
 ALTER TABLE `grado_estudio`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `inscripcion`
+--
+ALTER TABLE `inscripcion`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_categoria_competencia` (`id_categoria_competencia`);
 
 --
 -- Indices de la tabla `nombre_institucion`
@@ -318,6 +413,24 @@ ALTER TABLE `tipo_competencia`
 --
 
 --
+-- AUTO_INCREMENT de la tabla `categoria`
+--
+ALTER TABLE `categoria`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT de la tabla `categoria_competencia`
+--
+ALTER TABLE `categoria_competencia`
+  MODIFY `id_competencia` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT de la tabla `inscripcion`
+--
+ALTER TABLE `inscripcion`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
 -- AUTO_INCREMENT de la tabla `participantes`
 --
 ALTER TABLE `participantes`
@@ -328,6 +441,22 @@ ALTER TABLE `participantes`
 --
 ALTER TABLE `registros`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- Restricciones para tablas volcadas
+--
+
+--
+-- Filtros para la tabla `categoria_competencia`
+--
+ALTER TABLE `categoria_competencia`
+  ADD CONSTRAINT `categoria_competencia_ibfk_1` FOREIGN KEY (`id_categoria_jugador`) REFERENCES `categoria` (`id`);
+
+--
+-- Filtros para la tabla `inscripcion`
+--
+ALTER TABLE `inscripcion`
+  ADD CONSTRAINT `inscripcion_ibfk_1` FOREIGN KEY (`id_categoria_competencia`) REFERENCES `categoria_competencia` (`id_competencia`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
