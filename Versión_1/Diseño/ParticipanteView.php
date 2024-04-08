@@ -1,3 +1,7 @@
+<?php 
+include("./app/config.php");
+include("./layout/sesion.php");
+?>
 <?php
 require_once 'ParticipanteController.php';
 

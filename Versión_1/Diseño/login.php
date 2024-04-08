@@ -40,7 +40,8 @@ if (mysqli_num_rows($resultado) == 1) {
     // Inicio de sesión exitoso, establecer la variable de sesión y redirigir al dashboard
     $fila = mysqli_fetch_assoc($resultado);
     $_SESSION['nombre'] = $fila['nombre'];
-    $_SESSION['id_participante'] = $fila['id']; // Almacenar el ID del participante en la sesión
+    $_SESSION['id_participante'] = $fila['id'];
+     // Almacenar el ID del participante en la sesión
     // Redirigir a la página principal correspondiente después del inicio de sesión
     if ($fila['rol'] == 'normal') {
         header("location: menu.html");
@@ -48,11 +49,6 @@ if (mysqli_num_rows($resultado) == 1) {
         header("location: menulogin.php");
     }
     exit;
-
-
-
-
-
     
     } else {
         // Error en el inicio de sesión

@@ -1,3 +1,7 @@
+<?php 
+include("./app/config.php");
+include("./layout/sesion.php");
+?>
 <?php
 require_once 'GradoEstudioController.php';
 
@@ -5,9 +9,7 @@ $db = new PDO('mysql:host=localhost;dbname=datosks', 'root', '');
 $controller = new GradoEstudioController($db);
 
 // Ver todos los grados de estudio
-$grados_estudio = $controller->getAllGradosEstudio();
-
-// Código HTML para mostrar los grados de estudio y opciones para ver, editar y eliminar
+$grado_estudio = $controller->getGradoEstudioById($grado);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -49,17 +51,16 @@ $grados_estudio = $controller->getAllGradosEstudio();
                 </tr>
             </thead>
             <tbody>
-                <?php while ($grado = $grados_estudio->fetch(PDO::FETCH_ASSOC)) : ?>
+                
                     <tr>
-                        <td><?php echo $grado['id']; ?></td>
-                        <td><?php echo $grado['grado']; ?></td>
+                        <td><?php echo $grado_estudio['id']; ?></td>
+                        <td><?php echo $grado_estudio['grado']; ?></td>
                         <td>
-                            <a href="vergrado.php?id=<?php echo $grado['id']; ?>" class="btn btn-info btn-sm">Ver</a>
-                            <a href="editargrado.php?id=<?php echo $grado['id']; ?>" class="btn btn-primary btn-sm">Editar</a>
-                            <a href="eliminargrado.php?id=<?php echo $grado['id']; ?>" class="btn btn-danger btn-sm">Eliminar</a>
+                            <a href="vergrado.php?id=<?php echo $grado_estudio['id']; ?>" class="btn btn-info btn-sm">Ver</a>
+                            <a href="editargrado.php?id=<?php echo $grado_estudio['id']; ?>" class="btn btn-primary btn-sm">Editar</a>
+                            <a href="eliminargrado.php?id=<?php echo $grado_estudio['id']; ?>" class="btn btn-danger btn-sm">Eliminar</a>
                         </td>
                     </tr>
-                <?php endwhile; ?>
             </tbody>
         </table>
     </div>

@@ -12,7 +12,7 @@ class NombreInstitucionController {
         return $this->model->getAllNombresInstitucion();
     }
 
-    public function getNombreInstitucionById($id) {
+    public function getInstitucionById($id) {
         return $this->model->getNombreInstitucionById($id);
     }
 

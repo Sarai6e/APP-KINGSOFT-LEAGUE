@@ -6,8 +6,9 @@ class ClubRoboticaModel {
         $this->conn = $db;
     }
 
-    public function getClubs() {
-        $query = "SELECT * FROM club_robotica";
+    public function getClubs($id) {
+        $query = "SELECT * FROM club_robotica where id= ".$id;
+        //$query = "SELECT * FROM participantes where id = 1";
         $stmt = $this->conn->prepare($query);
         $stmt->execute();
         return $stmt;

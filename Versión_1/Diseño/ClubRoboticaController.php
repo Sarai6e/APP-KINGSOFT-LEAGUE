@@ -8,8 +8,8 @@ class ClubRoboticaController {
         $this->model = new ClubRoboticaModel($db);
     }
 
-    public function index() {
-        return $this->model->getClubs();
+    public function index($id) {
+        return $this->model->getClubs($id);
     }
 
     public function ver($id) {

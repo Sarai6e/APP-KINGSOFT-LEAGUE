@@ -1,3 +1,7 @@
+<?php 
+include("./app/config.php");
+include("./layout/sesion.php");
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -78,8 +82,8 @@
                 $db = new PDO('mysql:host=localhost;dbname=datosks', 'root', '');
                 $controller = new ClubRoboticaController($db);
 
-                // Ver todos los clubes
-                $clubs = $controller->index();
+                // Ver todos los clubes del usuario logeado
+                $clubs = $controller->index($id);
 
                 while ($club = $clubs->fetch(PDO::FETCH_ASSOC)) :
                 ?>

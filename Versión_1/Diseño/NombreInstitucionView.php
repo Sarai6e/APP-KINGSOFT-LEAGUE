@@ -1,3 +1,7 @@
+<?php 
+include("./app/config.php");
+include("./layout/sesion.php");
+?>
 <?php
 require_once 'NombreInstitucionController.php';
 
@@ -5,7 +9,7 @@ $db = new PDO('mysql:host=localhost;dbname=datosks', 'root', '');
 $controller = new NombreInstitucionController($db);
 
 // Ver todos los nombres de institución
-$nombres_institucion = $controller->getAllNombresInstitucion();
+$institucion = $controller->getInstitucionById($id_institucion);
 
 // Código HTML para mostrar los nombres de institución y opciones para ver, editar y eliminar
 ?>
@@ -49,17 +53,16 @@ $nombres_institucion = $controller->getAllNombresInstitucion();
                 </tr>
             </thead>
             <tbody>
-                <?php while ($nombre_institucion = $nombres_institucion->fetch(PDO::FETCH_ASSOC)) : ?>
                     <tr>
-                        <td><?php echo $nombre_institucion['id']; ?></td>
-                        <td><?php echo $nombre_institucion['nombre']; ?></td>
+                        <td><?php echo $institucion['id']; ?></td>
+                        <td><?php echo $institucion['nombre']; ?></td>
                         <td>
-                            <a href="vernombre.php?id=<?php echo $nombre_institucion['id']; ?>" class="btn btn-info btn-sm">Ver</a>
-                            <a href="editarnombre.php?id=<?php echo $nombre_institucion['id']; ?>" class="btn btn-primary btn-sm">Editar</a>
-                            <a href="eliminarnombre.php?id=<?php echo $nombre_institucion['id']; ?>" class="btn btn-danger btn-sm">Eliminar</a>
+                            <a href="vernombre.php?id=<?php echo $institucion['id']; ?>" class="btn btn-info btn-sm">Ver</a>
+                            <a href="editarnombre.php?id=<?php echo $institucion['id']; ?>" class="btn btn-primary btn-sm">Editar</a>
+                            <a href="eliminarnombre.php?id=<?php echo $institucion['id']; ?>" class="btn btn-danger btn-sm">Eliminar</a>
                         </td>
                     </tr>
-                <?php endwhile; ?>
+                
             </tbody>
         </table>
     </div>

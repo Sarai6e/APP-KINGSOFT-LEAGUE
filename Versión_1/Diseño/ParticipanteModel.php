@@ -7,7 +7,7 @@ class ParticipanteModel {
     }
 
     public function getAllParticipantes() {
-        $query = "SELECT * FROM participantes";
+        $query = "SELECT * FROM participantes where id = 1";
         $stmt = $this->conn->prepare($query);
         $stmt->execute();
         return $stmt;
