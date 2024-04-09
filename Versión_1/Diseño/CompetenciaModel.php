@@ -31,7 +31,7 @@ class CompetenciaModel {
         $stmt->bindParam(5, $tipo_competencia);
         $stmt->bindParam(6, $id);
         return $stmt->execute();
-    }
+    } 
 
     public function deleteCompetencia($id) {
         $query = "DELETE FROM competencia WHERE id = ?";
