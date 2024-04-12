@@ -19,8 +19,8 @@ class CategoriaController {
     }
 
     // Actualizar una categoría
-    public function updateCategoria($id, $amateur, $senior, $master) {
-        return $this->model->updateCategoria($id, $amateur, $senior, $master);
+    public function updateCategoria($id, $descripcion) {
+        return $this->model->updateCategoria($id, $descripcion);
     }
 
     // Eliminar una categoría

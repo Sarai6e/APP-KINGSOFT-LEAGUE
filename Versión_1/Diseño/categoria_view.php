@@ -68,16 +68,13 @@ include("./layout/sesion.php");
         <thead class="thead-dark">
             <tr>
                 <th>ID</th>
-                <th>Amateur</th>
-                <th>Senior</th>
-                <th>Master</th>
+                <th>Descripción</th>
                 <th>Acciones</th>
             </tr>
         </thead>
         <tbody>
             <?php
-         require_once 'Categoria_Controller.php';
-
+            require_once 'Categoria_Controller.php';
 
             $db = new PDO('mysql:host=localhost;dbname=datosks', 'root', ''); // Conexión a la base de datos
             $controller = new CategoriaController($db);
@@ -89,9 +86,7 @@ include("./layout/sesion.php");
             ?>
                 <tr>
                     <td><?php echo $categoria['id']; ?></td>
-                    <td><?php echo $categoria['amateur']; ?></td>
-                    <td><?php echo $categoria['senior']; ?></td>
-                    <td><?php echo $categoria['master']; ?></td>
+                    <td><?php echo $categoria['descripcion']; ?></td>
                     <td>
                         <a href="ver_categoria.php?id=<?php echo $categoria['id']; ?>" class="btn btn-info btn-sm">Ver</a>
                         <a href="editar_categoria.php?id=<?php echo $categoria['id']; ?>" class="btn btn-primary btn-sm">Editar</a>

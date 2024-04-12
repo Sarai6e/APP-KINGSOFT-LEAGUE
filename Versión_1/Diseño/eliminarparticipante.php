@@ -46,7 +46,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <p>¿Estás seguro de que deseas eliminar este participante?</p>
             <form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"] . "?id=" . $id); ?>">
                 <button type="submit" class="btn btn-danger">Eliminar</button>
-                <a href="participantes.php" class="btn btn-secondary">Cancelar</a>
+                <!-- Cambié el enlace del botón "Cancelar" para que vaya a verparticipante.php -->
+                <a href="verparticipante.php?id=<?php echo $id; ?>" class="btn btn-secondary">Cancelar</a>
             </form>
         </div>
     </div>

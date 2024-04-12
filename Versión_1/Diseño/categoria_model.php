@@ -24,13 +24,11 @@ class CategoriaModel {
     }
 
     // Actualizar una categoría
-    public function updateCategoria($id, $amateur, $senior, $master) {
-        $query = "UPDATE categoria SET amateur = ?, senior = ?, master = ? WHERE id = ?";
+    public function updateCategoria($id, $descripcion) {
+        $query = "UPDATE categoria SET descripcion = ? WHERE id = ?";
         $stmt = $this->conn->prepare($query);
-        $stmt->bindParam(1, $amateur);
-        $stmt->bindParam(2, $senior);
-        $stmt->bindParam(3, $master);
-        $stmt->bindParam(4, $id);
+        $stmt->bindParam(1, $descripcion);
+        $stmt->bindParam(2, $id);
         if($stmt->execute()) {
             return true;
         }

@@ -4,27 +4,27 @@ include("./layout/sesion.php");
 
 // Verifica si se proporcionó un ID válido en la URL
 if (!isset($_GET['id']) || empty($_GET['id'])) {
-    header("Location: club_robotica_view.php");
+    header("Location: categoria_view.php");
     exit();
 }
 
 $id = $_GET['id'];
 
-require_once 'ClubRoboticaController.php';
+require_once 'Categoria_Controller.php';
 
 $db = new PDO('mysql:host=localhost;dbname=datosks', 'root', ''); // Conexión a la base de datos
-$controller = new ClubRoboticaController($db);
+$controller = new CategoriaController($db);
 
 // Si el formulario se envió (confirmación de eliminación)
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Realizar la eliminación del club de robótica
-    $result = $controller->deleteClub($id);
+    // Realizar la eliminación de la categoría
+    $result = $controller->deleteCategoria($id);
 
     if ($result) {
-        header("Location: club_robotica_view.php");
+        header("Location: categoria_view.php");
         exit();
     } else {
-        echo "Error al eliminar el club de robótica.";
+        echo "Error al eliminar la categoría.";
     }
 }
 ?>
@@ -34,7 +34,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Eliminar Club de Robótica</title>
+    <title>Eliminar Categoría</title>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <!-- Font Awesome -->
@@ -45,13 +45,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <body>
 <?php include 'navegador.php'; ?>
 <div class="container">
-    <h1 class="mt-4 mb-4">Eliminar Club de Robótica</h1>
+    <h1 class="mt-4 mb-4">Eliminar Categoría</h1>
     <div class="row">
         <div class="col-md-6 offset-md-3">
-            <p>¿Estás seguro de que quieres eliminar este club de robótica?</p>
+            <p>¿Estás seguro de que quieres eliminar esta categoría?</p>
             <form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"] . "?id=" . $id); ?>">
                 <button type="submit" class="btn btn-danger">Eliminar</button>
-                <a href="ver.php" class="btn btn-secondary">Cancelar</a>
+                <a href="ver_categoria.php" class="btn btn-secondary">Cancelar</a>
             </form>
         </div>
     </div>

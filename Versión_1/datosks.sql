@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 08-04-2024 a las 19:34:16
+-- Tiempo de generación: 12-04-2024 a las 17:18:42
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.0.28
 
@@ -29,21 +29,18 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `categoria` (
   `id` int(11) NOT NULL,
-  `amateur` varchar(50) DEFAULT NULL,
-  `senior` varchar(50) DEFAULT NULL,
-  `master` varchar(50) DEFAULT NULL
+  `descripcion` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `categoria`
 --
 
-INSERT INTO `categoria` (`id`, `amateur`, `senior`, `master`) VALUES
-(1, 'Amateur', 'Senior', 'Master'),
-(2, 'Beginner', 'Intermediate', 'Advanced'),
-(3, 'Novato', 'Experimentado', 'Experto'),
-(4, 'Junior', 'Senior', 'Elite'),
-(5, 'Novice', 'Intermediate', 'Expert');
+INSERT INTO `categoria` (`id`, `descripcion`) VALUES
+(1, 'Amateur'),
+(2, 'Beginner'),
+(3, 'Novato'),
+(4, 'Junior');
 
 -- --------------------------------------------------------
 
@@ -67,8 +64,7 @@ INSERT INTO `categoria_competencia` (`id_competencia`, `id_tipo_competencia`, `i
 (1, 1, 1, 'https://www.example.com/reglas_amateur', 20.00),
 (2, 1, 2, 'https://www.example.com/reglas_senior', 30.00),
 (3, 2, 3, 'https://www.example.com/reglas_master', 50.00),
-(4, 2, 4, 'https://www.example.com/reglas_junior', 25.00),
-(5, 1, 5, 'https://www.example.com/reglas_expert', 40.00);
+(4, 2, 4, 'https://www.example.com/reglas_junior', 25.00);
 
 -- --------------------------------------------------------
 
@@ -218,7 +214,7 @@ CREATE TABLE `participantes` (
 --
 
 INSERT INTO `participantes` (`id`, `nombre`, `apellido`, `dni`, `participante_genero_id`, `grado_estudio_id`, `año_estudio`, `especialidad`, `correo`, `clave`, `fecha_de_actualizacion`, `robot_id`, `club_robotica_id`, `id_institucion`, `id_competencia`, `fecha_nacimiento`) VALUES
-(1, 'Sarai', 'Romero', '77382908', 1, 1, 1, 'Profesor', 'sarai@gmail.com', '123456', '2024-04-08 01:04:22', 1, '1', 2, 2, '2014-04-08'),
+(1, 'Sara', 'Romero', '77382908', 1, 1, 1, 'Profesor', 'sarai@gmail.com', '123456', '2024-04-12 14:34:28', 1, '1', 2, 2, '2014-04-08'),
 (3, 'Gimena', ' Vargas', '7896541', 2, 2, 1, 'Ingeniero de sotware con I:A', 'gimena@gmail.com', '1234', '2024-04-08 01:03:50', 2, '2', 1, 1, '2024-04-02');
 
 -- --------------------------------------------------------
