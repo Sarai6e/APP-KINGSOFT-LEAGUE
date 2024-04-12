@@ -1,5 +1,6 @@
 <?php
 session_start();
+
 if (isset($_SESSION['id_participante'])) {
     $id_sesion=$_SESSION['id_participante'];
     $sql_usuarios= "SELECT * from participantes
@@ -18,5 +19,6 @@ if (isset($_SESSION['id_participante'])) {
 
 } else {
     header('Location:./login.php');
+    exit();
 }
 ?>

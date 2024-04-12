@@ -26,7 +26,7 @@ class RobotModel {
         return $stmt->execute([$nombre, $peso, $ancho, $alto, $id]);
     }
 
-    public function deleteRobot($id) {
+    public function deleteRobot($id) { 
         $query = "DELETE FROM robot WHERE id = ?";
         $stmt = $this->db->prepare($query);
         return $stmt->execute([$id]);

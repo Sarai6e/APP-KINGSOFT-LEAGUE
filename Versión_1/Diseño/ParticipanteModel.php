@@ -13,6 +13,7 @@ class ParticipanteModel {
         return $stmt;
     }
 
+    
     public function getParticipanteById($id) {
         $query = "SELECT * FROM participantes WHERE id = ?";
         $stmt = $this->conn->prepare($query);
@@ -20,6 +21,10 @@ class ParticipanteModel {
         $stmt->execute();
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
+
+
+
+    
 
     public function updateParticipante($id, $nombre, $apellido, $dni, $genero_id, $grado_estudio_id, $año_estudio, $especialidad, $correo, $clave, $robot_id, $club_robotica_id, $fecha_nacimiento) {
         $query = "UPDATE participantes SET nombre = ?, apellido = ?, dni = ?, participante_genero_id = ?, grado_estudio_id = ?, año_estudio = ?, especialidad = ?, correo = ?, clave = ?, robot_id = ?, club_robotica_id = ?, fecha_nacimiento = ? WHERE id = ?";
