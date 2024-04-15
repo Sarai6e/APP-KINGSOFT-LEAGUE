@@ -92,8 +92,8 @@ include("./layout/sesion.php");
             ?>
                 <tr>
                     <td><?php echo $inscripcion['id']; ?></td>
-                    <td><?php echo $inscripcion['id_categoria_competencia']; ?></td>
-                    <td><?php echo $inscripcion['id_robot']; ?></td>
+                    <td><?php echo getcategoriacompetenciaName( $inscripcion['id_categoria_competencia'], $db); ?></td>
+                    <td><?php echo getrobotName( $inscripcion['id_robot'], $db); ?></td>
                     <td><?php echo $inscripcion['boucher']; ?></td>
                     <td><?php echo $inscripcion['confirmacion']; ?></td>
                     <td><?php echo $inscripcion['puntaje']; ?></td>
@@ -114,5 +114,32 @@ include("./layout/sesion.php");
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<?php
+function getcategoriacompetenciaName($id_categoria_competencia, $db) {
+    $query = "SELECT nombre FROM competencia WHERE id = ?";
+    $stmt = $db->prepare($query);
+    $stmt->bindParam(1, $id_categoria_competencia); // Usar $id_categoria_competencia en lugar de $id_tipo_competencia
+    $stmt->execute();
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+    return $result['nombre'];
+}
+
+function getrobotName($id_robot, $db) {
+    $query = "SELECT nombre FROM robot WHERE id = ?";
+    $stmt = $db->prepare($query);
+    $stmt->bindParam(1, $id_robot);
+    $stmt->execute();
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+    if ($result) {
+        return $result['nombre'];
+    } else {
+        return "Robot no encontrado"; // O cualquier otro mensaje de error adecuado
+    }
+}
+
+
+?>
+
 </body>
 </html>

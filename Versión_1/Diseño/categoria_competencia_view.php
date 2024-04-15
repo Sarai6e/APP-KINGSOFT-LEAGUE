@@ -86,11 +86,11 @@ include("./layout/sesion.php");
             $categorias = $controller->getAllCategoriaCompetencia();
 
             while ($categoria = $categorias->fetch(PDO::FETCH_ASSOC)) :
-            ?>
+                ?>
                 <tr>
                     <td><?php echo $categoria['id_competencia']; ?></td>
-                    <td><?php echo $categoria['id_tipo_competencia']; ?></td>
-                    <td><?php echo $categoria['id_categoria_jugador']; ?></td>
+                    <td><?php echo gettipocompetenciaName($categoria['id_tipo_competencia'], $db); ?></td>
+                    <td><?php echo getcategoriajugadNameor($categoria['id_categoria_jugador'], $db); ?></td>
                     <td><?php echo $categoria['reglas']; ?></td>
                     <td><?php echo $categoria['precio']; ?></td>
                     <td>
@@ -100,6 +100,8 @@ include("./layout/sesion.php");
                     </td>
                 </tr>
             <?php endwhile; ?>
+
+
         </tbody>
     </table>
 </div>
@@ -110,3 +112,24 @@ include("./layout/sesion.php");
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
+
+<?php
+function gettipocompetenciaName($id_tipo_competencia, $db) {
+    $query = "SELECT nombre FROM tipo_competencia WHERE id = ?";
+    $stmt = $db->prepare($query);
+    $stmt->bindParam(1, $id_tipo_competencia);
+    $stmt->execute();
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+    return $result['nombre'];
+}
+function getcategoriajugadNameor($id_categoria_jugador, $db) {
+    $query = "SELECT descripcion FROM categoria WHERE id = ?";
+    $stmt = $db->prepare($query);
+    $stmt->bindParam(1, $id_categoria_jugador);
+    $stmt->execute();
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+    return $result['descripcion'];
+}
+
+
+?>
