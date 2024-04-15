@@ -52,31 +52,46 @@
         $competencia = $controller->getCompetenciaById($id);
         if ($competencia) {
     ?>
-                    <h1>Actualizar Competencia</h1>
-            <form method="post" action="">
-                <input type="hidden" name="id" value="<?php echo $competencia['id']; ?>">
-                <div class="mb-3">
-                    <label for="nombre" class="form-label">Nombre:</label>
-                    <input type="text" class="form-control" id="nombre" name="nombre" value="<?php echo $competencia['nombre']; ?>">
-                </div>
-                <div class="mb-3">
-                    <label for="fecha_inicio_inscripcion" class="form-label">Fecha Inicio Inscripción:</label>
-                    <input type="date" class="form-control" id="fecha_inicio_inscripcion" name="fecha_inicio_inscripcion" value="<?php echo $competencia['fecha_inicio_inscripcion']; ?>">
-                </div>
-                <div class="mb-3">
-                    <label for="fecha_fin_inscripcion" class="form-label">Fecha Fin Inscripción:</label>
-                    <input type="date" class="form-control" id="fecha_fin_inscripcion" name="fecha_fin_inscripcion" value="<?php echo $competencia['fecha_fin_inscripcion']; ?>">
-                </div>
-                <div class="mb-3">
-                    <label for="fecha_compentencia" class="form-label">Fecha Competencia:</label>
-                    <input type="date" class="form-control" id="fecha_compentencia" name="fecha_compentencia" value="<?php echo $competencia['fecha_compentencia']; ?>">
-                </div>
-                <div class="mb-3">
-                    <label for="tipo_competencia" class="form-label">Tipo Competencia:</label>
-                    <input type="text" class="form-control" id="tipo_competencia" name="tipo_competencia" value="<?php echo $competencia['tipo_competencia']; ?>">
-                </div>
-                <button type="submit" name="submit" class="btn btn-primary">Actualizar</button>
-            </form>
+        <h1>Actualizar Competencia</h1>
+        <form method="post" action="">
+            <input type="hidden" name="id" value="<?php echo $competencia['id']; ?>">
+            <div class="mb-3">
+                <label for="nombre" class="form-label">Nombre:</label>
+                <input type="text" class="form-control" id="nombre" name="nombre" value="<?php echo $competencia['nombre']; ?>">
+            </div>
+            <div class="mb-3">
+                <label for="fecha_inicio_inscripcion" class="form-label">Fecha Inicio Inscripción:</label>
+                <input type="date" class="form-control" id="fecha_inicio_inscripcion" name="fecha_inicio_inscripcion" value="<?php echo $competencia['fecha_inicio_inscripcion']; ?>">
+            </div>
+            <div class="mb-3">
+                <label for="fecha_fin_inscripcion" class="form-label">Fecha Fin Inscripción:</label>
+                <input type="date" class="form-control" id="fecha_fin_inscripcion" name="fecha_fin_inscripcion" value="<?php echo $competencia['fecha_fin_inscripcion']; ?>">
+            </div>
+            <div class="mb-3">
+                <label for="fecha_compentencia" class="form-label">Fecha Competencia:</label>
+                <input type="date" class="form-control" id="fecha_compentencia" name="fecha_compentencia" value="<?php echo $competencia['fecha_compentencia']; ?>">
+            </div>
+            <div class="mb-3">
+                <label for="tipo_competencia" class="form-label">Tipo Competencia:</label>
+                <select class="form-control" id="tipo_competencia" name="tipo_competencia">
+                    <?php
+                    // Recuperar los datos de la tabla tipo_competencia
+                    $stmt = $db->prepare("SELECT * FROM tipo_competencia");
+                    $stmt->execute();
+                    $tipos_competencia = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+                    // Iterar sobre los tipos de competencia y crear las opciones
+                    foreach ($tipos_competencia as $tipo) {
+                        // Verificar si este tipo es el seleccionado actualmente
+                        $selected = ($competencia['tipo_competencia'] == $tipo['id']) ? "selected" : "";
+                        // Imprimir la opción
+                        echo "<option value='" . $tipo['id'] . "' $selected>" . $tipo['nombre'] . "</option>";
+                    }
+                    ?>
+                </select>
+            </div>
+            <button type="submit" name="submit" class="btn btn-primary">Actualizar</button>
+        </form>
     <?php
         } else {
             echo "<div class='alert alert-warning' role='alert'>Competencia no encontrada.</div>";

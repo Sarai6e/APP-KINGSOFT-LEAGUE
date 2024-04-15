@@ -1,63 +1,72 @@
+<?php
+include("./app/config.php");
+include("./layout/sesion.php");
+
+// Verifica si se proporcionó un ID válido en la URL
+if (!isset($_GET['id']) || empty($_GET['id'])) {
+    header("Location: grados_estudio.php");
+    exit();
+}
+
+$id = $_GET['id'];
+
+require_once 'GradoEstudioController.php';
+
+$db = new PDO('mysql:host=localhost;dbname=datosks', 'root', ''); // Conexión a la base de datos
+$controller = new GradoEstudioController($db);
+
+// Obtener los datos del grado de estudio por su ID
+$grado_estudio = $controller->getGradoEstudioById($id);
+
+// Verificar si el grado de estudio existe
+if (!$grado_estudio) {
+    echo "Grado de estudio no encontrado.";
+    exit();
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Detalles del Grado de Estudio</title>
-    <!-- Agregar Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-  <style>
-    body {
-      background-color: #f8f9fa;
-    }
-    .container {
-      margin-top: 200px; /* Ajuste del margen superior */
-      background-color: #fff;
-      padding: 100px 50px; /* Relleno superior e inferior reducido */
-      border-radius: 5px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    }
-    h1 {
-      color: #343a40;
-      margin-bottom: 20px;
-    }
-    p {
-      color: #6c757d;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ver Grado de Estudio</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .table{
+            background-color:white;
+        }
+        .container {
+            margin-top: 200px; /* Ajuste del margen superior */
+        }
+        .form-label{
+            color:white;
+        }
+        h1{
+             color:white;
+        }
+    </style>
 </head>
 <body>
-<?php 
-    include 'navegador.php'
-    ?>
-
-<div class="container mt-5">
-  <?php
-  require_once 'GradoEstudioController.php';
-
-  $db = new PDO('mysql:host=localhost;dbname=datosks', 'root', '');
-  $controller = new GradoEstudioController($db);
-
-  if(isset($_GET['id'])) {
-      $id = $_GET['id'];
-      $grado = $controller->getGradoEstudioById($id);
-      if ($grado) {
-          echo "<h1>Detalles del grado de estudio:</h1>";
-          echo "<p>ID: {$grado['id']}</p>";
-          echo "<p>Grado: {$grado['grado']}</p>";
-      } else {
-          echo "<h1>Grado de estudio no encontrado.</h1>";
-      }
-  } else {
-      echo "<h1>ID de grado de estudio no proporcionado.</h1>";
-  }
-  ?>
-  <!-- Botón para volver al inicio -->
-  <a href="GradoEstudioView.php" class="btn btn-primary mt-3">Regresar</a>
+<?php include 'navegador.php'; ?>
+<div class="container">
+    <h1 class="mt-4 mb-4">Ver Grado de Estudio</h1>
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <table class="table table-bordered">
+                <tr>
+                    <th>ID</th>
+                    <td><?php echo $grado_estudio['id']; ?></td>
+                </tr>
+                <tr>
+                    <th>Grado</th>
+                    <td><?php echo $grado_estudio['grado']; ?></td>
+                </tr>
+            </table>
+            <a href="GradoEstudioView.php" class="btn btn-secondary">Volver</a>
+        </div>
+    </div>
 </div>
-
-<!-- Agregar Bootstrap JS (Opcional, si lo necesitas) -->
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
 </body>
 </html>

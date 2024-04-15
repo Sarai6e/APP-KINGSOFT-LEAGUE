@@ -1,19 +1,61 @@
+<?php
+include("./app/config.php");
+include("./layout/sesion.php");
+
+// Verifica si se proporcionó un ID válido en la URL
+if (!isset($_GET['id']) || empty($_GET['id'])) {
+    header("Location: nombres_institucion.php");
+    exit();
+}
+
+$id = $_GET['id'];
+
+require_once 'NombreInstitucionController.php';
+
+$db = new PDO('mysql:host=localhost;dbname=datosks', 'root', ''); // Conexión a la base de datos
+$controller = new NombreInstitucionController($db);
+
+// Obtener los datos de la institución por su ID
+$institucion = $controller->getInstitucionById($id);
+
+// Verificar si la institución existe
+if (!$institucion) {
+    echo "Nombre de institución no encontrado.";
+    exit();
+}
+
+// Si el formulario se envió
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Realizar la actualización del nombre de institución
+    $nombre = $_POST['nombre'];
+
+    $result = $controller->updateNombreInstitucion($id, $nombre);
+
+    if ($result) {
+        header("Location: vernombre.php?id=" . $id);
+        exit();
+    } else {
+        echo "Error al actualizar el nombre de institución.";
+    }
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Actualizar Nombre de Institución</title>
-    <!-- Agregar Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <title>Editar Nombre de Institución</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
-        .table{
+       .table{
             background-color:white;
         }
         .container {
             margin-top: 200px; /* Ajuste del margen superior */
         }
-        .form-label{
+        label{
             color:white;
         }
         h1{
@@ -22,55 +64,21 @@
     </style>
 </head>
 <body>
-<?php 
-    include 'navegador.php'
-    ?>
-    <div class="container">
-        <?php
-        require_once 'NombreInstitucionController.php';
-
-        $db = new PDO('mysql:host=localhost;dbname=datosks', 'root', '');
-        $controller = new NombreInstitucionController($db);
-
-        if(isset($_POST['submit'])) {
-            $id = $_POST['id'];
-            $nombre = $_POST['nombre'];
-
-            if($controller->updateNombreInstitucion($id, $nombre)) {
-                echo "<div class='alert alert-success' role='alert'>Nombre de la institución actualizado correctamente.</div>";
-            } else {
-                echo "<div class='alert alert-danger' role='alert'>Error al actualizar el nombre de la institución.</div>";
-            }
-        }
-
-        if(isset($_GET['id'])) {
-            $id = $_GET['id'];
-            $nombre_institucion = $controller->getNombreInstitucionById($id);
-            if ($nombre_institucion) {
-        ?>
-                <h1>Actualizar Nombre de Institución</h1>
-                <form method="post" action="">
-                    <input type="hidden" name="id" value="<?php echo $nombre_institucion['id']; ?>">
-                    <div class="form-group">
-                        <label for="nombre">Nombre:</label>
-                        <input type="text" class="form-control" id="nombre" name="nombre" value="<?php echo $nombre_institucion['nombre']; ?>">
-                    </div>
-                    <button type="submit" name="submit" class="btn btn-primary">Actualizar</button>
-                </form>
-        <?php
-            } else {
-                echo "<div class='alert alert-warning' role='alert'>Nombre de la institución no encontrado.</div>";
-            }
-        } else {
-            echo "<div class='alert alert-danger' role='alert'>ID del nombre de la institución no proporcionado.</div>";
-        }
-        ?>
-
-        <!-- Botón de inicio -->
-        <a href="NombreInstitucionView.php" class="btn btn-secondary mt-3">Regrsar</a>
+<?php include 'navegador.php'; ?>
+<div class="container">
+    <h1 class="mt-4 mb-4">Editar Nombre de Institución</h1>
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"] . "?id=" . $id); ?>">
+                <div class="form-group">
+                    <label>Nombre</label>
+                    <input type="text" class="form-control" name="nombre" value="<?php echo $institucion['nombre']; ?>">
+                </div>
+                <button type="submit" class="btn btn-primary">Actualizar</button>
+                <a href="vernombre.php?id=<?php echo $id; ?>" class="btn btn-secondary">Cancelar</a>
+            </form>
+        </div>
     </div>
-
-    <!-- Agregar Bootstrap JS (Opcional, si lo necesitas) -->
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</div>
 </body>
 </html>

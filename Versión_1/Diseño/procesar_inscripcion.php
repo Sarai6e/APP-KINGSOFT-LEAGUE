@@ -7,6 +7,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Recoger datos del formulario
         $id_usuario = $_POST['id_usuario'];
         $id_categoria = $_POST['id_categoria'];
+        $confirmacion = $_POST['confirmacion'];
+        $puntaje = $_POST['puntaje'];
+        $posicion = $_POST['posicion'];
+        $descalificacion = $_POST['descalificacion'];
 
         // Verificar si el archivo se ha subido correctamente
         if ($_FILES['boucher']['error'] === UPLOAD_ERR_OK) {
@@ -21,16 +25,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $destination = "./uploads/" . $file_name_with_id;
             move_uploaded_file($file_tmp, $destination);
 
-            // Aquí deberías guardar los datos de la inscripción en la base de datos, incluido el nombre del archivo
-            // Conexión a la base de datos
+            // Conexión a la base de datos (reemplaza 'nombre_de_la_base_de_datos', 'nombre_de_usuario' y 'contraseña' con los valores reales)
             $db = new PDO('mysql:host=localhost;dbname=datosks', 'root', '');
 
             // Preparar la consulta para insertar la inscripción en la base de datos
-            $query = "INSERT INTO inscripcion (id_usuario, id_categoria_competencia, boucher) VALUES (?, ?, ?)";
+            $query = "INSERT INTO inscripcion (id_usuario, id_categoria_competencia, confirmacion, puntaje, posicion, descalificacion, boucher) VALUES (?, ?, ?, ?, ?, ?, ?)";
             $stmt = $db->prepare($query);
             $stmt->bindParam(1, $id_usuario);
             $stmt->bindParam(2, $id_categoria);
-            $stmt->bindParam(3, $file_name_with_id);
+            $stmt->bindParam(3, $confirmacion);
+            $stmt->bindParam(4, $puntaje);
+            $stmt->bindParam(5, $posicion);
+            $stmt->bindParam(6, $descalificacion);
+            $stmt->bindParam(7, $file_name_with_id);
             
             // Ejecutar la consulta
             if ($stmt->execute()) {
