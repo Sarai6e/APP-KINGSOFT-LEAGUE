@@ -28,4 +28,5 @@ class InscripcionController {
         return $this->model->deleteInscripcion($id);
     }
 }
+
 ?>
