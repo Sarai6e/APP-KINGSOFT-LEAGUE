@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 12-04-2024 a las 17:30:56
+-- Tiempo de generación: 15-04-2024 a las 17:41:30
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.0.28
 
@@ -151,17 +151,19 @@ CREATE TABLE `inscripcion` (
   `confirmacion` tinyint(1) DEFAULT NULL,
   `puntaje` decimal(10,2) DEFAULT NULL,
   `posicion` int(11) DEFAULT NULL,
-  `descalificacion` tinyint(1) DEFAULT NULL
+  `descalificacion` tinyint(1) DEFAULT NULL,
+  `id_usuario` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `inscripcion`
 --
 
-INSERT INTO `inscripcion` (`id`, `id_categoria_competencia`, `id_robot`, `boucher`, `confirmacion`, `puntaje`, `posicion`, `descalificacion`) VALUES
-(1, 1, 101, 'https://www.example.com/boucher_90vj.jpg', 1, 85.50, 2, 0),
-(2, 2, 102, 'https://www.example.com/boucher_2.jpg', 1, 78.00, 3, 0),
-(3, 3, 103, 'https://www.example.com/boucher_3.jpg', 1, 90.25, 1, 0);
+INSERT INTO `inscripcion` (`id`, `id_categoria_competencia`, `id_robot`, `boucher`, `confirmacion`, `puntaje`, `posicion`, `descalificacion`, `id_usuario`) VALUES
+(1, 1, 101, 'https://www.example.com/boucher_90vj.jpg', 1, 85.50, 2, 0, 0),
+(2, 2, 102, 'https://www.example.com/boucher_2.jpg', 1, 78.00, 3, 0, 0),
+(3, 3, 103, 'https://www.example.com/boucher_3.jpg', 1, 90.25, 1, 0, 0),
+(7, 1, 1, '1_WhatsApp Image 2024-03-16 at 13.01.37.jpeg', 2, 6.00, 7, 0, 1);
 
 -- --------------------------------------------------------
 
@@ -214,9 +216,9 @@ CREATE TABLE `participantes` (
 --
 
 INSERT INTO `participantes` (`id`, `nombre`, `apellido`, `dni`, `participante_genero_id`, `grado_estudio_id`, `año_estudio`, `especialidad`, `correo`, `clave`, `fecha_de_actualizacion`, `robot_id`, `club_robotica_id`, `id_institucion`, `id_competencia`, `fecha_nacimiento`) VALUES
-(1, 'Sara', 'Romero', '77382908', 1, 1, 1, 'Profesor', 'sarai@gmail.com', '123456', '2024-04-12 14:34:28', 1, '1', 2, 2, '2014-04-08'),
+(1, 'Sara', 'Romero', '77382908', 3, 1, 1, 'Profesor', 'sarai@gmail.com', '123456', '2024-04-12 17:37:10', 1, '1', 2, 2, '2014-04-08'),
 (3, 'Gimena', ' Vargas', '7896541', 2, 2, 1, 'Ingeniero de sotware con I:A', 'gimena@gmail.com', '1234', '2024-04-08 01:03:50', 2, '2', 1, 1, '2024-04-02'),
-(4, 'Diana', 'Peraldo', '78965412', 2, 2, 3, 'Profesora', 'diana@gmail.com', '123456', '2024-04-12 15:29:34', 2, '2', 0, 0, '2024-04-17');
+(4, 'Diana', 'Peraldo', '78965412', 2, 2, 3, 'Profesora', 'diana@gmail.com', '123456', '2024-04-12 16:18:10', 2, '2', 4, 4, '2024-04-17');
 
 -- --------------------------------------------------------
 
@@ -406,7 +408,7 @@ ALTER TABLE `categoria_competencia`
 -- AUTO_INCREMENT de la tabla `inscripcion`
 --
 ALTER TABLE `inscripcion`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de la tabla `participantes`
