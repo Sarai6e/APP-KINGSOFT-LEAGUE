@@ -90,7 +90,7 @@ include("./layout/sesion.php");
                 <tr>
                     <td><?php echo $categoria['id_competencia']; ?></td>
                     <td><?php echo gettipocompetenciaName($categoria['id_tipo_competencia'], $db); ?></td>
-                    <td><?php echo getcategoriajugadNameor($categoria['id_categoria_jugador'], $db); ?></td>
+                    <td><?php echo getcategoriajugadorName($categoria['id_categoria_jugador'], $db); ?></td>
                     <td><?php echo $categoria['reglas']; ?></td>
                     <td><?php echo $categoria['precio']; ?></td>
                     <td>
@@ -122,7 +122,8 @@ function gettipocompetenciaName($id_tipo_competencia, $db) {
     $result = $stmt->fetch(PDO::FETCH_ASSOC);
     return $result['nombre'];
 }
-function getcategoriajugadNameor($id_categoria_jugador, $db) {
+
+function getcategoriajugadorName($id_categoria_jugador, $db) {
     $query = "SELECT descripcion FROM categoria WHERE id = ?";
     $stmt = $db->prepare($query);
     $stmt->bindParam(1, $id_categoria_jugador);
@@ -130,6 +131,4 @@ function getcategoriajugadNameor($id_categoria_jugador, $db) {
     $result = $stmt->fetch(PDO::FETCH_ASSOC);
     return $result['descripcion'];
 }
-
-
 ?>
