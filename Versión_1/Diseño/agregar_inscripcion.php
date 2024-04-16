@@ -51,13 +51,15 @@
             <input type="text" class="form-control" id="id_categoria" name="id_categoria" required>
         </div>
         <div class="form-group">
+    <label for="id_robot">ID del Robot:</label>
+    <input type="text" class="form-control" id="id_robot" name="id_robot" required>
+</div>
+
+        <div class="form-group">
             <label for="boucher">Boucher (Archivo PDF):</label>
             <input type="file" class="form-control-file" id="boucher" name="boucher" required>
         </div>
-        <div class="form-group">
-            <button type="submit" class="btn btn-primary">Agregar</button>
-            <a href="inscripcion_view.php" class="btn btn-danger">Cancelar</a>
-        </div>
+
         <div class="form-group">
     <label for="confirmacion">Confirmación:</label>
     <select class="form-control" id="confirmacion" name="confirmacion" required>
@@ -80,7 +82,10 @@
         <option value="No">No</option>
     </select>
 </div>
-
+<div class="form-group">
+            <button type="submit" class="btn btn-primary">Agregar</button>
+            <a href="inscripcion_view.php" class="btn btn-danger">Cancelar</a>
+        </div>
     </form>
     <?php
     // Mostrar mensajes de éxito o error después de procesar el formulario
