@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 16-04-2024 a las 01:10:53
+-- Tiempo de generación: 16-04-2024 a las 19:05:35
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.0.28
 
@@ -147,10 +147,10 @@ CREATE TABLE `inscripcion` (
   `id_categoria_competencia` int(11) DEFAULT NULL,
   `id_robot` int(11) DEFAULT NULL,
   `boucher` varchar(255) DEFAULT NULL,
-  `confirmacion` tinyint(1) DEFAULT NULL,
+  `confirmacion` varchar(2) DEFAULT NULL,
   `puntaje` decimal(10,2) DEFAULT NULL,
   `posicion` int(11) DEFAULT NULL,
-  `descalificacion` tinyint(1) DEFAULT NULL,
+  `descalificacion` varchar(2) DEFAULT NULL,
   `id_usuario` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -159,10 +159,11 @@ CREATE TABLE `inscripcion` (
 --
 
 INSERT INTO `inscripcion` (`id`, `id_categoria_competencia`, `id_robot`, `boucher`, `confirmacion`, `puntaje`, `posicion`, `descalificacion`, `id_usuario`) VALUES
-(1, 1, 1, '1nlkhhjfuc.gpe', 1, 85.50, 2, 0, 0),
-(2, 2, 2, 'https://www.example.com/boucher_2.jpg', 1, 78.00, 3, 0, 0),
-(3, 3, 3, 'https://www.example.com/boucher_3.jpg', 1, 90.25, 1, 0, 0),
-(24, 1, NULL, '1_descarga.png', 0, 10.00, 1, 0, 1);
+(1, 1, 1, 'fgdkkl ñ.ñfk.jpe', 'si', 85.50, 2, 'no', 0),
+(2, 2, 2, 'https://www.example.com/boucher_2.jpg', 'si', 78.00, 3, 'si', 0),
+(3, 3, 3, 'https://www.example.com/boucher_3.jpg', 'si', 90.25, 1, 'no', 0),
+(4, 2, 2, '2_descarga.png', 'Si', 10.00, 1, 'Si', 2),
+(30, 3, 3, '2_r.png', 'Si', 10.00, 1, 'Si', 2);
 
 -- --------------------------------------------------------
 
@@ -282,8 +283,8 @@ CREATE TABLE `robot_competencia` (
 --
 
 INSERT INTO `robot_competencia` (`id`, `id_robot`, `id_competencia`) VALUES
-(1, 1, 1),
-(2, 2, 3),
+(1, 0, 0),
+(2, 0, 0),
 (3, 3, 3),
 (4, 4, 4);
 
@@ -407,7 +408,7 @@ ALTER TABLE `categoria_competencia`
 -- AUTO_INCREMENT de la tabla `inscripcion`
 --
 ALTER TABLE `inscripcion`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT de la tabla `participantes`
