@@ -1,11 +1,38 @@
+<?php
+include("./app/config.php");
+include("./layout/sesion.php");
+
+// Verifica si se proporcionó un ID válido en la URL
+if (!isset($_GET['id']) || empty($_GET['id'])) {
+    header("Location: robots.php");
+    exit();
+}
+
+$id = $_GET['id'];
+
+require_once 'RobotController.php';
+
+$db = new PDO('mysql:host=localhost;dbname=datosks', 'root', ''); // Conexión a la base de datos
+$controller = new RobotController($db);
+
+// Obtener los datos del robot por su ID
+$robot = $controller->getRobotById($id);
+
+// Verificar si el robot existe
+if (!$robot) {
+    echo "Robot no encontrado.";
+    exit();
+}
+?>
+
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Detalles del Robot</title>
-    <!-- Agregar Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <title>Ver Robot</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
     body {
       background-color: #f8f9fa;
@@ -27,42 +54,36 @@
   </style>
 </head>
 <body>
-<?php 
-    include 'navegador.php'
-    ?>
-<div class="container mt-5">
-    <?php
-    require_once 'RobotController.php';
-
-    // Verificar si se proporcionó un ID válido
-    if (isset($_GET["id"]) && !empty(trim($_GET["id"]))) {
-        $db = new PDO('mysql:host=localhost;dbname=datosks', 'root', '');
-        $controller = new RobotController($db);
-
-        $id = trim($_GET["id"]);
-
-        // Obtener el robot por ID
-        $robot = $controller->getRobotById($id);
-
-        if ($robot) {
-            echo "<h2>Detalles del Robot</h2>";
-            echo "<p>ID: " . $robot['id'] . "</p>";
-            echo "<p>Nombre: " . $robot['nombre'] . "</p>";
-            echo "<p>Peso: " . $robot['peso'] . "</p>";
-            echo "<p>Ancho: " . $robot['ancho'] . "</p>";
-            echo "<p>Alto: " . $robot['alto'] . "</p>";
-            echo "<a href='RobotView.php' class='btn btn-primary mt-3'>Regresar</a>";
-        } else {
-            echo "<h1>No se encontró ningún robot con ese ID.</h1>";
-        }
-    } else {
-        echo "<h1>ID de robot no especificado.</h1>";
-    }
-    ?>
+<?php include 'navegador.php'; ?>
+<div class="container">
+    <h1 class="mt-4 mb-4">Ver Robot</h1>
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <table class="table table-bordered">
+                <tr>
+                    <th>ID</th>
+                    <td><?php echo $robot['id']; ?></td>
+                </tr>
+                <tr>
+                    <th>Nombre</th>
+                    <td><?php echo $robot['nombre']; ?></td>
+                </tr>
+                <tr>
+                    <th>Peso</th>
+                    <td><?php echo $robot['peso']; ?></td>
+                </tr>
+                <tr>
+                    <th>Ancho</th>
+                    <td><?php echo $robot['ancho']; ?></td>
+                </tr>
+                <tr>
+                    <th>Alto</th>
+                    <td><?php echo $robot['alto']; ?></td>
+                </tr>
+            </table>
+            <a href="RobotView.php" class="btn btn-secondary">Volver</a>
+        </div>
+    </div>
 </div>
-
-<!-- Agregar Bootstrap JS (Opcional, si lo necesitas) -->
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
 </body>
 </html>

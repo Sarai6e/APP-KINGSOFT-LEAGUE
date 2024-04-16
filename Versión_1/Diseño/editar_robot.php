@@ -1,11 +1,56 @@
+<?php
+include("./app/config.php");
+include("./layout/sesion.php");
+
+// Verifica si se proporcionó un ID válido en la URL
+if (!isset($_GET['id']) || empty($_GET['id'])) {
+    header("Location: robots.php");
+    exit();
+}
+
+$id = $_GET['id'];
+
+require_once 'RobotController.php';
+
+$db = new PDO('mysql:host=localhost;dbname=datosks', 'root', ''); // Conexión a la base de datos
+$controller = new RobotController($db);
+
+// Obtener los datos del robot por su ID
+$robot = $controller->getRobotById($id);
+
+// Verificar si el robot existe
+if (!$robot) {
+    echo "Robot no encontrado.";
+    exit();
+}
+
+// Si el formulario se envió
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Realizar la actualización del robot
+    $nombre = $_POST['nombre'];
+    $peso = $_POST['peso'];
+    $ancho = $_POST['ancho'];
+    $alto = $_POST['alto'];
+
+    $result = $controller->updateRobot($id, $nombre, $peso, $ancho, $alto);
+
+    if ($result) {
+        header("Location: ver_robot.php?id=" . $id);
+        exit();
+    } else {
+        echo "Error al actualizar el robot.";
+    }
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Editar Robot</title>
-    <!-- Agregar Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
        .table{
             background-color:white;
@@ -22,85 +67,34 @@
     </style>
 </head>
 <body>
-<?php 
-    include 'navegador.php'
-    ?>
-    <div class="container">
-        <?php
-        require_once 'RobotController.php';
+<?php include 'navegador.php'; ?>
+<div class="container">
 
-        // Verificar si se envió el formulario de edición
-        if ($_SERVER["REQUEST_METHOD"] == "POST") {
-            $db = new PDO('mysql:host=localhost;dbname=datosks', 'root', '');
-            $controller = new RobotController($db);
-
-            // Verificar si se proporcionó un ID válido
-            if (isset($_POST["id"]) && !empty(trim($_POST["id"]))) {
-                $id = trim($_POST["id"]);
-                $nombre = trim($_POST["nombre"]);
-                $peso = trim($_POST["peso"]);
-                $ancho = trim($_POST["ancho"]);
-                $alto = trim($_POST["alto"]);
-
-                // Actualizar el robot
-                if ($controller->updateRobot($id, $nombre, $peso, $ancho, $alto)) {
-                    header("location: ver_robot.php?id=" . $id);
-                    exit();
-                } else {
-                    echo "<div class='alert alert-danger' role='alert'>Hubo un problema al actualizar el robot.</div>";
-                }
-            } else {
-                echo "<div class='alert alert-danger' role='alert'>ID de robot no especificado.</div>";
-            }
-        } else {
-            // Mostrar el formulario de edición con los datos actuales
-            if (isset($_GET["id"]) && !empty(trim($_GET["id"]))) {
-                $db = new PDO('mysql:host=localhost;dbname=datosks', 'root', '');
-                $controller = new RobotController($db);
-
-                $id = trim($_GET["id"]);
-
-                // Obtener el robot por ID
-                $robot = $controller->getRobotById($id);
-
-                if ($robot) {
-        ?>
-                    <h2>Editar Robot</h2>
-                    <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
-                        <input type="hidden" name="id" value="<?php echo $robot['id']; ?>">
-                        <div class="mb-3">
-                            <label for="nombre">Nombre:</label>
-                            <input type="text" class="form-control" name="nombre" value="<?php echo $robot['nombre']; ?>">
-                        </div>
-                        <div class="mb-3">
-                            <label for="peso">Peso:</label>
-                            <input type="text" class="form-control" name="peso" value="<?php echo $robot['peso']; ?>">
-                        </div>
-                        <div class="mb-3">
-                            <label for="ancho">Ancho:</label>
-                            <input type="text" class="form-control" name="ancho" value="<?php echo $robot['ancho']; ?>">
-                        </div>
-                        <div class="mb-3">
-                            <label for="alto">Alto:</label>
-                            <input type="text" class="form-control" name="alto" value="<?php echo $robot['alto']; ?>">
-                        </div>
-                        <div>
-                            <input type="submit" value="Guardar" class="btn btn-primary">
-                            <a href="RobotView.php" class="btn btn-secondary">Regresar</a>
-                        </div>
-                    </form>
-        <?php
-                } else {
-                    echo "<div class='alert alert-warning' role='alert'>No se encontró ningún robot con ese ID.</div>";
-                }
-            } else {
-                echo "<div class='alert alert-danger' role='alert'>ID de robot no especificado.</div>";
-            }
-        }
-        ?>
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+        <h1 class="mt-4 mb-4">Editar Robot</h1>
+            <form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"] . "?id=" . $id); ?>">
+                <div class="form-group">
+                    <label>Nombre</label>
+                    <input type="text" class="form-control" name="nombre" value="<?php echo $robot['nombre']; ?>">
+                </div>
+                <div class="form-group">
+                    <label>Peso</label>
+                    <input type="text" class="form-control" name="peso" value="<?php echo $robot['peso']; ?>">
+                </div>
+                <div class="form-group">
+                    <label>Ancho</label>
+                    <input type="text" class="form-control" name="ancho" value="<?php echo $robot['ancho']; ?>">
+                </div>
+                <div class="form-group">
+                    <label>Alto</label>
+                    <input type="text" class="form-control" name="alto" value="<?php echo $robot['alto']; ?>">
+                </div>
+                <button type="submit" class="btn btn-primary">Actualizar</button>
+                <a href="ver_robot.php?id=<?php echo $id; ?>" class="btn btn-secondary">Cancelar</a>
+            </form>
+        </div>
     </div>
-
-    <!-- Agregar Bootstrap JS -->
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</div>
 </body>
 </html>

@@ -74,7 +74,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         <label for="id_competencia" class="form-label">ID Competencia:</label>
                         <input type="text" class="form-control" id="id_competencia" name="id_competencia" value="<?php echo $robotCompetencia['id_competencia']; ?>">
                     </div>
-                    <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+                    <button type="submit" class="btn btn-primary">Actualizar</button>
                     <a href="RobotCompetenciaView.php" class="btn btn-secondary">Cancelar</a>
                 </form>
             </div>

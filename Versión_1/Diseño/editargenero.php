@@ -1,91 +1,84 @@
+<?php
+include("./app/config.php");
+include("./layout/sesion.php");
+
+// Verifica si se proporcionó un ID válido en la URL
+if (!isset($_GET['id']) || empty($_GET['id'])) {
+    header("Location: participante_genero.php");
+    exit();
+}
+
+$id = $_GET['id'];
+
+require_once 'ParticipanteGeneroController.php';
+
+$db = new PDO('mysql:host=localhost;dbname=datosks', 'root', ''); // Conexión a la base de datos
+$controller = new ParticipanteGeneroController($db);
+
+// Obtener los datos del género de participante por su ID
+$genero = $controller->getParticipanteGeneroById($id);
+
+// Verificar si el género existe
+if (!$genero) {
+    echo "Género de participante no encontrado.";
+    exit();
+}
+
+// Si el formulario se envió
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Realizar la actualización del género de participante
+    $nuevoGenero = $_POST['genero'];
+
+    $result = $controller->updateParticipanteGenero($id, $nuevoGenero);
+
+    if ($result) {
+        header("Location: vergenero.php?id=" . $id);
+        exit();
+    } else {
+        echo "Error al actualizar el género de participante.";
+    }
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Editar Género del Participante</title>
-    <!-- Agregar Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <title>Editar Género de Participante</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
-       .table{
+        .table{
             background-color:white;
         }
         .container {
             margin-top: 200px; /* Ajuste del margen superior */
         }
-        label{
+        .form-label{
             color:white;
         }
-        h2{
+        h1{
              color:white;
         }
     </style>
 </head>
 <body>
-<?php 
-    include 'navegador.php'
-    ?>
-    <div class="container">
-        <?php
-        require_once 'ParticipanteGeneroController.php';
-
-        // Verificar si se envió el formulario de edición
-        if ($_SERVER["REQUEST_METHOD"] == "POST") {
-            $db = new PDO('mysql:host=localhost;dbname=datosks', 'root', '');
-            $controller = new ParticipanteGeneroController($db);
-
-            // Verificar si se proporcionó un ID válido
-            if (isset($_POST["id"]) && !empty(trim($_POST["id"]))) {
-                $id = trim($_POST["id"]);
-                $genero = trim($_POST["genero"]);
-
-                // Actualizar el género del participante
-                if ($controller->updateParticipanteGenero($id, $genero)) {
-                    header("location: ParticipanteGeneroView.php");
-                    exit();
-                } else {
-                    echo "<div class='alert alert-danger' role='alert'>Hubo un problema al actualizar el género del participante.</div>";
-                }
-            } else {
-                echo "<div class='alert alert-danger' role='alert'>ID de género del participante no especificado.</div>";
-            }
-        } else {
-            // Mostrar el formulario de edición con los datos actuales
-            if (isset($_GET["id"]) && !empty(trim($_GET["id"]))) {
-                $db = new PDO('mysql:host=localhost;dbname=datosks', 'root', '');
-                $controller = new ParticipanteGeneroController($db);
-
-                $id = trim($_GET["id"]);
-
-                // Obtener el género del participante por ID
-                $genero = $controller->getParticipanteGeneroById($id);
-
-                if ($genero) {
-        ?>
-                    <h2>Editar Género del Participante</h2>
-                    <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
-                        <input type="hidden" name="id" value="<?php echo $genero['id']; ?>">
-                        <div class="mb-3">
-                            <label for="genero">Género:</label>
-                            <input type="text" class="form-control" name="genero" value="<?php echo $genero['genero']; ?>">
-                        </div>
-                        <div>
-                            <input type="submit" value="Guardar" class="btn btn-primary">
-                            <a href="ParticipanteGeneroView.php" class="btn btn-secondary">Cancelar</a>
-                        </div>
-                    </form>
-        <?php
-                } else {
-                    echo "<div class='alert alert-warning' role='alert'>No se encontró el género del participante.</div>";
-                }
-            } else {
-                echo "<div class='alert alert-danger' role='alert'>ID de género del participante no especificado.</div>";
-            }
-        }
-        ?>
+<?php include 'navegador.php'; ?>
+<div class="container">
+    <h1 class="mt-4 mb-4">Editar Género de Participante</h1>
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"] . "?id=" . $id); ?>">
+                <div class="form-group">
+                    <label>Género</label>
+                    <input type="text" class="form-control" name="genero" value="<?php echo $genero['genero']; ?>">
+                </div>
+                <button type="submit" class="btn btn-primary">Actualizar</button>
+                <a href="vergenero.php?id=<?php echo $id; ?>" class="btn btn-secondary">Cancelar</a>
+            </form>
+        </div>
     </div>
-
-    <!-- Agregar Bootstrap JS -->
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</div>
 </body>
 </html>

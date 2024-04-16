@@ -1,65 +1,72 @@
+<?php
+include("./app/config.php");
+include("./layout/sesion.php");
+
+// Verifica si se proporcionó un ID válido en la URL
+if (!isset($_GET['id']) || empty($_GET['id'])) {
+    header("Location: participante_genero.php");
+    exit();
+}
+
+$id = $_GET['id'];
+
+require_once 'ParticipanteGeneroController.php';
+
+$db = new PDO('mysql:host=localhost;dbname=datosks', 'root', ''); // Conexión a la base de datos
+$controller = new ParticipanteGeneroController($db);
+
+// Obtener los datos del género de participante por su ID
+$genero = $controller->getParticipanteGeneroById($id);
+
+// Verificar si el género existe
+if (!$genero) {
+    echo "Género de participante no encontrado.";
+    exit();
+}
+?>
+
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Detalles del Género del Participante</title>
-    <!-- Agregar Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <title>Ver Género de Participante</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
-    body {
-      background-color: #f8f9fa;
-    }
-    .container {
-      margin-top: 200px; /* Ajuste del margen superior */
-      background-color: #fff;
-      padding: 100px 50px; /* Relleno superior e inferior reducido */
-      border-radius: 5px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    }
-    h1 {
-      color: #343a40;
-      margin-bottom: 20px;
-    }
-    p {
-      color: #6c757d;
-    }
-  </style>
+        .table{
+            background-color:white;
+        }
+        .container {
+            margin-top: 200px; /* Ajuste del margen superior */
+        }
+        .form-label{
+            color:white;
+        }
+        h1{
+             color:white;
+        }
+    </style>
 </head>
 <body>
-<?php 
-    include 'navegador.php'
-    ?>
-<div class="container mt-5">
-    <?php
-    require_once 'ParticipanteGeneroController.php';
-
-    // Verificar si se proporcionó un ID válido
-    if (isset($_GET['id']) && !empty(trim($_GET['id']))) {
-        $db = new PDO('mysql:host=localhost;dbname=datosks', 'root', '');
-        $controller = new ParticipanteGeneroController($db);
-
-        $id = trim($_GET['id']);
-
-        // Obtener el género del participante por ID
-        $genero = $controller->getParticipanteGeneroById($id);
-
-        if ($genero) {
-            echo "<h2>Detalles del Género del Participante</h2>";
-            echo "<p><strong>ID:</strong> " . $genero['id'] . "</p>";
-            echo "<p><strong>Género:</strong> " . $genero['genero'] . "</p>";
-            echo "<p><a href='ParticipanteGeneroView.php' class='btn btn-primary'>Regresar</a></p>";
-        } else {
-            echo "<h1>No se encontró el género del participante.</h1>";
-        }
-    } else {
-        echo "<h1>ID de género del participante no especificado.</h1>";
-    }
-    ?>
+<?php include 'navegador.php'; ?>
+<div class="container">
+    <h1 class="mt-4 mb-4">Ver Género de Participante</h1>
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <table class="table table-bordered">
+                <tr>
+                    <th>ID</th>
+                    <td><?php echo $genero['id']; ?></td>
+                </tr>
+                <tr>
+                    <th>Género</th>
+                    <td><?php echo $genero['genero']; ?></td>
+                </tr>
+            </table>
+            <a href="ParticipanteGeneroView.php" class="btn btn-secondary">Volver</a>
+        </div>
+    </div>
 </div>
-
-<!-- Agregar Bootstrap JS (Opcional, si lo necesitas) -->
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
 </body>
 </html>

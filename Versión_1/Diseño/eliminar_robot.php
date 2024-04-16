@@ -1,39 +1,56 @@
+<?php
+include("./app/config.php");
+include("./layout/sesion.php");
+
+// Verifica si se proporcionó un ID válido en la URL
+if (!isset($_GET['id']) || empty($_GET['id'])) {
+    header("Location: robots.php");
+    exit();
+}
+
+$id = $_GET['id'];
+
+require_once 'RobotController.php';
+
+$db = new PDO('mysql:host=localhost;dbname=datosks', 'root', ''); // Conexión a la base de datos
+$controller = new RobotController($db);
+
+// Si el formulario se envió (confirmación de eliminación)
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Realizar la eliminación del robot
+    $result = $controller->deleteRobot($id);
+
+    if ($result) {
+        header("Location: robots.php");
+        exit();
+    } else {
+        echo "Error al eliminar el robot.";
+    }
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Eliminar Robot</title>
-    <!-- Agregar Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
-    <div class="container">
-        <?php
-        require_once 'RobotController.php';
-
-        // Verificar si se proporcionó un ID válido
-        if (isset($_GET["id"]) && !empty(trim($_GET["id"]))) {
-            $db = new PDO('mysql:host=localhost;dbname=datosks', 'root', '');
-            $controller = new RobotController($db);
-
-            $id = trim($_GET["id"]);
-
-            // Eliminar el robot
-            if ($controller->deleteRobot($id)) {
-                echo "<div class='alert alert-success' role='alert'>Robot eliminado correctamente.</div>";
-            } else {
-                echo "<div class='alert alert-danger' role='alert'>Hubo un problema al eliminar el robot.</div>";
-            }
-        } else {
-            echo "<div class='alert alert-danger' role='alert'>ID de robot no especificado.</div>";
-        }
-        ?>
-        <!-- Botón de inicio -->
-        <a href="RobotView.php" class="btn btn-primary mt-3">Inicio</a>
+<?php include 'navegador.php'; ?>
+<div class="container">
+    <h1 class="mt-4 mb-4">Eliminar Robot</h1>
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <p>¿Estás seguro de que quieres eliminar este robot?</p>
+            <form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"] . "?id=" . $id); ?>">
+                <button type="submit" class="btn btn-danger">Eliminar</button>
+                <a href="ver_robot.php?id=<?php echo $id; ?>" class="btn btn-secondary">Cancelar</a>
+            </form>
+        </div>
     </div>
-
-    <!-- Agregar Bootstrap JS -->
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</div>
 </body>
 </html>
