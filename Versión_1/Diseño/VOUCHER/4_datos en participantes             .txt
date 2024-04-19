@@ -1,0 +1,45 @@
+datos en participantes:                   
+id     ************                 
+nombre ***********
+apellido****
+dni******
+participante genero id*****
+grado de estudio_id*******
+año de estudio ******
+especialidad ******
+correo******
+clave *******
+robot_id********
+club robotica id********
+id institucion 
+ide competencia
+feha de nacimiento*****
+
+
+ARHIVOS QUE FUNCIONAN:                            
+ Participante :falta configuarcion de los id
+ Club robotica ******
+grado de estudio **********
+nombre institucion
+robot
+
+
+
+
+
+
+ARCHIVOS QUE NO FUNCIONAN:
+competencia
+genero
+robot competencia
+tipo competencia
+categoria
+categoria de competencia 
+inscripcion
+
+
+
+baucher areglar 
+
+
+ 

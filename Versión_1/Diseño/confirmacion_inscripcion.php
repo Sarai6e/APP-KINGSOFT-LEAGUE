@@ -15,8 +15,11 @@ if(isset($_GET['id'])) {
 
     // Verificar si la inscripción existe
     if($inscripcion) {
-        // Obtener la ruta de la imagen asociada a la inscripción (ajusta esto según cómo almacenas las imágenes)
-        $imagen = 'ruta/directorio/' . $inscripcion['imagen']; // Cambia 'ruta/directorio/' según la ubicación real de tus imágenes
+        // Obtener la ruta de la imagen asociada a la inscripción
+        $imagen = 'VOUCHER/' . $inscripcion['boucher']; // Ajusta esto según la ubicación real de tus imágenes
+
+        // Comprobar si la imagen existe
+        if (file_exists($imagen)) {
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -42,10 +45,12 @@ if(isset($_GET['id'])) {
     <!-- Formulario de confirmación -->
     <form action="confirmar_inscripcion_proceso.php" method="POST">
         <input type="hidden" name="id_inscripcion" value="<?php echo $inscripcion['id']; ?>">
+        <!-- Pregunta de confirmación -->
+        <p>¿Estás seguro de confirmar esta inscripción y la imagen asociada?</p>
         <!-- Opción para confirmar la inscripción -->
-        <button type="submit" name="confirmar" class="btn btn-success">Confirmar Inscripción</button>
+        <button type="submit" name="confirmar" value="si" class="btn btn-success">Sí</button>
         <!-- Opción para cancelar -->
-        <a href="cancelar_inscripcion.php?id=<?php echo $inscripcion['id']; ?>" class="btn btn-danger">Cancelar</a>
+        <button type="submit" name="confirmar" value="no" class="btn btn-danger">No</button>
     </form>
 </div>
 
@@ -56,6 +61,9 @@ if(isset($_GET['id'])) {
 </body>
 </html>
 <?php
+        } else {
+            echo "La imagen no existe.";
+        }
     } else {
         echo "La inscripción no existe.";
     }
