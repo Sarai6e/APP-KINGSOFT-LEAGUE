@@ -54,6 +54,10 @@ include("./layout/sesion.php");
         h1{
              color:white;
         }
+        .btn-warning {
+    background-color: #ffc107; /* Color de fondo del botón Confirmacion (amarillo) */
+}
+
     </style>
 </head>
 <body>
@@ -102,6 +106,7 @@ include("./layout/sesion.php");
                     <td>
                     <a href="ver_inscripcion.php?id=<?php echo $inscripcion['id']; ?>" class="btn btn-info btn-sm">Ver</a>
                         <a href="editar_inscripcion.php?id=<?php echo $inscripcion['id']; ?>" class="btn btn-primary btn-sm">Editar</a>
+                        <a href="confirmacion_inscripcion.php?id=<?php echo $inscripcion['id']; ?>" class="btn btn-warning btn-sm">Confirmacion</a>
                         <a href="eliminar_inscripcion.php?id=<?php echo $inscripcion['id']; ?>" class="btn btn-danger btn-sm">Eliminar</a>
                     </td>
                 </tr>
