@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 16-04-2024 a las 19:05:35
+-- Tiempo de generación: 19-04-2024 a las 19:41:46
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.0.28
 
@@ -159,11 +159,10 @@ CREATE TABLE `inscripcion` (
 --
 
 INSERT INTO `inscripcion` (`id`, `id_categoria_competencia`, `id_robot`, `boucher`, `confirmacion`, `puntaje`, `posicion`, `descalificacion`, `id_usuario`) VALUES
-(1, 1, 1, 'fgdkkl ñ.ñfk.jpe', 'si', 85.50, 2, 'no', 0),
-(2, 2, 2, 'https://www.example.com/boucher_2.jpg', 'si', 78.00, 3, 'si', 0),
-(3, 3, 3, 'https://www.example.com/boucher_3.jpg', 'si', 90.25, 1, 'no', 0),
-(4, 2, 2, '2_descarga.png', 'Si', 10.00, 1, 'Si', 2),
-(30, 3, 3, '2_r.png', 'Si', 10.00, 1, 'Si', 2);
+(1, 1, 1, '1_descarga.png', 'si', 85.50, 2, 'no', 0),
+(2, 2, 2, '2_WhatsApp Image 2024-04-19 at 9.29.10 AM.jpeg', 'si', 78.00, 3, 'si', 0),
+(3, 3, 3, '3_descarga.png', 'si', 90.25, 1, 'no', 0),
+(4, 2, 2, '2_descarga.png', 'Si', 10.00, 1, 'Si', 2);
 
 -- --------------------------------------------------------
 
@@ -415,6 +414,18 @@ ALTER TABLE `inscripcion`
 --
 ALTER TABLE `participantes`
   MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT de la tabla `robot_competencia`
+--
+ALTER TABLE `robot_competencia`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT de la tabla `tipo_competencia`
+--
+ALTER TABLE `tipo_competencia`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Restricciones para tablas volcadas
