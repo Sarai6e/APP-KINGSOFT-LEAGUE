@@ -52,7 +52,7 @@ include("./layout/sesion.php");
         </div>
         <div class="form-group">
             <button type="submit" class="btn btn-primary">Agregar</button>
-            <a href="categoria_view.php" class="btn btn-danger">Cancelar</a>
+            <a href="categoria_view.php" class="btn btn-danger">Volver</a>
         </div>
     </form>
     <?php
