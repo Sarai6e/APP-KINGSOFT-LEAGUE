@@ -21,7 +21,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $result = $controller->deleteRobotCompetencia($id);
 
     if ($result) {
-        header("Location: robot_competencias.php");
+        header("Location: RobotCompetenciaView.php");
         exit();
     } else {
         echo "Error al eliminar el registro de robot competencia.";
@@ -47,7 +47,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <p>¿Estás seguro de que quieres eliminar este registro de robot competencia?</p>
             <form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"] . "?id=" . $id); ?>">
                 <button type="submit" class="btn btn-danger">Eliminar</button>
-                <a href="ver_robot_competencia.php?id=<?php echo $id; ?>" class="btn btn-secondary">Cancelar</a>
+                <a href="ver_robot_competencia.php" class="btn btn-secondary">Cancelar</a>
             </form>
         </div>
     </div>

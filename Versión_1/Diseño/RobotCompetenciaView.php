@@ -40,7 +40,7 @@ $robotCompetencias = $controller->index();
         <!-- Título y botón de agregar -->
         <div class="d-flex justify-content-between align-items-center mb-4">
             <h1 class="mt-4 mb-4">Robótica Competencia</h1>
-            <a href="agregar_club.php" class="btn btn-success">Agregar Club de Robótica</a>
+            <a href="agregar_robot_competencia.php" class="btn btn-success">Agregar Club de Robótica</a>
         </div>
 
         <table class="table table-bordered">
