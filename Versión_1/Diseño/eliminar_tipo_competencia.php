@@ -47,7 +47,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <p>¿Estás seguro de que quieres eliminar este tipo de competencia?</p>
             <form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"] . "?id=" . $id); ?>">
                 <button type="submit" class="btn btn-danger">Eliminar</button>
-                <a href="ver_tipo_competencia.php?id=<?php echo $id; ?>" class="btn btn-secondary">Cancelar</a>
+                <a href="ver_tipo_competencia.php" class="btn btn-secondary">Cancelar</a>
             </form>
         </div>
     </div>
