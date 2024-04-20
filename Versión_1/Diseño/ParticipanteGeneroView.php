@@ -41,8 +41,8 @@ $participante_genero = $controller->getAllParticipanteGenero();
 <div class="container">
         <!-- Título y botón de agregar -->
         <div class="d-flex justify-content-between align-items-center mb-4">
-            <h1 class="mt-4 mb-4">Participante_genero</h1>
-            <a href="agregar_club.php" class="btn btn-success">Agregar Participantes</a>
+            <h1 class="mt-4 mb-4">Participante Género</h1>
+            <a href="agregar_genero_participante.php" class="btn btn-success">Agregar Participantes</a>
         </div>
         <table class="table table-bordered">
             <thead class="thead-dark">

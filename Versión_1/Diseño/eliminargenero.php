@@ -21,7 +21,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $result = $controller->deleteParticipanteGenero($id);
 
     if ($result) {
-        header("Location: participante_genero.php");
+        header("Location: ParticipanteGeneroView.php");
         exit();
     } else {
         echo "Error al eliminar el género de participante.";
@@ -47,7 +47,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <p>¿Estás seguro de que quieres eliminar este género de participante?</p>
             <form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"] . "?id=" . $id); ?>">
                 <button type="submit" class="btn btn-danger">Eliminar</button>
-                <a href="vergenero.php?id=<?php echo $id; ?>" class="btn btn-secondary">Cancelar</a>
+                <a href="ParticipanteGeneroView.php" class="btn btn-secondary">Cancelar</a>
             </form>
         </div>
     </div>
