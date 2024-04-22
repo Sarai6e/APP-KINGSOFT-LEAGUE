@@ -41,7 +41,6 @@ $participantes = $controller->getAllParticipantes();
         <!-- Título y botón de agregar -->
         <div class="d-flex justify-content-between align-items-center mb-4">
             <h1 class="mt-4 mb-4">Participantes</h1>
-            <a href="agregar_participantes.php" class="btn btn-success">Agregar Participantes</a>
         </div>
     <table class="table table-bordered">
         <thead class="thead-dark">
