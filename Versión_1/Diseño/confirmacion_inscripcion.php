@@ -46,7 +46,7 @@ if(isset($_GET['id'])) {
     <form action="confirmar_inscripcion_proceso.php" method="POST">
         <input type="hidden" name="id_inscripcion" value="<?php echo $inscripcion['id']; ?>">
         <!-- Pregunta de confirmación -->
-        <p>¿Estás seguro de confirmar esta inscripción y la imagen asociada?</p>
+        <p class="mt-4 mb-4" style="color: white;">¿Estás seguro de confirmar esta inscripción?</p>
         <!-- Opción para confirmar la inscripción -->
         <button type="submit" name="confirmar" value="si" class="btn btn-success">Sí</button>
         <!-- Opción para cancelar -->
