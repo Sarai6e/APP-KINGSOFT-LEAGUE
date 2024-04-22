@@ -23,7 +23,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $file_name_with_id =  $id_participante . "_" . $file_name;
 
             // Mover el archivo a la carpeta deseada (se recomienda sanitizar el nombre del archivo para evitar posibles ataques)
-            $destination = "./VOUCHER/" . $file_name_with_id;
+            $destination = "./BOUCHER/" . $file_name_with_id;
             move_uploaded_file($file_tmp, $destination);
 
             // Aquí mostrar "Guardado" junto con el ID del usuario

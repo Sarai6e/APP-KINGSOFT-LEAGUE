@@ -16,7 +16,7 @@ if(isset($_GET['id'])) {
     // Verificar si la inscripción existe
     if($inscripcion) {
         // Obtener la ruta de la imagen asociada a la inscripción
-        $imagen = 'VOUCHER/' . $inscripcion['boucher']; // Ajusta esto según la ubicación real de tus imágenes
+        $imagen = 'BOUCHER/' . $inscripcion['boucher']; // Ajusta esto según la ubicación real de tus imágenes
 
         // Comprobar si la imagen existe
         if (file_exists($imagen)) {
