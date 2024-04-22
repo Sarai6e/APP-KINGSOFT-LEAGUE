@@ -12,6 +12,7 @@
     <style>
         .container {
             margin-top: 150px;
+    
         }
         label {
             font-weight: bold;
@@ -23,6 +24,7 @@
         .btn-danger {
             width: 100px;
         }
+        
     </style>
 </head>
 <body>
