@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 19-04-2024 a las 19:41:46
+-- Tiempo de generación: 23-04-2024 a las 01:15:15
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.0.28
 
@@ -151,18 +151,16 @@ CREATE TABLE `inscripcion` (
   `puntaje` decimal(10,2) DEFAULT NULL,
   `posicion` int(11) DEFAULT NULL,
   `descalificacion` varchar(2) DEFAULT NULL,
-  `id_usuario` int(11) NOT NULL
+  `id_participante` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `inscripcion`
 --
 
-INSERT INTO `inscripcion` (`id`, `id_categoria_competencia`, `id_robot`, `boucher`, `confirmacion`, `puntaje`, `posicion`, `descalificacion`, `id_usuario`) VALUES
-(1, 1, 1, '1_descarga.png', 'si', 85.50, 2, 'no', 0),
-(2, 2, 2, '2_WhatsApp Image 2024-04-19 at 9.29.10 AM.jpeg', 'si', 78.00, 3, 'si', 0),
-(3, 3, 3, '3_descarga.png', 'si', 90.25, 1, 'no', 0),
-(4, 2, 2, '2_descarga.png', 'Si', 10.00, 1, 'Si', 2);
+INSERT INTO `inscripcion` (`id`, `id_categoria_competencia`, `id_robot`, `boucher`, `confirmacion`, `puntaje`, `posicion`, `descalificacion`, `id_participante`) VALUES
+(1, 1, 1, '1.jpeg', 'si', 10.00, 1, 'NO', 1),
+(2, 2, 2, '1_WhatsApp Image 2024-04-19 at 9.29.10 AM.jpeg', 'SI', 10.00, 2, 'NO', 2);
 
 -- --------------------------------------------------------
 
@@ -404,16 +402,52 @@ ALTER TABLE `categoria_competencia`
   MODIFY `id_competencia` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
+-- AUTO_INCREMENT de la tabla `club_robotica`
+--
+ALTER TABLE `club_robotica`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT de la tabla `competencia`
+--
+ALTER TABLE `competencia`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT de la tabla `grado_estudio`
+--
+ALTER TABLE `grado_estudio`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
 -- AUTO_INCREMENT de la tabla `inscripcion`
 --
 ALTER TABLE `inscripcion`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT de la tabla `nombre_institucion`
+--
+ALTER TABLE `nombre_institucion`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `participantes`
 --
 ALTER TABLE `participantes`
   MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT de la tabla `participante_genero`
+--
+ALTER TABLE `participante_genero`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT de la tabla `robot`
+--
+ALTER TABLE `robot`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `robot_competencia`
