@@ -27,13 +27,21 @@ if (!$inscripcion) {
 // Si el formulario se envió
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Realizar la actualización de la inscripción
-    $id_categoria_competencia = $_POST['id_categoria_competencia'];
-    $id_robot = $_POST['id_robot'];
     $puntaje = $_POST['puntaje'];
     $posicion = $_POST['posicion'];
     $descalificacion = $_POST['descalificacion'];
 
-    $result = $controller->updateInscripcion($id, $id_categoria_competencia, $id_robot, $inscripcion['boucher'], $inscripcion['confirmacion'], $puntaje, $posicion, $descalificacion);
+    // Verificar si se subió un nuevo boucher
+    if ($_FILES['boucher']['name']) {
+        // Guardar el archivo en el servidor
+        $boucherPath = "./uploads/" . basename($_FILES["boucher"]["name"]);
+        move_uploaded_file($_FILES["boucher"]["tmp_name"], $boucherPath);
+    } else {
+        // Si no se subió un nuevo boucher, mantener el boucher existente
+        $boucherPath = $inscripcion['boucher'];
+    }
+
+    $result = $controller->updateInscripcion($id, $inscripcion['id_categoria_competencia'], $inscripcion['id_robot'], $boucherPath, $inscripcion['confirmacion'], $puntaje, $posicion, $descalificacion);
 
     if ($result) {
         header("Location: ver_inscripcion.php?id=" . $id);
@@ -78,15 +86,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <div class="row">
         <div class="col-md-6 offset-md-3">
         <h1 class="mt-4 mb-4" style="color: white;">Editar Inscripción</h1>
-            <form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"] . "?id=" . $id); ?>">
-                <div class="form-group">
-                    <label>ID Categoría de Competencia</label>
-                    <input type="text" class="form-control" name="id_categoria_competencia" value="<?php echo $inscripcion['id_categoria_competencia']; ?>" readonly>
-                </div>
-                <div class="form-group">
-                    <label>ID Robot</label>
-                    <input type="text" class="form-control" name="id_robot" value="<?php echo $inscripcion['id_robot']; ?>" readonly>
-                </div>
+            <form method="POST" enctype="multipart/form-data" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"] . "?id=" . $id); ?>">
                 <div class="form-group">
                     <label>Puntaje</label>
                     <input type="text" class="form-control" name="puntaje" value="<?php echo $inscripcion['puntaje']; ?>">
@@ -101,6 +101,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         <option value="Si" <?php if ($inscripcion['descalificacion'] == 'Si') echo 'selected'; ?>>Si</option>
                         <option value="No" <?php if ($inscripcion['descalificacion'] == 'No') echo 'selected'; ?>>No</option>
                     </select>
+                </div>
+                <div class="form-group">
+                    <label>Boucher</label><br>
+                    <img src="<?php echo $inscripcion['boucher']; ?>" alt="Boucher" style="max-width: 200px;"><br><br>
+                    <input type="file" name="boucher">
                 </div>
                 <button type="submit" class="btn btn-primary">Actualizar</button>
                 <a href="ver_inscripcion.php?id=<?php echo $id; ?>" class="btn btn-secondary">Cancelar</a>

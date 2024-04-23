@@ -55,12 +55,9 @@ include("./layout/sesion.php");
              color:white;
         }
         .btn-warning {
-            background-color: #ffc107; /* Color de fondo del botón Confirmacion (amarillo) */
-        }
-        .img-boucher {
-            max-width: 100px; /* Tamaño máximo de la imagen */
-            max-height: 100px;
-        }
+    background-color: #ffc107; /* Color de fondo del botón Confirmacion (amarillo) */
+}
+
     </style>
 </head>
 <body>
@@ -101,15 +98,13 @@ include("./layout/sesion.php");
                     <td><?php echo $inscripcion['id']; ?></td>
                     <td><?php echo getcategoriacompetenciaName( $inscripcion['id_categoria_competencia'], $db); ?></td>
                     <td><?php echo getrobotName( $inscripcion['id_robot'], $db); ?></td>
-                    <td>
-                        <img src="<?php echo $inscripcion['boucher']; ?>" alt="Boucher" class="img-boucher">
-                    </td>
+                    <td><?php echo $inscripcion['boucher']; ?></td>
                     <td><?php echo $inscripcion['confirmacion']; ?></td>
                     <td><?php echo $inscripcion['puntaje']; ?></td>
                     <td><?php echo $inscripcion['posicion']; ?></td>
                     <td><?php echo $inscripcion['descalificacion']; ?></td>
                     <td>
-                        <a href="ver_inscripcion.php?id=<?php echo $inscripcion['id']; ?>" class="btn btn-info btn-sm">Ver</a>
+                    <a href="ver_inscripcion.php?id=<?php echo $inscripcion['id']; ?>" class="btn btn-info btn-sm">Ver</a>
                         <a href="editar_inscripcion.php?id=<?php echo $inscripcion['id']; ?>" class="btn btn-primary btn-sm">Editar</a>
                         <a href="confirmacion_inscripcion.php?id=<?php echo $inscripcion['id']; ?>" class="btn btn-warning btn-sm">Confirmacion</a>
                         <a href="eliminar_inscripcion.php?id=<?php echo $inscripcion['id']; ?>" class="btn btn-danger btn-sm">Eliminar</a>
@@ -147,6 +142,8 @@ function getrobotName($id_robot, $db) {
         return "Robot no encontrado"; // O cualquier otro mensaje de error adecuado
     }
 }
+
+
 ?>
 
 </body>
