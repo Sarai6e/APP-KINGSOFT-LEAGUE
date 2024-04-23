@@ -25,10 +25,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $db_pass = '';
 
             try {
-                $db = new PDO("mysql:host=$db_host;dbname=$db_name", $db_user, $db_pass);
-                $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                $pdo = new PDO("mysql:host=$db_host;dbname=$db_name", $db_user, $db_pass);
+                $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-                $inscripcionController = new InscripcionController($db);
+                $inscripcionController = new InscripcionController($pdo);
                 // Obtenemos los demás datos del formulario
                 $id_categoria = $_POST["id_categoria"];
                 $id_robot = $_POST["id_robot"];
@@ -97,59 +97,76 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST" enctype="multipart/form-data">
             <div class="form-group">
                 <label for="id_participante">ID de Participante:</label>
-                <input type="text" class="form-control" id="id_participante" name="id_participante" required>
+                <input type="text" class="form-control" id="id_participante" name="id_participante" value="<?php echo $_SESSION['id_participante']; ?>" required readonly>
             </div>
             <div class="form-group">
                 <label for="id_categoria">ID Categoría de Competencia:</label>
-                <input type="text" class="form-control" id="id_categoria" name="id_categoria" required>
+                <!-- Combo para seleccionar la categoría de la base de datos -->
+                <select class="form-control" id="id_categoria" name="id_categoria" required>
+                    <?php
+                    // Realizamos la consulta SQL para obtener las categorías de competencia
+                    $stmt = $pdo->prepare("SELECT id_competencia, id_categoria_jugador FROM categoria_competencia");
+                    $stmt->execute();
+                    $categorias = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                    
+                    foreach ($categorias as $categoria) {
+                        // Obtenemos el ID de la categoría y buscamos su descripción en la tabla 'categoria'
+                        $stmt = $pdo->prepare("SELECT descripcion FROM categoria WHERE id = ?");
+                        $stmt->execute([$categoria['id_categoria_jugador']]);
+                        $descripcion = $stmt->fetchColumn();
+
+                        // Mostramos la descripción como opción en el select
+                        echo '<option value="' . $categoria['id_competencia'] . '">' . $descripcion . '</option>';
+                    }
+                    ?>
+                </select>
             </div>
             <div class="form-group">
                 <label for="id_robot">ID del Robot:</label>
-                <input type="text" class="form-control" id="id_robot" name="id_robot" required>
+                <!-- Combo para seleccionar el robot de la base de datos -->
+                <select class="form-control" id="id_robot" name="id_robot" required>
+                    <?php
+                    // Realizamos la consulta SQL para obtener los robots
+                    $stmt = $pdo->prepare("SELECT id, nombre FROM robot");
+                    $stmt->execute();
+                    $robots = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                    
+                    foreach ($robots as $robot) {
+                        // Mostramos el nombre del robot como opción en el select
+                        echo '<option value="' . $robot['id'] . '">' . $robot['nombre'] . '</option>';
+                    }
+                    ?>
+                </select>
             </div>
             <div class="form-group">
-                <label for="boucher">Boucher (Archivo PDF):</label>
-                <input type="file" class="form-control-file" id="boucher" name="boucher" required>
+                <label for="boucher">Boucher:</label>
+                <input type="file" class="form-control-file" id="boucher" name="boucher" accept=".jpeg, .jpg, .png, .pdf" required>
             </div>
             <div class="form-group">
                 <label for="confirmacion">Confirmación:</label>
                 <select class="form-control" id="confirmacion" name="confirmacion" required>
-                    <option value="Si">Si</option>
-                    <option value="No">No</option>
+                    <option value="SI">SI</option>
+                    <option value="NO">NO</option>
                 </select>
             </div>
             <div class="form-group">
                 <label for="puntaje">Puntaje:</label>
-                <input type="text" class="form-control" id="puntaje" name="puntaje">
+                <input type="number" class="form-control" id="puntaje" name="puntaje" min="0" max="100">
             </div>
             <div class="form-group">
                 <label for="posicion">Posición:</label>
-                <input type="text" class="form-control" id="posicion" name="posicion">
+                <input type="number" class="form-control" id="posicion" name="posicion" min="1">
             </div>
             <div class="form-group">
                 <label for="descalificacion">Desclasificación:</label>
-                <select class="form-control" id="descalificacion" name="descalificacion">
-                    <option value="Si">Si</option>
-                    <option value="No">No</option>
+                <select class="form-control" id="descalificacion" name="descalificacion" required>
+                    <option value="SI">SI</option>
+                    <option value="NO">NO</option>
                 </select>
             </div>
-            <div class="form-group">
-                <button type="submit" class="btn btn-primary">Agregar</button>
-                <a href="inscripcion_view.php" class="btn btn-danger">Cancelar</a>
-            </div>
+            <button type="inscripcion_view.php" class="btn btn-primary">Agregar</button>
+            <a href="inscripcion_view.php" class="btn btn-danger">Cancelar</a>
         </form>
-        <?php
-        // Mostrar mensajes de éxito o error después de procesar el formulario
-        if (isset($_GET['success'])) {
-            echo '<div class="alert alert-success" role="alert">Inscripción registrada correctamente.</div>';
-        } elseif (isset($_GET['error'])) {
-            echo '<div class="alert alert-danger" role="alert">Error al registrar la inscripción. Por favor, inténtalo de nuevo.</div>';
-        }
-        ?>
     </div>
-    <!-- Bootstrap JS -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
