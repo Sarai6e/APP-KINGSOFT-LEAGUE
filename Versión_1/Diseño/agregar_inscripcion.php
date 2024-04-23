@@ -6,7 +6,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Verificamos si se han subido archivos
     if (isset($_FILES["boucher"]) && $_FILES["boucher"]["error"] == 0) {
         // Definimos la ubicación para guardar el archivo
-        $target_dir = "uploads/";
+        $target_dir = "BOUCHER/";
         // Obtenemos el ID del participante
         $id_participante = $_POST["id_participante"];
         // Obtenemos el nombre del archivo subido
@@ -21,8 +21,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             // Si el archivo se ha movido correctamente, actualizamos la base de datos
             $db_host = 'localhost';
             $db_name = 'datosks';
-            $db_user = 'usuario';
-            $db_pass = 'contraseña';
+            $db_user = 'root';
+            $db_pass = '';
 
             try {
                 $db = new PDO("mysql:host=$db_host;dbname=$db_name", $db_user, $db_pass);
@@ -76,6 +76,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <style>
         .container {
             margin-top: 150px;
+            color: white;
         }
         label {
             font-weight: bold;
