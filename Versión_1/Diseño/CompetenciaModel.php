@@ -7,7 +7,7 @@ class CompetenciaModel {
     }
 
     public function getAllCompetencias() {
-        $query = "SELECT * FROM competencia";
+        $query = "SELECT * FROM competencia where id = 1";
         $stmt = $this->conn->prepare($query);
         $stmt->execute();
         return $stmt;
@@ -16,7 +16,7 @@ class CompetenciaModel {
     public function getCompetenciaById($id) {
         $query = "SELECT * FROM competencia WHERE id = ?";
         $stmt = $this->conn->prepare($query);
-        $stmt->bindParam(1, $id);
+        $stmt->bindParam($id);
         $stmt->execute();
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
