@@ -52,7 +52,7 @@
                     </ul>
                 </li>
                 <li><a href="login.php">LOGIN</a></li>
-                <li><a href="#sobre-mi">ROBOT</a></li>
+                <li><a href="#sobre-mi"></a></li>
                 <li><a href="#servicios"></a></li>
                 <li><a href="#curriculum"></a></li>
                 <li><a href="#contacto"></a></li>
