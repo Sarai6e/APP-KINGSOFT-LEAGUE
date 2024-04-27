@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 23-04-2024 a las 01:15:15
+-- Tiempo de generación: 27-04-2024 a las 18:32:51
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.0.28
 
@@ -111,7 +111,7 @@ CREATE TABLE `competencia` (
 --
 
 INSERT INTO `competencia` (`id`, `nombre`, `fecha_inicio_inscripcion`, `fecha_fin_inscripcion`, `fecha_compentencia`, `tipo_competencia`) VALUES
-(1, 'zumo', '2024-04-03', '2024-04-05', '2024-04-27', 4),
+(1, 'Racnabot', '2024-04-03', '2024-04-05', '2024-04-27', 4),
 (2, 'Robot minisumo autonomo', '2024-04-05', '2024-04-13', '2024-04-27', 2),
 (3, 'Robot soccer bluetooth/RC', '2024-04-03', '2024-04-24', '2024-04-30', 3),
 (4, 'Robot micromouse', '2024-04-06', '2024-03-12', '2024-03-30', 4);
@@ -159,8 +159,9 @@ CREATE TABLE `inscripcion` (
 --
 
 INSERT INTO `inscripcion` (`id`, `id_categoria_competencia`, `id_robot`, `boucher`, `confirmacion`, `puntaje`, `posicion`, `descalificacion`, `id_participante`) VALUES
-(1, 1, 1, '1.jpeg', 'si', 10.00, 1, 'NO', 1),
-(2, 2, 2, '1_WhatsApp Image 2024-04-19 at 9.29.10 AM.jpeg', 'SI', 10.00, 2, 'NO', 2);
+(1, 1, 1, '1_descarga.png', 'si', 10.00, 1, 'Si', 1),
+(2, 2, 2, '1_WhatsApp Image 2024-04-19 at 9.29.10 AM.jpeg', 'SI', 10.00, 2, 'NO', 2),
+(3, 1, 1, '1_Presentación Corporativo Moderno Azul y Blanco (1).pdf', 'no', 6.00, 0, 'SI', 1);
 
 -- --------------------------------------------------------
 
@@ -213,9 +214,9 @@ CREATE TABLE `participantes` (
 --
 
 INSERT INTO `participantes` (`id`, `nombre`, `apellido`, `dni`, `participante_genero_id`, `grado_estudio_id`, `año_estudio`, `especialidad`, `correo`, `clave`, `fecha_de_actualizacion`, `robot_id`, `club_robotica_id`, `id_institucion`, `id_competencia`, `fecha_nacimiento`) VALUES
-(1, 'Sara', 'Romero', '77382908', 3, 1, 1, 'Profesor', 'sarai@gmail.com', '123456', '2024-04-12 17:37:10', 1, '1', 2, 2, '2014-04-08'),
-(3, 'Gimena', ' Vargas', '7896541', 2, 2, 1, 'Ingeniero de sotware con I:A', 'gimena@gmail.com', '1234', '2024-04-08 01:03:50', 2, '2', 1, 1, '2024-04-02'),
-(4, 'Diana', 'Peraldo', '78965412', 2, 2, 3, 'Profesora', 'diana@gmail.com', '123456', '2024-04-12 16:18:10', 2, '2', 4, 4, '2024-04-17');
+(1, 'Sara', 'Romero', '77382908', 3, 1, 1, 'Profesor', 'sarai@gmail.com', '123456', '2024-04-12 22:37:10', 1, '1', 2, 2, '2014-04-08'),
+(3, 'Gimena', ' Vargas', '7896541', 2, 2, 1, 'Ingeniero de sotware con I:A', 'gimena@gmail.com', '1234', '2024-04-08 06:03:50', 2, '2', 1, 1, '2024-04-02'),
+(4, 'Diana', 'Peraldo', '78965412', 2, 2, 3, 'Profesora', 'diana@gmail.com', '123456', '2024-04-12 21:18:10', 2, '2', 4, 4, '2024-04-17');
 
 -- --------------------------------------------------------
 
@@ -302,10 +303,11 @@ CREATE TABLE `tipo_competencia` (
 --
 
 INSERT INTO `tipo_competencia` (`id`, `nombre`, `descripcion`) VALUES
-(1, 'Zumo', 'asfdb'),
-(2, 'zumo', 'sdagsdfh'),
-(3, 'zumo', 'watwet'),
-(4, 'zumo', 'wfresy');
+(1, 'Robot minisumo autonomo', 'asfdb'),
+(2, 'Robot de seguridad en linea', 'sdagsdfh'),
+(3, 'Robot minisumo bluetooth', 'watwet'),
+(4, 'robot de combate', 'wfresy'),
+(5, 'Robot Soccer', 'es de color negro\r\n');
 
 --
 -- Índices para tablas volcadas
@@ -353,12 +355,6 @@ ALTER TABLE `inscripcion`
 -- Indices de la tabla `nombre_institucion`
 --
 ALTER TABLE `nombre_institucion`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indices de la tabla `participantes`
---
-ALTER TABLE `participantes`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -423,19 +419,13 @@ ALTER TABLE `grado_estudio`
 -- AUTO_INCREMENT de la tabla `inscripcion`
 --
 ALTER TABLE `inscripcion`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `nombre_institucion`
 --
 ALTER TABLE `nombre_institucion`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
---
--- AUTO_INCREMENT de la tabla `participantes`
---
-ALTER TABLE `participantes`
-  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `participante_genero`
@@ -459,7 +449,7 @@ ALTER TABLE `robot_competencia`
 -- AUTO_INCREMENT de la tabla `tipo_competencia`
 --
 ALTER TABLE `tipo_competencia`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- Restricciones para tablas volcadas
