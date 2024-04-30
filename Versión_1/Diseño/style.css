@@ -179,11 +179,10 @@ nav ul li a {
 }
 
 #logo {
-    width: 150px;
-    height: auto;
+    width: 300px; /* Duplica el tamaño del logo */
+    height: auto; /* Mantiene la proporción de altura */
     margin-left: 20px;
 }
-
 
 
 
@@ -232,11 +231,13 @@ nav ul li a {
     justify-content: space-between;
 }
 .sobre-mi .fila .contenedor-img{
-    width: 40%;
+    margin-top: px;
+    width: 60%;
+
 }
   
 .sobre-mi .fila .contenedor-img img{
-    width: 100%;
+    padding: 18% 0% 0% 0%;
 }
 .sobre-mi .fila .info{
     width: 55%;
@@ -308,23 +309,23 @@ nav ul li a {
 }
 @keyframes animHtml {
     0%{width: 0%;}
-    100%{width: 95%;}
+    100%{width: 100%;}
 }
 @keyframes animCss {
     0%{width: 0%;}
-    100%{width: 90%;}
+    100%{width: 100%;}
 }
 @keyframes animJs {
     0%{width: 0%;}
-    100%{width: 85%;}
+    100%{width: 100%;}
 }
 @keyframes animReact {
     0%{width: 0%;}
-    100%{width: 75%;}
+    100%{width: 100%;}
 }
 @keyframes animBoostrap {
     0%{width: 0%;}
-    100%{width: 93%;}
+    100%{width: 100%;}
 }
 
 /* SECCION SERVICIOS */
