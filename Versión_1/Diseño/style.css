@@ -183,15 +183,6 @@ nav ul li a {
     height: auto; /* Mantiene la proporción de altura */
     margin-left: 20px;
 }
-
-
-
-
-
-
-
-
-
 .inicio .frase{
     position: absolute;
     top: 50%;
@@ -233,7 +224,6 @@ nav ul li a {
 .sobre-mi .fila .contenedor-img{
     margin-top: px;
     width: 60%;
-
 }
   
 .sobre-mi .fila .contenedor-img img{
@@ -328,7 +318,7 @@ nav ul li a {
     100%{width: 100%;}
 }
 
-/* SECCION SERVICIOS */
+/* SECCION DE TRABAJOS */
 .servicios{
     background-color: #ededed;
     padding: 70px 0;
