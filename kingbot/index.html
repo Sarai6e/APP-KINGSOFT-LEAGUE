@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" /> 
+    <link rel="stylesheet" href="style.css">
+    <title>Kingbot</title>
+    <style>
+      /* Estilos para el logo */
+      #logo {
+    width: 150px;
+    height: auto; /* Esto mantendrá la proporción de la imagen */
+    margin-right: 100px; /* Empujará el logo hacia la izquierda */
+    margin-left: 20px; /* Agrega un margen a la izquierda para separar el logo del borde de la barra de navegación */
+}
+
+
+      .resaltar {
+            position: relative;
+            display: inline-block;
+        }
+        .resaltar::before {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            color: rgb(255, 215, 00); /* Color del texto amarillo */
+            overflow: hidden;
+            clip: rect(0, auto, auto, 0);
+            z-index: 2;
+        }
+        .resaltar::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 2px; /* Ajusta la posición del texto para el efecto de sombra */
+            left: 2px; /* Ajusta la posición del texto para el efecto de sombra */
+            color: black; /* Color del texto negro */
+            z-index: 1;
+        }
+
+  </style>
+</head>
+<body>  
+    <!-- SECCION INICIO -->
+    <section class="inicio" id="inicio">
+        <div class="contenido">
+            <header>
+                <div class="background-slider">
+                    <img src="img/1.png" alt="Background Image">
+                    <img src="img/2.png" alt="Background Image">
+                    <img src="img/3.png" alt="Background Image">
+                    <img src="img/4.png" alt="Background Image">
+                </div>
+              <nav class="navbar">
+                <div class="navbar-container">
+                    <h1><a href="#"><img id="logo" src="k.svg" alt="Logo"></a></h1>
+                    <ul class="nav-links">
+                        <li><a href="#inicio">Inicio</a></li>
+                        <li><a href="#sobre-mi">Sobre Mí</a></li>
+                        <li><a href="#servicios">Capacitaciones</a></li>
+                        <li><a href="#trabajos">Competencia</a></li>
+                        <li><a href="#curriculum">Logros</a></li>
+                        <li><a href="#contacto">Contacto</a></li>
+                    </ul>
+                    <ul class="social-icons">
+                        <li><a href="https://web.facebook.com/profile.php?id=61556971887920" class="social-icon"><i class="fab fa-facebook"></i></a></li>
+                        <li><a href="#" class="social-icon"><i class="fab fa-twitter"></i></a></li>
+                        <li><a href="#" class="social-icon"><i class="fab fa-instagram"></i></a></li>
+                        <li><a href="https://wa.me/998887099"     class="social-icon" target="_blank"><i class="fab fa-whatsapp"></i></a></li>
+                    </ul>
+                </div>
+            </nav>
+            
+                <div class="nav-responsive">
+                    <a href="#inicio">
+                        <i class="fa-solid fa-house"></i>
+                    </a>
+                    <a href="#sobre-mi">
+                        <i class="fa-solid fa-user"></i>
+                    </a>
+                    <a href="#servicios">
+                        <i class="fa-solid fa-gear"></i>
+                    </a>
+                    <a href="#trabajos">
+                        <i class="fa-solid fa-briefcase"></i>
+                    </a>
+                    <a href="#curriculum">
+                        <i class="fa-solid fa-square-poll-vertical"></i>
+                    </a>
+                    <a href="#contacto">
+                            <i class="fa-solid fa-envelope"></i>
+                    </a>
+                </div>
+            </header>
+            <header>
+                <div class="frase">
+                    <h2>Hola, somos <span class="resaltar" data-text="KINGBOT">KINGBOT</span>.</h2>
+                </div>
+            </header>
+
+        <a href="#inicio">
+            <div class="subir">
+                <i class="fa-solid fa-arrow-up"></i>
+            </div>
+        </a>
+
+    </section>
+
+    <!-- SECCION SOBRE MI -->
+    <section class="sobre-mi" id="sobre-mi">
+        <div class="contenido fila">
+            <div class="contenedor-img">
+                <img src="img/roboot.png" alt="" >
+            </div>
+            
+            <div class="info">
+                <div class="opciones">
+                    <button class="selected" id="btn-info-sobre-mi">Sobre Mí</button>
+                    <button id="btn-skills">Skills</button>
+                </div>
+                <div class="info-opcion" id="info-sobre-mi">
+                    <h2><span class="color">KINGBOT</span></h2>
+                    <p>Nuestro objetivo es inspirar y motivar a los estudiantes a involucrarse en el fascinante mundo de la robótica. Creemos firmemente que el aprendizaje a través de la experimentación y el juego es una de las mejores formas de despertar el interés por la ciencia y la tecnología. La educación STEM (Ciencia, Tecnología, Ingeniería y Matemáticas)  se ha convertido en un pilar fundamental para preparar a los estudiantes de hoy para los desafíos del mañana. Esta aproximación innovadora al aprendizaje no solo fomenta el desarrollo de habilidades técnicas, sino que también cultiva el pensamiento crítico, la resolución de problemas y la creatividad. Estamos comprometidos a proporcionar una experiencia enriquecedora que inspire a los estudiantes a explorar carreras en campos STEM y a convertirse en los innovadores del mañana.</p>
+                </div>
+                
+
+                <div class="info-opcion" id="info-skills">
+                    <p></p>
+                    <div class="skill">
+                        <div class="texto">
+                            <h3>Inspiración y motivación:</h3>
+                            <h3>100%</h3>
+                        </div>
+                        <div class="contenedor-barra">
+                            <div class="relleno"></div>
+                        </div>
+                    </div>
+                    <div class="skill">
+                        <div class="texto">
+                            <h3>Experimentación y juego:</h3>
+                            <h3>100%</h3>
+                        </div>
+                        <div class="contenedor-barra">
+                            <div class="relleno"></div>
+                        </div>
+                    </div>
+                    <div class="skill">
+                        <div class="texto">
+                            <h3> Educación STEM:</h3>
+                            <h3>100%</h3>
+                        </div>
+                        <div class="contenedor-barra">
+                            <div class="relleno"></div>
+                        </div>
+                    </div>
+                    <div class="skill">
+                        <div class="texto">
+                            <h3>Desarrollo de habilidades tecnologicas:</h3>
+                            <h3>100%</h3>
+                        </div>
+                        <div class="contenedor-barra">
+                            <div class="relleno"></div>
+                        </div>
+                    </div>
+                    <div class="skill">
+                        <div class="texto">
+                            <h3>Compromiso:</h3>
+                            <h3>100%</h3>
+                        </div>
+                        <div class="contenedor-barra">
+                            <div class="relleno"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECCION CAPACITACIONES -->
+    <section class="servicios" id="servicios">
+        <div class="contenido">
+            <h2 class="titulo-seccion">BRINDAMOS CAPACITACIONES EN: </h2>
+            <div class="items-servicios">
+                <div class="item">
+                    <i class="fa-solid fa-brain"></i>
+                    <h3>Inteligencia Artificial</h3>
+                    <p>La IA es la creación de sistemas inteligentes que simulan procesos de pensamiento humano, transformando industrias y mejorando nuestras vidas.</p>
+                </div>
+                <div class="item">
+                    <i class="fa-solid fa-vr-cardboard"></i>
+                    <h3>Realidad aumentada</h3>
+                    <p>La RA combina el mundo real con elementos virtuales para crear experiencias inmersivas que enriquecen la interacción humana con la información digital.</p>
+                </div>
+                <div class="item">
+                    <i class="fa-solid fa-robot"></i>
+                    <h3>Robótica</h3>
+                    <p>La Robótica es el diseño y construcción de robots autónomos o controlados remotamente que revolucionan sectores como la manufactura y la medicina.</p>
+                </div>
+                <div class="item">
+                    <i class="fa-solid fa-house-signal"></i>                  
+                    <h3>IoT</h3>
+                    <p>El IoT es la red de dispositivos físicos conectados entre sí y a internet, optimizando procesos y mejorando la eficiencia en hogares, ciudades y empresas.</p>
+                </div>
+ 
+                <div class="item">
+                    <i class="fa-solid fa-cubes"></i>
+                    <h3>Impresión 3D</h3>
+                    <p>La Impresión 3D crea objetos tridimensionales a partir de modelos digitales, democratizando la fabricación y permitiendo la materialización rápida de ideas.</p>
+                </div>
+                <div class="item">
+                    <i class="fa-solid fa-layer-group"></i>
+                    <h3>Corte CNC y Láser</h3>
+                    <p>El Corte CNC y Láser utilizan tecnología computarizada para cortar materiales con precisión, ofreciendo versatilidad en la producción de piezas personalizadas y de alta calidad.</p>
+                </div>
+
+
+
+                
+
+            </div>
+        </div>
+    </section>
+
+    <!-- SECCION TRABAJOS -->
+    <section class="trabajos" id="trabajos">
+        <div class="contenido">
+            <h2 class="titulo-seccion">PARTICIPACION EN COMPETENCIAS</h2>
+            <div class="portfolio">
+                <div class="item">
+                    <img src="img/COMPETENCIA/1.jpeg" alt="">
+                    <div class="info-trabajo">
+                        <h2>Huawei Developer </h2>
+                        <h2>Competition LATAM 2023 </h2>              
+                    </div>
+                </div>
+                <div class="item">
+                    <img src="img/COMPETENCIA/2.jpeg" alt="">
+                    <div class="info-trabajo">
+                        <h2>VI concurso de </h2>
+                        <h2> invenciones UNHEVAL 2023 </h2>              
+                    </div>
+                </div>
+                <div class="item">
+                    <img src="img/COMPETENCIA/3.jpeg" alt="">
+                    <div class="info-trabajo">
+                        <h2>VI concurso de </h2>
+                        <h2> invenciones UNHEVAL 2023 </h2>              
+                    </div>
+                </div>
+                <div class="item">
+                    <img src="img/COMPETENCIA/4.jpeg" alt="">
+                    <div class="info-trabajo">
+                        <h2>IEEE R9 IoT & IA </h2>
+                        <h2>2023 en Costa Rica </h2>              
+                    </div>
+                </div>
+                <div class="item">
+                    <img src="img/COMPETENCIA/5.jpeg" alt="">
+                    <div class="info-trabajo">
+                        <h2>Hackathon ASRS </h2>
+                        <h2>Nicaragua 2022 </h2>              
+                    </div>
+                </div>
+                <div class="item">
+                    <img src="img/COMPETENCIA/6.jpeg" alt="">
+                    <div class="info-trabajo">
+                        <h2>Hackathon Acelera </h2>
+                        <h2>Cajamarca 2022 </h2>              
+                    </div>
+                </div>
+                <div class="item">
+                    <img src="img/COMPETENCIA/7.jpeg" alt="">
+                    <div class="info-trabajo">
+                        <h2>Hackathon Lupita en</h2>
+                        <h2> la Amazonía 2022 </h2>              
+                    </div>
+                </div>
+                <div class="item">
+                    <img src="img/COMPETENCIA/8.jpeg" alt="">
+                    <div class="info-trabajo">
+                        <h2>EXPLORADORES </h2>
+                        <h2> ESPACIALES 2023</h2>
+                        <h2>MUNICIPALIDAD DE </h2> 
+                        <h2>SAN MIGUEL</h2>             
+                    </div>
+                </div>
+                <div class="item">
+                    <img src="img/COMPETENCIA/9.jpeg" alt="">
+                    <div class="info-trabajo">
+                        <h2>Hackathon de IA,  </h2>
+                        <h2>Ganando a la diabetes </h2>   
+                        <h2>2023 - ESAN  </h2>           
+                    </div>
+                </div>
+                    <div class="item">
+                        <img src="img/COMPETENCIA/10.jpeg" alt="">
+                        <div class="info-trabajo">
+                            <h2>ENERGIZATE</h2>
+                            <h2>PERU 2023</h2>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <img src="img/COMPETENCIA/11.jpeg" alt="">
+                        <div class="info-trabajo">
+                            <h2>Reconocimiento de</h2>
+                            <h2>Placas UNHEVAL 2G</h2>
+                            <h2>- 2023</h2>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <img src="img/COMPETENCIA/12.jpeg" alt="">
+                        <div class="info-trabajo">
+                            <h2>ROBOTIFEST 2023</h2>
+                            <h2>- UNIVERSIDAD COSTARICA</h2>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <img src="img/COMPETENCIA/13.jpeg" alt="">
+                        <div class="info-trabajo">
+                            <h2>CONCURSO DE</h2>
+                            <h2>TRABAJOS Y PROYECTOS</h2>
+                            <h2>CIP LIMA 2024</h2>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <img src="img/COMPETENCIA/14.jpeg" alt="">
+                        <div class="info-trabajo">
+                            <h2>HUAWEI ICT</h2>
+                            <h2>COMPETITION 2024</h2>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <img src="img/COMPETENCIA/15.jpeg" alt="">
+                        <div class="info-trabajo">
+                            <h2>SENATI</h2>
+                            <h2>INNOVA 2023</h2>
+                        </div>
+                    </div>
+
+                    
+                    
+            </div>
+        </div>
+    </section>
+
+    <!-- SECCION CURRICULUM -->
+    <section class="curriculum" id="curriculum">
+        <div class="numeros">
+            <div class="item">
+                <span class="num">200</span>
+                <span class="txt">PROYECTOS<br> REALIZADOS</span>
+            </div>
+            <div class="item">
+                <span class="num">20</span>
+                <span class="txt">PARTICIPACION EN  <br> CONCURSOS</span>
+            </div>
+            <div class="item">
+                <span class="num">7</span>
+                <span class="txt">PREMIOS <br> GANADOS</span>
+            </div>
+        </div>
+        <div class="contenido">
+            <h2 class="titulo-seccion">LOGROS DESTACADOS</h2>
+           
+            <div class="recorrido-anios derecha">
+                <div class="dato dato-der">
+                    <div class="anio b1">2024</div>
+                    <div class="linea c1"></div>
+                    <div class="info c1">
+                        <h3>4to Lugar concurso SENATI INNOVA</h3>  <br>
+                    </div>
+                </div>
+            </div>
+            <div class="recorrido-anios izquierda">
+                <div class="dato dato-izq">
+                    <div class="info c2">
+                        <h3>2nd Runner-Up en la Huawei Developers Competiton  LATAM</h3>  <br>
+                        <h3>Mención honrosa IEEE R9 IoT & IA  en Costa Rica.</h3> <br>
+                        <h3>2 Menciones honrosas en categoría Proyectos Abiertos del Robotifest Costa Rica </h3>  <br>
+                        <h3>1er Lugar Categoría Primaria Escuelas Innovadoras – Municipalidad de San Miguel</h3>
+                        <p></p>
+                    </div>
+                    <div class="linea c2"></div>
+                    <div class="anio b2">2023</div>
+                </div>
+            </div>
+            <div class="recorrido-anios derecha">
+                <div class="dato dato-der">
+                    <div class="anio b3">2022</div>
+                    <div class="linea c3"></div>
+                    <div class="info c3">
+                        <h3>1er lugar Hackathon Acelera Cajamarca </h3><br>
+                        <h3>1er lugar Hackathon Lupita en la Amazonia </h3> <br>
+                    </div>
+                </div>
+            </div>
+    </section>
+
+    <!-- SECCION CONTACTO -->
+    <section class="contacto" id="contacto">
+        <div class="banner">
+            <p>Tienes algun proyecto?</p>
+            <h2>Trabajemos juntos!</h2>
+
+        </div>
+        <div class="contenido">
+            <h2 class="titulo-seccion">CONTACTAME AHORA</h2>
+            <div class="fila">
+                <div class="item">
+                    <span class="icono">
+                        <i class="fa-solid fa-phone"></i>
+                    </span>
+                    <h3>Número Teléfono</h3>
+                    <p> +51 998 887 099 <br></p>
+                </div>
+                <div class="item">
+                    <span class="icono">
+                        <i class="fa-solid fa-envelope"></i>
+                    </span>
+                    <h3>Dirección Email</h3>
+                    <p>contacto@kingbot.pe<br></p>
+                </div>
+            </div>
+    </section>
+    <footer>
+        <h2>KINGBOT</h2>
+
+        <div class="redes">
+            <span class="red r1">
+                <i class="fa-brands fa-facebook-f"></i>
+            </span>
+            <span class="red r2">
+                <i class="fa-brands fa-twitter"></i>
+            </span>
+            
+            <span class="red r3">
+                <i class="fa-brands fa-instagram"></i>
+            </span>
+            <span class="red r4">
+                <i class="fa-brands fa-youtube"></i>
+            </span>
+            <span class="red r2">
+                <i class="fa-brands fa-whatsapp"></i>
+            </span>
+
+        </div>
+
+        <p>Todos los derechos reservados <a href="#inicio">INGENIERIA DE INFORMATICA KINGBOT</a></p>
+
+    </footer>
+
+    <script src="script.js"></script>
+    <script src="script_login.js"></script>
+</body>
+</html>
