@@ -1,13 +1,14 @@
-document.addEventListener("DOMContentLoaded", function () {
-    const images = document.querySelectorAll(".background-slider img");
-    let currentImageIndex = 0;
 
-    // Comienza mostrando la primera imagen
-    images[currentImageIndex].style.opacity = 1;
+    document.addEventListener('DOMContentLoaded', function() {
+        const videos = document.querySelectorAll('.bg-video');
+        let currentVideoIndex = 0;
 
-    setInterval(() => {
-        images[currentImageIndex].style.opacity = 0; // Oculta la imagen actual
-        currentImageIndex = (currentImageIndex + 1) % images.length;
-        images[currentImageIndex].style.opacity = 1; // Muestra la siguiente imagen
-    }, 3000);
-});
+        videos[currentVideoIndex].classList.add('active');
+
+        setInterval(() => {
+            videos[currentVideoIndex].classList.remove('active');
+            currentVideoIndex = (currentVideoIndex + 1) % videos.length;
+            videos[currentVideoIndex].classList.add('active');
+        }, 5000); // Cambia cada 5 segundos
+    });
+
