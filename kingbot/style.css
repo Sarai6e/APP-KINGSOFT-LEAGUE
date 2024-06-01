@@ -650,6 +650,7 @@ nav ul li a {
 .contacto .banner h2{
     font-size: 3rem;
     margin: 10px 0;
+    text-align: center;
 }
 .contacto .banner button{
     border: none;
