@@ -38,6 +38,42 @@
             color: black; /* Color del texto negro */
             z-index: 1;
         }
+        .btn-iniciar-sesion {
+        display: inline-block;
+        padding: 15px 30px; /* Cuadrado más grande */
+        border: 3px solid #FFD700; /* Borde amarillo más grueso */
+        color: #FFD700; /* Color del texto amarillo */
+        background-color: transparent; /* Fondo transparente */
+        text-align: center;
+        text-decoration: none;
+        font-size: 18px; /* Texto más grande */
+        font-weight: bold; /* Negrita */
+        border-radius: 0px; /* Puntas en ángulo */
+        transition: background-color 0.3s, color 0.3s, transform 0.3s; /* Animación en color y transformación */
+        position: relative;
+        overflow: hidden;
+    }
+
+    .btn-iniciar-sesion::before {
+        content: '';
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: #FFD700; /* Fondo amarillo al pasar el mouse */
+        z-index: -1;
+        transition: top 0.3s;
+    }
+
+    .btn-iniciar-sesion:hover::before {
+        top: 0;
+    }
+
+    .btn-iniciar-sesion:hover {
+        color: #000; /* Texto negro al pasar el mouse */
+        transform: scale(1.05); /* Crece un poco al pasar el mouse */
+    }
 
   </style>
 </head>
@@ -70,6 +106,7 @@
                         <li><a href="#" class="social-icon"><i class="fab fa-twitter"></i></a></li>
                         <li><a href="#" class="social-icon"><i class="fab fa-instagram"></i></a></li>
                         <li><a href="https://wa.me/998887099"     class="social-icon" target="_blank"><i class="fab fa-whatsapp"></i></a></li>
+                        <li><a href="https://kingbot.pe/league/login.php" class="social-icon"><i class="fas fa-user"></i></a></li>
                     </ul>
                 </div>
             </nav>
@@ -98,6 +135,8 @@
             <header>
                 <div class="frase">
                     <h2>Hola, somos <span class="resaltar" data-text="KINGBOT">KINGBOT</span>.</h2>
+            
+                    <a href="https://kingbot.pe/league/login.php" class="btn btn-iniciar-sesion" role="button">Iniciar sesión</a>
                 </div>
             </header>
 
